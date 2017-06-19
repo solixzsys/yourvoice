@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="/static/css/style.css" rel="stylesheet">
+        <link href="/static/css/bootstrap.css" rel="stylesheet">
+        
+    </head>
+    <body>
+
+        
+        <div class="jumbotron">
+            <div class="container">
+                <h1>Salam Alaikum!</h1>
+                <p>RAMADAN MUBARAK ...</p>
+                <p>
+                    <a class="btn btn-primary btn-lg">Learn more</a>
+                </p>
+               
+            </div>
+        </div>
+
+        
+        <div class="container">
+            
+            <div class="row">
+                
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <p>
+                    {{obj.0.poll_title}}
+
+                     </p>
+                     <p>
+                    {{obj.0.poll_question|safe}}
+
+                     </p>
+                     <p>
+                    {% for i in obj%}
+                        {{i.poll_options}}
+                    {% endfor %}
+
+                     </p>
+                </div>
+                
+            </div>
+            <div class="row">
+                
+                <div id="area" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                     
+                       <div class="panel panel-default">
+                           
+                            <div class="panel-heading">
+                                 <div id="titletext"></div>
+                            </div>
+                            <div class="panel-body" style="min-height: 200px">
+                                <ul id="optionarea" class="list-group"></ul>
+                               
+                               
+                            </div>
+                            
+                            
+                            <div class="panel-footer">
+                                         <button id="next" style="" type="button"  class="btn btn-info ">Next</button>
+                                
+                            </div>
+                           
+                            
+
+                           
+                        </div>
+
+
+                </div>
+                
+            </div>
+            
+
+            
+        </div>
+        
+        
+        <script src="/static/js/jquery.js"></script>
+        <script src="/static/js/bootstrap.js"></script>
+        <script src="/static/js/main.js"></script>
+    
+    </body>
+</html>
