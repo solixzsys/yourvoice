@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^jsonpoll$', jsonpoll),
     url(r'^jsonpolloption$', jsonoption),
     url(r'^pages/',include('django.contrib.flatpages.urls')),
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]
