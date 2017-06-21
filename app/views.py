@@ -13,8 +13,19 @@ def index(request):
 
 
 
-    return render(request,'test.html',{'obj':poll_object})
+    return render(request,'index.html',{'obj':poll_object})
 
+def test(request):
+    polls_dict={}
+    poll_object = Poll.objects.all()
+    # for obj in poll_object:
+    #     polls_dict[obj.poll_question]=PollOption.objects.filter(polloption_questioncode=obj.poll_code)
+   
+
+
+
+    return render(request,'test.html',{'obj':poll_object})
+    
 
 def jsonpoll(request):
     

@@ -4,7 +4,7 @@
         <title></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="/static/css/style.css" rel="stylesheet">
+        <link href="/static/css/style_1.css" rel="stylesheet">
         <link href="/static/css/bootstrap.css" rel="stylesheet">
         
     </head>
@@ -18,6 +18,13 @@
                 <p>
                     <a class="btn btn-primary btn-lg">Learn more</a>
                 </p>
+                {% load flatpages %}
+{% get_flatpages as flatpages %}
+<ul>
+    {% for page in flatpages %}
+        <li><a href="/pages/{{ page.url }}">{{ page.title }}</a></li>
+    {% endfor %}
+</ul>
                
             </div>
         </div>
@@ -83,7 +90,7 @@
         
         <script src="/static/js/jquery.js"></script>
         <script src="/static/js/bootstrap.js"></script>
-        <script src="/static/js/main.js"></script>
+        <script src="/static/js/main_1.js"></script>
     
     </body>
 </html>

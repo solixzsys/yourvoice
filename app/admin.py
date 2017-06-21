@@ -1,10 +1,36 @@
 from django.contrib import admin
-from app.models import Poll,PollOption
+from app.models import Poll,PollOption,SurveyTag
 from django import forms
+from ckeditor.fields import RichTextField
 # Register your models here.
 import random
 import string
 import hashlib
+from django.contrib.flatpages.admin import FlatPageAdmin,FlatpageForm,FlatPage
+from ckeditor.widgets import CKEditorWidget
+
+
+class SurveyTagAdmin(admin.ModelAdmin):
+    list_display=('surveytag_title','surveytag_tag','surveytag_owner','surveytag_domain','surveytag_status')
+
+
+admin.site.register(SurveyTag,SurveyTagAdmin)
+class CkFlatPageForm(FlatpageForm):
+    
+    class Meta:
+        model=FlatPage
+        fields='__all__'
+        widgets={
+            'content': CKEditorWidget()
+        }
+
+
+class CkFlatPageAdmin(FlatPageAdmin):
+    form=CkFlatPageForm
+
+admin.site.unregister(FlatPage)
+admin.site.register(FlatPage,CkFlatPageAdmin)       
+
 class PollForm(forms.ModelForm):
     Option1=forms.CharField(max_length=200,required=False)
     Option2=forms.CharField(max_length=200,required=False)
@@ -18,7 +44,7 @@ class PollForm(forms.ModelForm):
 
 class PollAdmin(admin.ModelAdmin):
     form=PollForm
-    list_display=('poll_title','poll_date','poll_domain','poll_state','poll_author','poll_code',)
+    list_display=('poll_title','poll_date','poll_domain','poll_state','poll_author','poll_surveytag','poll_code',)
     exclude=('poll_code',)
     list_filter=('poll_domain','poll_state','poll_date','poll_author')
     search_fields=['poll_title','poll_question']
@@ -44,7 +70,7 @@ class PollAdmin(admin.ModelAdmin):
 
             self.fieldsets=(
                     (None,{
-                        'fields':(('poll_title','poll_domain','poll_date'),'poll_question')
+                        'fields':(('poll_title','poll_domain','poll_date','poll_surveytag'),'poll_question')
                     }),
                     ('Options',{
                         'classes': ('collapse',),
@@ -84,13 +110,13 @@ class PollAdmin(admin.ModelAdmin):
             obj.poll_author=request.user    
             
             if(option1 != ""):
-                PollOption.objects.create(polloption_text=option1,polloption_questioncode=code,polloption_questiontitle=title, polloption_code=str(''.join([random.choice(string.ascii_letters+string.digits) for n in range(32)])))
+                PollOption.objects.create(polloption_text=option1,polloption_questioncode=code,polloption_questiontitle=title, polloption_code=str(''.join([random.choice(string.ascii_letters+string.digits) for n in range(32)]))+code)
             if(option2 !=""):
-                PollOption.objects.create(polloption_text=option2,polloption_questioncode=code,polloption_questiontitle=title, polloption_code=str(''.join([random.choice(string.ascii_letters+string.digits) for n in range(32)])))
+                PollOption.objects.create(polloption_text=option2,polloption_questioncode=code,polloption_questiontitle=title, polloption_code=str(''.join([random.choice(string.ascii_letters+string.digits) for n in range(32)]))+code)
             if(option3 !="")   : 
-                PollOption.objects.create(polloption_text=option3,polloption_questioncode=code,polloption_questiontitle=title, polloption_code=str(''.join([random.choice(string.ascii_letters+string.digits) for n in range(32)])))
+                PollOption.objects.create(polloption_text=option3,polloption_questioncode=code,polloption_questiontitle=title, polloption_code=str(''.join([random.choice(string.ascii_letters+string.digits) for n in range(32)]))+code)
             if(option4 !=""):
-                PollOption.objects.create(polloption_text=option4,polloption_questioncode=code,polloption_questiontitle=title, polloption_code=str(''.join([random.choice(string.ascii_letters+string.digits) for n in range(32)])))
+                PollOption.objects.create(polloption_text=option4,polloption_questioncode=code,polloption_questiontitle=title, polloption_code=str(''.join([random.choice(string.ascii_letters+string.digits) for n in range(32)]))+code)
         return super().save_model(request, obj, form, change)
 
 
@@ -123,3 +149,7 @@ class PollOptionAdmin(admin.ModelAdmin):
     search_fields=['polloption_questiontitle']
 
 admin.site.register(PollOption,PollOptionAdmin)    
+
+
+# from django.contrib.sites.models import Site
+# admin.site.unregister(Site)

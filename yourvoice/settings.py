@@ -26,6 +26,25 @@ SECRET_KEY = 'a&-&*gp4t)1)i+#scqyb*z@yscxqwr$#l!4+8ygroj$o!ghcm6'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+SITE_ID=2
+
+# ckeditor config
+CKEDITOR_UPLOAD_PATH = MEDIA_ROOT + '/editor'
+CKEDITOR_CONFIGS = {
+'default': {
+'toolbar': [
+[ 'Source','-','Save','-', 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo', '-', 'Find','Replace','-','SelectAll'], 
+[ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] ,'/',
+[ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' ], 
+[ 'Link','Unlink' ],
+[ 'Image','Table','HorizontalRule','SpecialChar' ],
+[ 'Format'],
+[ 'TextColor','BGColor', '-', 'Styles','Format','FontSize' ],
+[ 'Maximize', 'ShowBlocks','-','About' ],
+],
+'format_tags': 'p;h1;h2;h3;h4;h5;h6;pre;address;div',
+},
+}
 
 
 # Application definition
@@ -33,12 +52,15 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'app',
     'ckeditor',
+    'extended_flatpages',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+   'django.contrib.sites',
+    'django.contrib.flatpages',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +71,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 ]
 
 ROOT_URLCONF = 'yourvoice.urls'
