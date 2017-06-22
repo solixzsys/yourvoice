@@ -6,8 +6,8 @@ from django.core import serializers
 
 
 def result(request):
-    
-    return render(request,'result.html',{})
+    pages=StoryFlatPage.objects.all()
+    return render(request,'result.html',{'pages':pages})
 
 
 
