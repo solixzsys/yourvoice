@@ -1,0 +1,167 @@
+$(document).ready(function() {
+//function insert_impression(bid,adUrl,ad_upload_video,placementID,publisherID,earnings,adName,user_id,browser,operating){
+function insert_impression(){
+		var id = document.getElementById( "id" ).value;
+		var bid = document.getElementById( "bid" ).value;
+		var adUrl = document.getElementById( "adUrl" ).value;
+		var ad_upload_video = document.getElementById( "ad_upload_video" ).value;
+		var publisherID = document.getElementById( "publisherID" ).value;
+		var placementID = document.getElementById( "placementID" ).value;
+		var earnings = document.getElementById( "earnings" ).value;
+		var adName = document.getElementById( "adName" ).value;
+		var user_id = document.getElementById( "user_id" ).value;
+		var browser = document.getElementById( "browser" ).value;
+		var operating = document.getElementById( "operating" ).value;
+		var only_country = document.getElementById( "only_country" ).value;
+		var city = document.getElementById( "city" ).value;
+		
+		var dataString = "publisherID=" + publisherID + "&placementID=" + placementID + "&earnings=" + earnings + "&bid=" + bid + "&id=" + id + "&user_id=" + user_id + "&adUrl=" + adUrl + "&ad_upload_video=" + ad_upload_video + "&adName=" + adName + "&only_country=" + only_country + "&city=" + city + "&browser=" + browser + "&operating=" + operating;
+        $.ajax({ 
+            type: 'POST',
+            url: "http://store.therubiqube.com/play/insertDB.php",
+            dataType: "json",
+	    data: dataString,
+	    success: function(data){
+               // var dataRes = JSON.parse(data);
+                /* if(data.success){
+                    var locationHref = window.location.href;
+                    window.location.href=locationHref.replace("#",""); 
+                } */
+	    }
+        });
+}
+/* 
+var xmlHttp = null;
+ 
+function InsertImpression()
+		{
+			var insertDBURL = "http://store.therubiqube.com/play/insertDB.php";
+			var id = document.getElementById( "id" ).value;
+			var bid = document.getElementById( "bid" ).value;
+			var adUrl = document.getElementById( "adUrl" ).value;
+			var ad_upload_video = document.getElementById( "ad_upload_video" ).value;
+			var publisherID = document.getElementById( "publisherID" ).value;
+			var placementID = document.getElementById( "placementID" ).value;
+			var earnings = document.getElementById( "earnings" ).value;
+			var adName = document.getElementById( "adName" ).value;
+			var user_id = document.getElementById( "user_id" ).value;
+			var browser = document.getElementById( "browser" ).value;
+			var operating = document.getElementById( "operating" ).value;
+			var type = document.getElementById( "type" ).value;
+			var only_country = document.getElementById( "only_country" ).value;
+			var city = document.getElementById( "city" ).value;
+							
+			var Url = insertDBURL + "?publisherID=" + publisherID + "&placementID=" + placementID + "&earnings=" + earnings + "&id=" + id + "&bid=" + bid + "&user_id=" + user_id + "&adUrl=" + adUrl + "&ad_upload_video=" + ad_upload_video + "&adName=" + adName + "&only_country=" + only_country + "&city=" + city + "&browser=" + browser + "&operating=" + operating;
+		 
+			xmlHttp = new XMLHttpRequest(); 
+						
+			if (!xmlHttp) return false;
+			if (typeof success != 'function') success = function () {};
+			if (typeof error!= 'function') error = function () {};
+						
+			xmlHttp.onreadystatechange = ProcessRequest;
+			xmlHttp.open( "GET", Url, true );
+			xmlHttp.send( null );
+		}
+		 
+		function ProcessRequest() 
+		{
+						if(xmlHttp.readyState == 4) {
+					return xmlHttp.status === 200 ? 
+						success(xmlHttp.responseText) : error(xmlHttp.status);
+				}
+		}
+ */
+ 
+		//Register user clicks on click
+		$('#link').on("click", function() {
+		var id = document.getElementById( "id" ).value;
+		var bid = document.getElementById( "bid" ).value;
+		var adUrl = document.getElementById( "adUrl" ).value;
+		var ad_upload_video = document.getElementById( "ad_upload_video" ).value;
+		var publisherID = document.getElementById( "publisherID" ).value;
+		var placementID = document.getElementById( "placementID" ).value;
+		var earnings = document.getElementById( "earnings" ).value;
+		var adName = document.getElementById( "adName" ).value;
+		var user_id = document.getElementById( "user_id" ).value;
+		var browser = document.getElementById( "browser" ).value;
+		var operating = document.getElementById( "operating" ).value;
+		var only_country = document.getElementById( "only_country" ).value;
+		var city = document.getElementById( "city" ).value;
+		//alert(publisherID);
+		var dataString = "publisherID=" + publisherID + "&placementID=" + placementID + "&earnings=" + earnings + "&bid=" + bid + "&id=" + id + "&user_id=" + user_id + "&adUrl=" + adUrl + "&ad_upload_video=" + ad_upload_video + "&adName=" + adName + "&only_country=" + only_country + "&city=" + city + "&browser=" + browser + "&operating=" + operating;
+		$.ajax({ 
+            type: 'POST',
+            url: "http://store.therubiqube.com/play/insertclick.php",
+            dataType: "json",
+	    data: dataString,
+	    success: function(data){
+               // var dataRes = JSON.parse(data);
+                /* if(data.success){
+                    var locationHref = window.location.href;
+                    window.location.href=locationHref.replace("#",""); 
+                } */
+				}
+			});
+		});
+	
+		//when duration is 10 seconds
+		var videoLock = false;
+
+		$('video').on("timeupdate", function() {
+			
+		if ($('video')[0].currentTime >= 10 && videoLock == false) {
+		videoLock = true;
+		
+		var id = document.getElementById( "id" ).value;
+		var bid = document.getElementById( "bid" ).value;
+		var adUrl = document.getElementById( "adUrl" ).value;
+		var ad_upload_video = document.getElementById( "ad_upload_video" ).value;
+		var publisherID = document.getElementById( "publisherID" ).value;
+		var placementID = document.getElementById( "placementID" ).value;
+		var earnings = document.getElementById( "earnings" ).value;
+		var adName = document.getElementById( "adName" ).value;
+		var user_id = document.getElementById( "user_id" ).value;
+		var browser = document.getElementById( "browser" ).value;
+		var operating = document.getElementById( "operating" ).value;
+		var only_country = document.getElementById( "only_country" ).value;
+		var city = document.getElementById( "city" ).value;
+		//alert(publisherID);
+		var dataString = "publisherID=" + publisherID + "&placementID=" + placementID + "&earnings=" + earnings + "&bid=" + bid + "&id=" + id + "&user_id=" + user_id + "&adUrl=" + adUrl + "&ad_upload_video=" + ad_upload_video + "&adName=" + adName + "&only_country=" + only_country + "&city=" + city + "&browser=" + browser + "&operating=" + operating;
+        $.ajax({ 
+            type: 'POST',
+            url: "http://store.therubiqube.com/play/insertDB.php",
+            dataType: "json",
+	    data: dataString,
+	    success: function(data){
+               // var dataRes = JSON.parse(data);
+                /* if(data.success){
+                    var locationHref = window.location.href;
+                    window.location.href=locationHref.replace("#",""); 
+                } */
+	    }
+        });
+		//insert_impression();
+		//InsertImpression();
+		}
+
+		});
+/* function setImpression(){
+		var vid = document.getElementById("video");
+		
+		if(vid.duration - vid.currentTime >= 10){	//insert_impression("'+bid+'","'+adUrl+'","'+ad_upload_video+'","'+placementID+'","'+publisherID+'","'+earnings+'","'+adName+'","'+user_id+'","'+browser+'","'+operating+'","'+type+'","'+only_country+'","'+city+'");
+		InsertImpression();
+			}
+		}
+		vid.addEventListener("timeupdate", setImpression,false);
+		 */
+		var vid = document.getElementById("video"); 
+		
+		vid.onended = function() {
+						//var iframe = document.getElementById("frame");
+					   document.getElementById("containerRQ").style.display = "none";
+					   document.getElementById("containerRQ").innerHTML = "";
+						//eventOnEnded();
+						
+		};
+});

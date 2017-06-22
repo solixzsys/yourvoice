@@ -1,0 +1,1008 @@
+'use strict';
+// This will ALWAYS be hosted on our website
+var isProd = true;
+var serviceWorkerRegistration;// Type is ServiceWorkerRegistration
+//var serviceWorker;
+var sub;// Type is PushSubscription 
+var isSubscribed = false;
+function MyPushManager(){};
+var userReadyFunctionPointer = null;
+var smBaseURL = 'https://app.sendmsgs.com/';
+//var smBaseURL = 'http://localhost/push_notif_app_trunk/';
+
+//var smDBObj = null;
+//var subscriberID = 0;
+// TODO
+
+//jQuery(document).ready(domReadyHandler);
+jQuery(document).ready(domRHandler);
+
+
+function domRHandler(){
+//	log('domRHandler');
+	/**
+	 * We need to first pull the configuration of the applied website and act as per the configuration
+	 * If HTTP, then need to perform all the cookie stuff.
+	 * If HTTPS, then dont need to perform the cookie stuff but need to register the SW directly
+	 * */
+	
+	if('safari' in window) {
+		if(!'pushNotification' in window.safari){
+			return false;
+		}
+		executeSafariUseCase();
+	    return false;
+	}
+	if(('serviceWorker' in navigator) == false){
+		return false;
+	}
+//	log("domRHandler");
+	var domain = document.domain;
+	var isConfigured = false;
+	if(getParameterByName('source') != null){
+		//That means this is a https proxy/child window where users would opt-in
+		executeChildWindowUseCase();
+		return;
+	}
+	isConfigured = initConfig(domain);
+	if(isConfigured == false){
+		log('Could not be configured due to some error.');
+		return false;
+	}
+	if(smHttpsSupported == false){
+		executeHttpUseCase();
+	}else{
+		executeHttpsUseCase();
+	}
+}
+function executeSafariUseCase(){
+	var domain = document.domain;
+	var isConfigured = initConfig(domain);
+	if(isConfigured == false){
+		log('Could not be configured due to some error.');
+		return false;
+	}
+	if(smConfig[domain].safari_web_push_id == ''){
+		log('Safari not configured.');
+		return false;
+	}
+	var permissionData = window.safari.pushNotification.permission(smConfig[domain].safari_web_push_id);
+    checkRemotePermission(permissionData);
+
+}
+function checkRemotePermission(permissionData){
+	var domain = document.domain;
+    if (permissionData.permission === 'default') {
+    	console.log("Im here...");
+        // This is a new web service URL and its validity is unknown.
+//    	var inputObj = {'uri': getURI(), 'cookies': JSON.stringify(readAllApplicableCookies(smDomain))};
+//    	var inputObj = {'uri': 'test_uri', 'cookies': 'test_cookies'};
+        window.safari.pushNotification.requestPermission(
+        	smBaseURL + 'subscription', // The web service URL.
+        	smConfig[domain].safari_web_push_id,     // The Website Push ID.
+            {}, // Data that you choose to send to your server to help you identify the user.
+            checkRemotePermission         // The callback function.
+        );
+    }
+    else if (permissionData.permission === 'denied') {
+        // The user said no.
+    	console.log("User Denied", permissionData);
+    }
+    else if (permissionData.permission === 'granted') {
+        // The web service URL is a valid push provider, and the user said yes.
+        // permissionData.deviceToken is now available to use.
+    	console.log("User granted", permissionData);
+    	
+//    	subscriberID = permissionData.deviceToken;
+    	var inputObj = {connection_str: permissionData.deviceToken, uri: getURI(), cookies: readAllApplicableCookies(smDomain)};
+    	sendSafariRegisterInfoToServer(inputObj);
+    	
+    }else{
+    	console.log("Please pay attention here.......");
+    }	
+}
+function executeChildWindowUseCase(){
+	if(getParameterByName('source') == null){
+		return false;
+	}
+	if(getParameterByName('ck') != null){
+		var cookies = JSON.parse(getParameterByName('ck'));
+		putCookies(cookies);
+	}
+	var domain = getParameterByName('source');
+	var isConfigured = initConfig(domain);
+	if(isConfigured == false){
+		log('Could not be configured due to some error.');
+		return false;
+	}
+	getFromIDB().then(function(resultObj){
+		displayAppropriateContentAsPerPermission(resultObj.permission);
+	}).catch(function(error){
+		executeHttpsUseCase();
+	});
+}
+function isAccountBlock(domain){
+	if(smConfig[domain].hasOwnProperty('is_account_block') == false){
+		return false;
+	}
+	if(smConfig[domain].is_account_block == 0){
+		return false;
+	}
+	return true;
+}
+function isAccountInActive(domain){
+	if(smConfig[domain].hasOwnProperty('is_active') == false){
+		return false;
+	}
+	if(smConfig[domain].is_active == 1){
+		return false;
+	}
+	return true;
+}
+function isPlanFullyUtilised(domain){
+	if(smConfig[domain].hasOwnProperty('is_plan_fully_utilised') == false){
+		return false;
+	}
+	if(smConfig[domain].is_plan_fully_utilised == 1){
+		return true;
+	}
+	return false;
+}
+function areReqdCookiesAvailable(domain){
+	var isMandatoryCookieMissing = false;
+	if(smConfig[domain].hasOwnProperty('cookies') == false || smConfig[domain]['cookies'].length == 0){
+		return !isMandatoryCookieMissing;	
+	}
+	jQuery(smConfig[domain]['cookies']).each(function(index, cookieObj){
+		if(cookieObj.is_mandatory == 1 ){
+			if(window.opener != window && window.opener != null){
+				// That means this is child window and all data from the parent is stored in thi window in the cookie
+				if(getCookie(cookieObj.name) == null){
+					isMandatoryCookieMissing = true;
+					return;
+				}
+			}else{
+				if(cookieObj.source == 'cookie' && getCookie(cookieObj.name) == null){
+					isMandatoryCookieMissing = true;
+					return;
+				}
+				else if(cookieObj.source == 'url' && getParameterByName(cookieObj.name) == null){
+					isMandatoryCookieMissing = true;
+					return;
+				}
+			}
+
+		}
+	});
+	return !isMandatoryCookieMissing;
+}
+function readAllApplicableCookies(domain){
+	var cookies = [];
+	if(smConfig[domain].hasOwnProperty('cookies') == false || smConfig[domain]['cookies'].length == 0){
+		return cookies;	
+	}
+	jQuery(smConfig[domain]['cookies']).each(function(index, cookieObj){
+		var cookieValue = null;
+		if(window.opener != window && window.opener != null){
+			//That means its a child window and everything from parent to this window is stored inside the cookie
+			cookieValue = getCookie(cookieObj.name);
+		}else{
+			if(cookieObj.source == 'cookie'){
+				cookieValue = getCookie(cookieObj.name);	
+			}
+			else if(cookieObj.source == 'url'){
+				cookieValue = getParameterByName(cookieObj.name);
+			}
+		}
+		if(cookieValue != null){
+			cookies.push({'key': cookieObj.name, 'value': cookieValue});
+		}
+	});
+	return cookies;
+}
+function executeHttpsUseCase(){
+	if ('serviceWorker' in navigator) {
+//	    log('Service Worker is supported');
+		isUserOptingFirstTime().then(function(result){
+			log("User didn't fill the permission dialog");
+		    navigator.serviceWorker.addEventListener('message', domMessageHandler);
+		    navigator.serviceWorker.register(smPathToSW).then(sworkerRegisterSuccessHandler).catch(swRegisterFailureHandler);
+		}).catch(function(error){
+			displayUnsubscribeWidgetIfApplicable();
+			log("User already filled the permission dialog");
+		});
+	}else{
+		log("Service Worker not supported");
+	}
+}
+function executeHttpUseCase(){
+	log('executeHttpUseCase');
+	isUserOptingFirstTime().then(function(result){
+		log("User didn't fill the permission dialog");
+		displayHTTPPermissionDialog();
+	}).catch(function(error){
+		displayUnsubscribeWidgetIfApplicable();
+		log("User already filled the permission dialog");
+	});
+}
+function displayHTTPPermissionDialog(){
+	var divHTML = '<div id="smAllowDenyDiv" class="sm-popup-notification"><div class="sm-popup-notification-inner-wrapper"><div class="sm-popup-notification-image-wrapper"><img src="' + smConfig[smDomain]['style']['logo'] + '"></div><div class="sm-popup-notification-text-wrapper"><span class="sm-popup-notification-title">' + smConfig[smDomain]['title'] + '</span><p class="sm-popup-notification-message">' + smConfig[smDomain]['msg'] + '</p></div><div style="clear: both;"><div class="sm-popup-notification-modal-branding"><a href="javascript:" target="_blank" style="text-decoration: none;"><img src="https://app.sendmsgs.com/images/powered_by_icon.png"></a><span><a href="https://app.sendmsgs.com/" target="_blank" style="text-decoration: none;color: black;">Powered by Sendmsgs</a></span></div><div class="sm-popup-button-wrapper"><button id="smDenyBtn" class="sm-btn-close">' + smConfig[smDomain]['deny_btn_text'] + '</button><button id="smAllowBtn" class="sm-btn-allow">' + smConfig[smDomain]['allow_btn_text'] + '</button></div><div style="clear:both"></div></div></div></div>';
+	var $div = jQuery(divHTML).appendTo('body');
+
+	jQuery('#smDenyBtn').on('click', httpDenyBtnClickHandler);
+	jQuery('#smAllowBtn').on('click', httpAllowBtnClickHandler);
+}
+function httpAllowBtnClickHandler(event){
+	log('clicked');
+	jQuery('#smAllowDenyDiv').hide();
+	var urlToHit = smPathToProxy + '?source=' + document.domain + '&uri=' + encodeURIComponent(window.location.pathname);
+	var cookies = readAllApplicableCookies(smDomain);
+	if(cookies.length > 0){
+		cookies = encodeURIComponent(JSON.stringify(cookies));
+		urlToHit += '&ck=' + cookies; 
+	}
+	var newWindow = PopupCenter(urlToHit, 'Push Notification', 500, 300);
+	function receiveMessage(event)
+	{
+	  log("Parent got something: ", event.data);
+	  var dataToStore = event.data;
+	  if(dataToStore.cmd == 'put'){
+		  putToIDB(dataToStore);
+	  }
+//	  document.cookie = event.data;
+	  if (event.origin !== "http://example.org")
+	    return;
+	}
+	window.addEventListener("message", receiveMessage, false);
+	return false;
+}
+function httpDenyBtnClickHandler(event){
+//	document.cookie = 'permission=denied';
+	var dataToStore = {cmd: 'put', apiKey: null, subscriberID: null, id: 0, endPoint: null, permission: 'denied'};
+	putToIDB(dataToStore);
+	jQuery('#smAllowDenyDiv').hide();
+}
+function isUserOptingFirstTime(){
+	return new Promise(function(resolve, reject){
+		getFromIDB().then(function(resultObj){
+			return reject(false);
+		}).catch(function(error){
+			return resolve(true);
+		});
+	});
+}
+function getCookie(key){
+	var allCookies = document.cookie;
+	var userFilledFlag = false;
+	allCookies = allCookies.split(';');
+	var cookieValue = null;
+	jQuery(allCookies).each(function(index, value){
+		if(value.indexOf(key + '=') != -1){
+			cookieValue = value.replace(key + '=', '');
+			return;
+		}
+	});
+	if(cookieValue != null){
+		cookieValue = cookieValue.trim();
+	}
+	return cookieValue;
+}
+function putCookies(cookies){
+	if(cookies.length == 0){
+		return;
+	}
+	jQuery(cookies).each(function(index, cookieObj){
+		putCookie(cookieObj);
+	});
+}
+function putCookie(cookieObj){
+	if(cookieObj.hasOwnProperty('key') == false || cookieObj.hasOwnProperty('value') == false){
+		return false;
+	}
+	document.cookie = cookieObj.key + '=' + cookieObj.value;
+	
+	return true;
+}
+function initConfig(domain){
+//	log(domain);
+	if(smConfig.hasOwnProperty(domain) == false){
+		log('Could not initialize...');
+		return false;
+	}
+	if(areReqdCookiesAvailable(domain) == false){
+		log('Required cookies not available. So, skipping further execution.');
+		return false;
+	}
+	if(isAccountBlock(domain) == true || isAccountInActive(domain) == true || isPlanFullyUtilised(domain) == true){
+		log('Account is block/Inactive/Fully Utilised. So, skipping further execution.');
+		return false;
+	}
+	smDomain = domain;
+	smPathToSW = smConfig[domain].pathToSW;
+	smPathToProxy = smConfig[domain].pathToProxy;
+	smHttpsSupported = smConfig[domain].httpsSupported;
+	if(smHttpsSupported == false){
+		applyStyle(domain);
+	}
+	return true;
+}
+function applyStyle(domain){
+//	smConfig[domain]['style']['logo'];
+	//.sm-popup-notification{font-family: Arial,Helvetica,sans-serif;background-color:#F0EFF0;width:422px;top:1px;left:calc(50% - 211px);margin:0;padding:0;box-shadow: 0 0 4px #888;font-size: 11px;font-weight: 400;position: fixed;z-index: 2147483647; top:2px}
+	var metaTagHTML = '<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">';
+	jQuery(metaTagHTML).appendTo(jQuery('head'));
+	var styleHTML = '<style>';
+	
+	styleHTML += '.sm-popup-notification{font-family: Arial,Helvetica,sans-serif;' + smConfig[domain]['style']['bg_color'] + 'width:422px;top:1px;left:calc(50% - 211px);margin:0;padding:0;box-shadow: 0 0 4px #888;font-size: 11px;font-weight: 400;position: fixed;z-index: 2147483647; top:2px}\n';
+	styleHTML += '.sm-popup-notification-inner-wrapper{margin:0;padding:0 20px 10px}\n';
+	styleHTML += '.sm-popup-notification-image-wrapper{float:left;position:relative;margin:15px 15px 0 0!important;padding:0!important;display:inline-block}\n';
+	styleHTML += '.sm-popup-notification-text-wrapper{position:relative!important;padding:10px 0 0!important;color:#000!important;text-align:left!important;margin:0!important;line-height:1.4em!important;display:inline-block!important;width:calc(100% - 80px)!important}\n';
+	styleHTML += '.sm-popup-notification-image-wrapper img{height:65px!important;width:65px!important}\n';
+	styleHTML += ".sm-popup-notification-title{margin-bottom:5px;text-align:left;font-size:14px;font-weight:700;line-height:1.4em;" + smConfig[domain]['style']['title_color'] + "font-family:'Open Sans',sans-serif}\n";
+	styleHTML += ".sm-popup-notification-message{font-size:12px!important;line-height:1.4em!important;margin:10px 0!important;" + smConfig[domain]['style']['msg_color'] + "padding:0!important;text-align:left!important;font-family:'Open Sans',sans-serif!important}\n";
+	styleHTML += ".sm-popup-notification-modal-branding{float:left;font-size:10px;margin-top:8px;font-family:Arial!important;line-height:1.2em!important}\n";
+	styleHTML += ".sm-popup-notification-modal-branding img{vertical-align:bottom!important;width:14px!important;height:14px!important;padding-right:2px!important;display:inline-block!important}\n";
+	styleHTML += ".sm-popup-notification-modal-branding span a{text-decoration:none!important;color:#000!important;font-size:10px!important;line-height:1.2em!important;font-weight:400!important}\n";
+	styleHTML += ".sm-popup-button-wrapper{float:right!important;margin:0!important;padding:0!important}\n";
+	styleHTML += ".sm-popup-notification button{width:90px!important;height:26px!important;font-size:14px!important;cursor:pointer!important;line-height:1.1em!important;border-radius:4px!important;color:#fff!important;background:linear-gradient(to bottom,#64b4f4,#0084f6)!important;border:1px solid #42a2f2!important;display:inline-block!important;font-weight:400!important;margin:0!important;padding:5px!important;text-transform:none!important;box-sizing:border-box!important;font-family:Arial!important;text-shadow:none!important;box-shadow:none!important;white-space:nowrap!important}\n";
+	styleHTML += ".sm-popup-button-wrapper button.sm-btn-close{" + smConfig[domain]['style']['deny_btn_bg_color'] + "color:#000!important;border-color:#CCC!important;margin-right:20px!important;width:100px!important}\n";
+	styleHTML += ".sm-popup-button-wrapper button.sm-btn-allow{width:100px!important;" + smConfig[domain]['style']['allow_btn_bg_color'] + "}\n";
+	styleHTML += '@media (max-width: 480px) {'+
+	 '.sm-popup-notification{width:97%;top:1px;left:calc(3% - 6px);}' +
+'.sm-popup-notification-image-wrapper{float:none;display:block; text-align:center}' +
+'.sm-popup-notification-text-wrapper{position:none;display:block!important;text-align:center; width:100% !important;}' +
+'.sm-popup-notification-title{ width:100%; margin:0px!important;  padding:0px!important;text-align:center!important;}' +
+'.sm-popup-notification-message{ width:100%; margin:0px!important;  padding:0px!important;text-align:center!important;}' +
+'.sm-popup-notification-modal-branding{display:none}' +
+'.sm-popup-button-wrapper{width:100% !important;text-align:center!important;}' +
+'}';
+	styleHTML += "</style>";
+	
+//	var style = jQuery('<style>.main_div_class { ' + smConfig[smDomain]['style']['mainDiv']['bg_color'] + ' }</style>')
+	var style = jQuery(styleHTML);
+	
+	jQuery(style).appendTo(jQuery('head'));
+//	jQuery('#smAllowDenyDiv').addClass('main_div_class');
+	
+}
+function PopupCenter(url, title, w, h, dataToPass) {
+    // Fixes dual-screen position                         Most browsers      Firefox
+    var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+    var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+
+    var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+    var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+    var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+    var top = ((height / 2) - (h / 2)) + dualScreenTop;
+    var newWindow = window.open(url, title, 'scrollbars=yes, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+//    newWindow.addEventListener('load', function(event){
+//    	this.childWindowLoadHandler(dataToPass);
+//    }, true);
+
+    // Puts focus on the newWindow
+    if (window.focus) {
+        newWindow.focus();
+    }
+    return newWindow;
+}
+//function childWindowLoadHandler(cookiesToAdd){
+//	log(cookiesToAdd);
+//}
+function sworkerRegisterSuccessHandler(swReg){
+//	log('Registered :^)', swReg, navigator.serviceWorker.controller);
+	return navigator.serviceWorker.ready.then(serviceWorkerReadyHandler).catch(function(e) {
+        console.error('Error getting subscription', e);
+    });
+}
+function serviceWorkerReadyHandler(swReg){
+	//log('Ready :^)', swReg.active);
+//	serviceWorker = swReg.active;
+	serviceWorkerRegistration = swReg;
+	//log("Reg Obj: ", serviceWorkerRegistration);
+	
+	executeSubscriptionProcess();
+	return navigator.serviceWorker.ready;
+}
+
+function swRegisterFailureHandler(error){
+	log("serviceWorkerRegisterFailureHandler called");
+	log(':^(', error);
+}
+function executeSubscriptionProcess(){
+	//log("Reg Obj: ", serviceWorkerRegistration);
+	
+	serviceWorkerRegistration.pushManager.getSubscription().then(function(subscription) {
+
+      if (!subscription) {
+        // This is the first time we are subscribing
+    	  return serviceWorkerRegistration.pushManager.subscribe({userVisibleOnly: true}).then(userPermissionGrantedHandler)
+    		.catch(function(error){
+    			serviceWorkerRegistration.pushManager.permissionState({userVisibleOnly: true}).then(permissionStateHandler);		
+    			log(error);
+    		  });
+      }else{
+    	  // User already subscribed. So, we would unsubscribe first and then subscribe again.
+    	  return subscription.unsubscribe().then(function(successful) {
+    	      // You've successfully unsubscribed
+    		  return serviceWorkerRegistration.pushManager.subscribe({userVisibleOnly: true}).then(userPermissionGrantedHandler)
+      		.catch(function(error){
+      			serviceWorkerRegistration.pushManager.permissionState({userVisibleOnly: true}).then(permissionStateHandler);		
+      			log(error);
+      		  });
+    	    }).catch(function(error) {
+    	      // Unsubscription failed
+    	    	log(error);
+    	    });
+      }
+    })
+    .catch(function(err) {
+    	log(error);
+    });
+	
+	
+//	serviceWorkerRegistration.pushManager.subscribe({userVisibleOnly: true}).then(userPermissionGrantedHandler)
+//	.catch(function(error){
+//		serviceWorkerRegistration.pushManager.permissionState({userVisibleOnly: true}).then(permissionStateHandler);		
+//		log(error);
+//	  });
+}
+function permissionStateHandler(pushMessagingState){
+	/**
+	 * prompt
+	 * denied
+	 * granted
+	 * */
+//	log("Hey! Im coming here in permissionStateHandler.................");
+	log(pushMessagingState);
+	if(pushMessagingState == 'denied'){
+		userPermissionDeniedHandler();
+	}
+}
+function userPermissionGrantedHandler(pushSubscription){
+	//log("userPermissionAllowedHandler called");
+	//log('Subscribed! Endpoint:', pushSubscription, pushSubscription.endpoint);
+	
+	serviceWorkerRegistration.pushManager.permissionState({userVisibleOnly: true}).then(permissionStateHandler);
+	log('Permission Granted...');
+	var inputObj = {pushSubObj: pushSubscription, uri: getURI(), cookies: readAllApplicableCookies(smDomain)};
+    sub = pushSubscription;
+    isSubscribed = true;
+    
+	var msgToSend = {cmd: 'get'}
+    sendMessageToSW(msgToSend).then(function(responseFromSW){
+    	log("Going to register to the server.......");
+	    sendRegisterInfoToServer(inputObj);
+//    	log("sendMessageToSW 'get' Then Handler", responseFromSW);
+//    	if(responseFromSW.hasOwnProperty('apiKey') != false && responseFromSW.hasOwnProperty('subscriberID') != false && responseFromSW.apiKey != false && responseFromSW.subscriberID != false){
+////    		var tokens = responseFromSW.endPoint.split("/");
+//    		var storedEndPoint = responseFromSW.endPoint;
+//    		var tokens = pushSubscription.endpoint.split("/");
+//    		var currentEndPoint = tokens[tokens.length - 1];
+//    		if(CryptoJS.MD5(currentEndPoint) != storedEndPoint){
+//    			sendRegisterInfoToServer(inputObj);	
+//    		}
+//    	}else{
+//    		log("First time: Going to register to the server.......");
+//    	    sendRegisterInfoToServer(inputObj);
+//    	}
+    }).catch(function(error){
+    	log("sendMessageToSW 'get' Catch Handler", error);
+    });
+    
+    if(userReadyFunctionPointer != null){
+    	userReadyFunctionPointer();
+    }
+}
+function userPermissionDeniedHandler(){
+	//log("User denied");
+	log('Permission Denied...');
+
+	var msgToSend = {cmd: 'get'}
+    sendMessageToSW(msgToSend).then(function(responseFromSW){
+    	//log("sendMessageToSW 'get' Then Handler", responseFromSW);
+//    	if(responseFromSW.apiKey != false && responseFromSW.subscriberID != false){
+//    		sendUnRegisterInfoToServer(responseFromSW);	
+//    	}
+    	var msgToPassToParentWindow = {cmd: 'put', apiKey: null, subscriberID: null, id: 0, endPoint: null, permission: 'denied'};
+    	passDataToParentWindowIfApplicable(msgToPassToParentWindow);
+    	unsubscribe();
+    }).catch(function(error){
+    	//log("sendMessageToSW 'get' Catch Handler", error);
+    });
+}
+function unsubscribe(){
+  sub.unsubscribe().then(swUnsubscribeSuccessHandler).catch(swUnsubscribeFailureHandler);
+}
+function sendSafariRegisterInfoToServer(inputObj){
+	//log('sendRegisterInfoToServer called...');
+	log("Cookies are : ", inputObj.cookies);
+	var dataToPost = {'api_key': smApiKey, 'connection_str': inputObj.connection_str, 'domain': smDomain, 'uri': inputObj.uri, 'cookies': inputObj.cookies};
+	var data = new FormData();
+	data.append( "json", JSON.stringify( dataToPost ) );
+
+	
+	$.ajax({
+		type : "POST",
+		url : smBaseURL + 'user/Subscription/subscribeSafari',
+		data: JSON.stringify( dataToPost ),
+		contentType: "application/json",
+		crossDomain:true,
+		cache: false,
+		success : function(response) {
+			console.log(response);
+		},
+		error : function(error) {
+			console.log(error);
+		},
+		beforeSend: function(){
+		}
+	});
+}
+function sendRegisterInfoToServer(inputObj){
+	//log('sendRegisterInfoToServer called...');
+	var tokens = inputObj.pushSubObj.endpoint.split("/");
+	log("SW_driver.js: End Point is :", tokens[tokens.length - 1]);
+	log("Cookies are : ", inputObj.cookies);
+	var dataToPost = {'pushSubObj': JSON.stringify(inputObj.pushSubObj), 'api_key': smApiKey, 'connection_str': tokens[tokens.length - 1], 'domain': smDomain, 'uri': inputObj.uri, 'cookies': inputObj.cookies};
+	var data = new FormData();
+	data.append( "json", JSON.stringify( dataToPost ) );
+
+	fetch(smBaseURL + 'user/subscription/subscribe', {
+		method: 'post',
+		body: data,
+		cache: 'no-cache'
+	}).then(function(response){
+		sendRegisterInfoToServerResponseHandler(dataToPost, response);
+	}).catch(function(err) {
+		log("Unable to complete request, please try again later.");
+		// Error :(
+	});	
+}
+function sendRegisterInfoToServerResponseHandler(request, response){
+	//log("sendRegisterInfoToServerResponseHandler.........", response);
+	response.json().then(function(data) {
+		if(data.subscriber_id == 0){
+			unsubscribe();
+			return false;
+		}
+
+        //Here we need to pass the data to the service worker so he can generate welcome notification call from the server
+        var msgToSend = {cmd: 'pull_for_welcome_notification', api_key: smApiKey, subscriber_id: data.subscriber_id, domain: request.domain}
+        sendMessageToSW(msgToSend).then(function(responseFromSW){
+        	//log("sendMessageToSW 'put' Then Handler", responseFromSW);
+        }).catch(function(error){
+        	//log("sendMessageToSW 'put' Catch Handler", error);
+        });
+		
+		
+		//log("Subscriber id is......", data.subscriber_id);
+        var msgToSend = {cmd: 'put', api_key: smApiKey, subscriber_id: data.subscriber_id, end_point: CryptoJS.MD5(request.connection_str)}
+        sendMessageToSW(msgToSend).then(function(responseFromSW){
+        	//log("sendMessageToSW 'put' Then Handler", responseFromSW);
+        	var msgToPass = {cmd: 'put', apiKey: smApiKey, subscriberID: data.subscriber_id, id: data.subscriber_id, endPoint: CryptoJS.MD5(request.connection_str), permission: 'allowed'}
+        	if(isChildWindow()){
+            	passDataToParentWindowIfApplicable(msgToPass);
+            	closeChildWindowIfApplicable();
+        	}else{
+        		putToIDB(msgToPass);
+        	}
+        }).catch(function(error){
+        	//log("sendMessageToSW 'put' Catch Handler", error);
+        });
+      });  
+}
+function getURI(){
+	var uri = '';
+	if(window.opener != window && window.opener != null){
+		/**
+		 * That means this is the Child Window
+		 * */
+		uri = getParameterByName('uri');
+	}else{
+		uri = window.location.pathname;
+	}
+	return uri;
+}
+function isChildWindow(){
+	var re = /.sendmsgs.com$/;
+	return re.test(window.location.hostname);
+}
+function passDataToParentWindowIfApplicable(msgToSend){
+	if(window.opener != window && window.opener != null){
+		/**
+		 * That means this is the Child Window
+		 * */
+		window.opener.postMessage(msgToSend, '*');
+	}
+}
+function closeChildWindowIfApplicable(){
+	if(window.opener != window && window.opener != null){
+		/**
+		 * That means this is the Child Window
+		 * */
+		window.close();
+	}
+}
+function swUnsubscribeSuccessHandler(event){
+	//log('Unsubscribed!', event);
+    isSubscribed = false;
+}
+function swUnsubscribeFailureHandler(error){
+    //log('Error unsubscribing', error);
+//    subscribeButton.textContent = 'Subscribe';
+}
+function domMessageHandler(event){
+	//log("Method domMessageHandler called.....");
+}
+function sendMessageToSW(msgToSend) {
+	  return new Promise(function(resolve, reject) {
+	    var messageChannel = new MessageChannel();
+	    messageChannel.port1.onmessage = function(event) {
+	    	//This will execute when Main page will receive data from Service Worker
+	    	//log("Msg received from Service Worker: ", event.data);
+	    	if (event.data.error) {
+	    		reject(event.data.error);
+	    	} else {
+	    		resolve(event.data);
+	    	}
+	    };
+	    return navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
+	    	serviceWorkerRegistration.active.postMessage(msgToSend, [messageChannel.port2]);
+	    	resolve(true);
+	    });	    
+//	    serviceWorker.postMessage(msgToSend, [messageChannel.port2]);
+	  });
+}
+function sendUnRegisterInfoToServer(userObj){
+	//log('sendUnRegisterInfoToServer called...');
+	var dataToPost = {'api_key': userObj.apiKey, 'subscriber_id': userObj.subscriberID};
+	var data = new FormData();
+	data.append( "json", JSON.stringify( dataToPost ) );
+
+	fetch(smBaseURL + 'user/subscription/unsubscribe', {
+		method: 'post',
+		body: data,
+		cache: 'no-cache'
+	}).then(function(response){
+		sendUnRegisterInfoToServerResponseHandler(userObj, response);
+	}).catch(function(err) {
+		//log("Unable to complete request, please try again later.");
+		// Error :(
+	});	
+}
+function sendUnRegisterInfoToServerResponseHandler(request, response){
+	//log("sendUnRegisterInfoToServerResponseHandler.........", response);
+	var msgToSend = {cmd: 'flush'}
+	sendMessageToSW(msgToSend).then(function(responseFromSW){
+	//log("sendMessageToSW 'flush' Then Handler", responseFromSW);
+		closeChildWindowIfApplicable();
+	  }).catch(function(error){
+//		  var err = new Error('');
+		  //log("Line #: ", err.lineNumber,  " sendMessageToSW 'flush' Catch Handler", error);
+		  log("Error occured in flushing Service Worker Data from IndexDB.");
+	  });	
+}
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+function displayAppropriateContentAsPerPermission(permission){
+	if(permission == 'allowed'){
+		jQuery('#defaultDiv,#unsubDiv').hide();
+		jQuery('#subDiv').show();
+	}
+	else if(permission == 'denied'){
+		jQuery('#defaultDiv,#subDiv').hide();
+		jQuery('#unsubDiv').show();
+	}
+}
+function openIDB(){
+	return new Promise(
+			function(resolve, reject){
+				var dbRequest = window.indexedDB.open( 'sm_http', 6);
+				dbRequest.onupgradeneeded = dbUpgradeNeededHandler; 
+				dbRequest.onsuccess = function(event){
+					log("DB Opened successfully.......");
+//					smDBObj = event.target.result;
+					resolve(event.target.result);
+				};
+				dbRequest.onerror = function(event){
+					reject(false);
+				};
+			}
+			);
+}
+function putToIDB(dataToStore){
+	return new Promise(
+			function(resolve, reject){
+				openIDB().then(function(idbObj){
+					var dbTransaction = idbObj.transaction(['sm_http'], "readwrite");
+					dbTransaction.oncomplete = dbTransactionCompleteHandler;
+					dbTransaction.onerror = function(error){
+						reject(false);
+					};
+					var dbObjectStore = dbTransaction.objectStore('sm_http');
+					var dbObjectStoreRequest = dbObjectStore.clear();
+					dbObjectStoreRequest.onsuccess = dbObjectStoreRequestClearSuccessHandler;
+					console.log("New item going to add", dataToStore);
+					dbObjectStore = dbTransaction.objectStore('sm_http');
+					dbObjectStoreRequest = dbObjectStore.add(dataToStore);
+					dbObjectStoreRequest.onsuccess = function(event){
+						resolve(true);
+					};
+				});
+			});
+}
+function getFromIDB(){
+	return new Promise(
+			function(resolve, reject){
+				openIDB().then(function(idbObj){
+					var dbTransaction = idbObj.transaction(['sm_http'], "readwrite");
+					dbTransaction.oncomplete = dbTransactionCompleteHandler;
+					dbTransaction.onerror = function(error){
+						reject(false);
+					};
+					var dbObjectStore = dbTransaction.objectStore('sm_http');
+//					console.log("Asim Key: " + apiKey + ", subID: " + subscriberID + ", endPoint: " + endPoint);
+					var dbObjectStoreRequest = dbObjectStore.getAll();
+					dbObjectStoreRequest.onsuccess = function(event){
+						if(event.target.result.length == 0){
+							reject(false);
+						}else{
+							resolve(event.target.result[0]);
+						}
+					};
+					dbObjectStoreRequest.onerror = function(error){
+						reject("DB Store Object Request Error.");
+					}
+				});	
+			});
+}
+function flushIDB(){
+	return new Promise(
+			function(resolve, reject){
+				openIDB().then(function(idbObj){
+					var dbTransaction = dbObj.transaction(['sw'], "readwrite");
+					dbTransaction.oncomplete = dbTransactionCompleteHandler;
+					dbTransaction.onerror = function(error){
+						reject(false);
+					};
+					dbObjectStore = dbTransaction.objectStore('sw');
+					var dbObjectStoreRequest = dbObjectStore.clear();
+					dbObjectStoreRequest.onsuccess = function(event){
+						resolve(true);
+					};
+				});
+			});
+}
+function dbUpgradeNeededHandler(event){
+	log("dbUpgradeNeededHandler", event);
+	var dbObj = event.target.result;
+
+	if(dbObj.objectStoreNames.contains('sm_http') == true){
+		dbObj.deleteObjectStore('sm_http');
+		  
+	}
+	dbObj.createObjectStore('sm_http', { keyPath: "id" });
+}
+function dbObjectStoreRequestClearSuccessHandler(event){
+	log("All Records Flushed out........");
+	log("dbObjectStoreRequestClearSuccessHandler", event);
+}
+function dbObjectStoreRequestSuccessHandler(event){
+	log("New record added.......");
+	log("dbObjectStoreRequestSuccessHandler", event);
+}
+function dbOpenErrorHandler(event){
+	log("DB coult not be Opened.......");
+}
+function dbTransactionCompleteHandler(event){
+	log("dbTransactionCompleteHandler", event);
+}
+function dbTransactionErrorHandler(event){
+	log("dbTransactionErrorHandler", event);
+}
+function log(strToLog){
+	if(isProd == true){
+		return false;
+	}
+	console.log(strToLog);
+}
+function displayUnsubscribeWidgetIfApplicable(){
+	var domain = document.domain;
+	if(smConfig[document.domain].display_unsubscribe_widget == 0){
+		return false;
+	}
+	getFromIDB().then(function(resultObj){
+		if(resultObj.permission == 'allowed'){
+			var positionCSS = fetchUnsubscribeWidgetPositionStyle();
+			var divHTML = '<div id="smUnsubMainDiv" style="position: fixed;' + positionCSS + ' opacity: 0.7;z-index:9999;text-align:center; display:block; color:#fff; background-color:#000; padding:5px; "><div id="smUnsubscribe"><a href="JavaScript:;" style="color:#FAFAFA;text-decoration:underline;">' + smConfig[document.domain].unsubscribe_widget_text + '</a></div><div id="smConfirmUnsubscribe" style=" text-align:center;display: none;">Are you sure?<br/><a id="smUnsubYes" href="JavaScript:;" style="color:#FAFAFA;text-decoration:underline;">Yes</a> | <a id="smUnsubNo" href="JavaScript:;" style="color:#FAFAFA;text-decoration:underline;">No</a></div></div>';
+			var $div = jQuery(divHTML).appendTo('body');
+
+			jQuery('#smUnsubscribe').on('click', unsubscribeBtnClickHandler);
+			jQuery('#smUnsubYes').on('click', unsubscribeWidgetClickHandler);
+			jQuery('#smUnsubNo').on('click', unsubscribeNoBtnClickHandler);
+		}
+	}).catch(function(error){
+		log("We cannot display Unsubscribe widget because user didn't subscribe to Push Notification Service.");
+	});
+}
+function fetchUnsubscribeWidgetPositionStyle(){
+	var domain = document.domain;
+	
+	if(smConfig[document.domain].unsubscribe_widget_position == 'bottom_right'){
+		return 'bottom: 0; right: 0;';
+	}
+	else if(smConfig[document.domain].unsubscribe_widget_position == 'bottom_left'){
+		return 'bottom: 0; left: 0;';
+	}
+	else if(smConfig[document.domain].unsubscribe_widget_position == 'bottom_center'){
+		return 'left: 50%;bottom: -13px;transform: translate(-50%, -50%);margin: 0 auto;';
+	}
+	if(smConfig[document.domain].unsubscribe_widget_position == 'top_right'){
+		return 'top: 0; right: 0;';
+	}
+	if(smConfig[document.domain].unsubscribe_widget_position == 'top_left'){
+		return 'top: 0; left: 0;';
+	}else{
+		return 'bottom: 0; right: 0;';
+	}
+	
+}
+function unsubscribeBtnClickHandler(event){
+	$('#smUnsubscribe').hide();
+	$('#smConfirmUnsubscribe').show();
+}
+function unsubscribeNoBtnClickHandler(event){
+	$('#smUnsubscribe').show();
+	$('#smConfirmUnsubscribe').hide();
+}
+function unsubscribeWidgetClickHandler(event){
+	getFromIDB().then(function(resultObj){
+		if(resultObj.permission == 'allowed'){
+			var dataToPost = {'api_key': resultObj.apiKey, 'subscriber_id': resultObj.subscriberID};
+			
+			jQuery.ajax({
+				type: "POST",
+				dataType: "jsonp",
+				url : 'https://app.sendmsgs.com/user/subscription/unsubscribeViaWidget',
+				jsonpCallback: 'unsubscribeViaWidgetResponseHandler',
+				data: dataToPost,
+				cache: false
+			});
+			
+		}
+	}).catch(function(error){
+		log("We cannot display Unsubscribe widget because user didn't subscribe to Push Notification Service.", error);
+	});
+}
+function unsubscribeViaWidgetResponseHandler(response){
+	if(smConfig[document.domain].httpsSupported == true){
+		var msgToSend = {cmd: 'flush'}
+		sendMessageToSW(msgToSend).then(function(responseFromSW){
+		//log("sendMessageToSW 'get' Then Handler", responseFromSW);
+			var dataToStore = {cmd: 'put', apiKey: null, subscriberID: null, id: 0, endPoint: null, permission: 'denied'};
+			putToIDB(dataToStore);
+		  }).catch(function(error){
+			  log("Error in flusing IndexDB By Service Worker on Unsubscribe Use Case");
+			  log(error);
+		  });	
+	}else{
+		var dataToStore = {cmd: 'put', apiKey: null, subscriberID: null, id: 0, endPoint: null, permission: 'denied'};
+		putToIDB(dataToStore);
+		$('#smUnsubMainDiv').hide();
+		alert("You have been successfully Unsubscribed from Push Notifications.");
+	}
+}
+//function getMyBaseURL(){
+//	var baseURL = null;
+//	if($('script[src*="sw_driver.js"]').length == 0){
+//		return baseURL;
+//	}
+//	baseURL = $('script[src*="sw_driver.js"]').attr('src').replace('sw_driver.js', '');
+//	
+//	return baseURL;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+/////////Javascript API functions START here -----------------------------
+MyPushManager.prototype.addSubscriberToSegments = function(segmentIds){
+	navigator.serviceWorker.ready.then(function(swReg){
+		//log('addSubscriberToSegments called...');
+//		serviceWorker = swReg.active;
+		serviceWorkerRegistration = swReg;
+		var msgToSend = {cmd: 'get'}
+		sendMessageToSW(msgToSend).then(function(responseFromSW){
+		//log("sendMessageToSW 'get' Then Handler", responseFromSW);
+		if(responseFromSW.apiKey != false && responseFromSW.subscriberID != false){
+			var inputObj = {'apiKey': responseFromSW.apiKey, 'subscriberID': responseFromSW.subscriberID, 'segments': segmentIds};
+			sendAddSubscriberToSegmentsRequestToServer(inputObj);
+			}
+		  }).catch(function(error){
+			  var err = new Error('');
+			  //log("Line #: ", err.lineNumber,  " sendMessageToSW 'get' Catch Handler", error);
+		  });	
+	}).catch(function(e) {
+        console.error('Error getting subscription', e);
+  });
+}
+function sendAddSubscriberToSegmentsRequestToServer(inputObj){
+	//log("Calling sendAddSubscriberToSegmentsRequestToServer...");
+	var dataToPost = {'api_key': inputObj.apiKey, 'subscriber_id': inputObj.subscriberID, 'segments': inputObj.segments};
+	var data = new FormData();
+	data.append("json", JSON.stringify(dataToPost));
+	
+	fetch(smBaseURL + 'user/subscription/addSubscriberToSegments', {
+		method: 'post',
+		body: data,
+		cache: 'no-cache'
+	}).then(function(response){
+		addSubscriberToSegmentsResponseHandler(inputObj, response);
+	}).catch(function(err) {
+		//log("Unable to complete request, please try again later.");
+		// Error :(
+	});	
+}
+function addSubscriberToSegmentsResponseHandler(request, response){
+	//log('addSubscriberToSegmentsResponseHandler');
+}
+MyPushManager.prototype.removeSubscriberFromSegments = function(segmentNames){
+	navigator.serviceWorker.ready.then(function(swReg){
+		//log('removeSubscriberFromSegments called...');
+//		serviceWorker = swReg.active;
+		serviceWorkerRegistration = swReg;
+		var msgToSend = {cmd: 'get'}
+		sendMessageToSW(msgToSend).then(function(responseFromSW){
+		//log("sendMessageToSW 'get' Then Handler", responseFromSW);
+		if(responseFromSW.apiKey != false && responseFromSW.subscriberID != false){
+			var inputObj = {'apiKey': responseFromSW.apiKey, 'subscriberID': responseFromSW.subscriberID, 'segments': segmentNames};
+			sendRemoveSubscriberToSegmentsRequestToServer(inputObj);
+			}
+		  }).catch(function(error){
+			  var err = new Error('');
+			  //log("Line #: ", err.lineNumber,  " sendMessageToSW 'get' Catch Handler", error);
+		  });	
+	}).catch(function(e) {
+        console.error('Error getting subscription', e);
+  });
+}
+function sendRemoveSubscriberToSegmentsRequestToServer(inputObj){
+	//log("Calling sendRemoveSubscriberToSegmentsRequestToServer...");
+	var dataToPost = {'api_key': inputObj.apiKey, 'subscriber_id': inputObj.subscriberID, 'segments': inputObj.segments};
+	var data = new FormData();
+	data.append("json", JSON.stringify(dataToPost));
+	
+	fetch(smBaseURL + 'user/subscription/removeSubscriberFromSegments', {
+		method: 'post',
+		body: data,
+		cache: 'no-cache'
+	}).then(function(response){
+		removeSubscriberToSegmentsResponseHandler(inputObj, response);
+	}).catch(function(err) {
+		//log("Unable to complete request, please try again later.");
+		// Error :(
+	});	
+}
+function removeSubscriberToSegmentsResponseHandler(request, response){
+	//log('removeSubscriberToSegmentsResponseHandler');
+}
+MyPushManager.prototype.ready = function(userFunctionToExecute){
+	userReadyFunctionPointer = userFunctionToExecute;
+}
+/////////Javascript API functions END here -----------------------------

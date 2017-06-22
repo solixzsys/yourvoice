@@ -1,0 +1,48 @@
+var url = 'http://store.therubiqube.com/play/index.php?publisherID='+publisherID+'&placementID='+placementID+'&callbackURL='+callbackURL;
+//var video_url = ;
+var frame = 'containerRQ';
+var none = 'none';
+document.write('<meta http-equiv="Access-Control-Allow-Origin" content="*">');
+document.write("<script src=\"https:\/\/ajax.googleapis.com\/ajax\/libs\/jquery\/1.10.2\/jquery.min.js\"><\/script>");
+document.write("<script src=\"http:\/\/store.therubiqube.com\/js\/scroll.js\"><\/script>");
+document.write("<script src=\"http:\/\/store.therubiqube.com\/js\/load.js\"><\/script>");
+document.write("<script src=\"http:\/\/store.therubiqube.com\/js\/record.js\"><\/script>");
+document.write('<nav style="width:'+width+';" id="containerRQ">');
+document.write('<input type="hidden" id="id" name="id">');
+document.write('<input type="hidden" id="user_id" name="user_id">');
+document.write('<input type="hidden" id="ip" name="ip">');
+document.write('<input type="hidden" id="publisherID" name="publisherID">');
+document.write('<input type="hidden" id="placementID" name="placementID">');
+document.write('<input type="hidden" id="earnings" name="earnings">');
+document.write('<input type="hidden" id="adUrl" name="adUrl">');
+document.write('<input type="hidden" id="ad_upload_video" name="ad_upload_video">');
+document.write('<input type="hidden" id="bid" name="bid">');
+document.write('<input type="hidden" id="adName" name="adName">');
+document.write('<input type="hidden" id="browser" name="browser">');
+document.write('<input type="hidden" id="operating" name="operating">');
+document.write('<input type="hidden" id="only_country" name="only_country">');
+document.write('<input type="hidden" id="city" name="city">');
+document.write("<script>");
+/* if(document.getElementById('earnings').value==0){
+		document.getElementById("containerRQ").innerHTML = "";
+		}
+ */document.write("<\/script>");
+document.write('<div style="float: right; z-index: 1; position: static; margin-bottom: -1%; color:#fff !important; cursor: pointer"><a onclick="document.getElementById(\''+frame+'\').innerHTML=\'\'"><img height="18px" width="18px" src="http://store.therubiqube.com/close-button.png"/></a><\/div>');
+document.write('<center><a id="link" target="_blank">');
+//document.write('<iframe scrolling="no" src="'+url+'" width="'+width+'" height="'+height+'" id="frame" frameborder="0"><\/iframe>');
+document.write('<video width="'+width+'" height="'+height+'" id ="video" name="vid" onhover="unmute(this);" type="video/mp4" />');
+document.write('</a></center>');
+document.write('<center><p id="powered" style="font-size:12px;">Powered by RubiQube Ad Network</p></center>');
+/* document.write('<script>');
+var vid = document.getElementById("video");
+vid.onended = function() {document.getElementById("containerRQ").style.display = "none";
+document.getElementById("containerRQ").innerHTML = "";
+						//eventOnEnded();
+						InsertImpression();
+};
+if(vid.duration - vid.currentTime >= 10){	
+InsertImpression();
+}
+document.write('<\/script>'); */
+//window.onscroll= function(){document.getElementById('frame').contentWindow.checkMedia()};
+document.write('<\/nav>');

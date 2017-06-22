@@ -1,0 +1,17 @@
+
+		var smApiKey = '83e49c2e0c83dec6bf824411287a8bbf';
+		var subdomain = '';
+		var smPathToSW;
+		var smDomain;
+		var smPathToProxy;
+		var smHttpsSupported;
+		var smConfig = {"punchng.com":{"pathToSW":"https:\/\/punchng.sendmsgs.com\/sw.js?v=1","pathToProxy":"https:\/\/punchng.sendmsgs.com\/subscription.html","httpsSupported":false,"display_unsubscribe_widget":"0","unsubscribe_widget_position":"bottom_right","unsubscribe_widget_text":"Unsubscribe","domain_aliases":[],"is_account_block":"0","is_active":"1","is_plan_fully_utilised":"0","cookies":[],"safari_web_push_id":"","style":{"bg_color":"background-color:#f0eff0;","title_color":"color:#cc0000;","msg_color":"color:#000000;","allow_btn_bg_color":"background:#000000 !important;","deny_btn_bg_color":"background:#cccccc !important;","logo":"https:\/\/s3-us-west-2.amazonaws.com\/sm-user-content\/133\/website_logo_133_1496253071.png"},"title":"Punch Nigeria Limited would like to send you push notifications.","msg":"Notifications can be turned off anytime from browser settings.","allow_btn_text":"Allow","deny_btn_text":"No Thanks"}};
+jQuery.each(smConfig, function(domain, domainObj){
+	if(domainObj.hasOwnProperty('domain_aliases') == true){
+		var domainAliases = domainObj.domain_aliases;
+		delete domainObj.domain_aliases;
+		jQuery(domainAliases).each(function(index, domainName){
+			smConfig [domainName]= domainObj;
+		});
+	}
+});

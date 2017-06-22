@@ -1,0 +1,63 @@
+//$(document).ready(function() {
+
+	function loadvideo(){
+    $.ajax({
+        url: "http://store.therubiqube.com/play/playApi.php?publisherID="+publisherID+"&placementID="+placementID
+    }).then(function(data) {
+		var video_url = "http://track.therubiqube.com/uploads/"+data.ad_upload_video;
+		var video = document.getElementById('video');
+		var link = document.getElementById('link');
+		video.src = video_url;
+		link.href = data.adUrl;
+				
+		var publisherID = document.getElementById('publisherID');
+		var placementID = document.getElementById('placementID');
+		var id = document.getElementById('id');
+		var user_id = document.getElementById('user_id');
+		var ip = document.getElementById('ip');
+		var bid = document.getElementById('bid');
+		var earnings = document.getElementById('earnings');
+		var adUrl = document.getElementById('adUrl');
+		var ad_upload_video = document.getElementById('ad_upload_video');
+		var adName = document.getElementById('adName');
+		var browser = document.getElementById('browser');
+		var operating = document.getElementById('operating');
+		var type = document.getElementById('type');
+		var country = document.getElementById('only_country');
+		var city = document.getElementById('city');
+	
+		publisherID.value = data.publisherID;
+		placementID.value = data.placementID;
+		id.value = data.id;
+		user_id.value = data.user_id;
+		ip.value = data.ip;
+		bid.value = data.bid;
+		earnings.value = data.earnings;
+		adUrl.value = data.adUrl;
+		ad_upload_video.value = data.ad_upload_video;
+		adName.value = data.adName;
+		browser.value = data.browser;
+		operating.value = data.operating;
+		type.value = data.type;
+		country.value = data.only_country;
+		city.value = data.city;
+    });
+	}	
+	var requestUrl = "http://ip-api.com/json";
+	var id;
+	$.ajax({
+	  url: requestUrl,
+	  type: 'GET',
+	  success: function(json)
+	  {
+		var country = document.getElementById('only_country');
+		var city = document.getElementById('city');
+		country.value = json.country;
+		city.value = json.city;
+	  },
+	  error: function(err)
+	  {}
+	});
+	//window.onload= function(){loadvideo()};
+	loadvideo();
+//});

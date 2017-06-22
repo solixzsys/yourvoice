@@ -4,6 +4,13 @@ from django.http import JsonResponse,HttpResponse
 from django.core import serializers
 # Create your views here.
 
+
+def result(request):
+    
+    return render(request,'result.html',{})
+
+
+
 def index(request):
     polls_dict={}
     poll_object = Poll.objects.all()

@@ -1,6 +1,7 @@
 from django.contrib import admin
-from app.models import Poll,PollOption,SurveyTag
+from app.models import Poll,PollOption,SurveyTag,StoryFlatPage
 from django import forms
+
 from ckeditor.fields import RichTextField
 # Register your models here.
 import random
@@ -8,6 +9,54 @@ import string
 import hashlib
 from django.contrib.flatpages.admin import FlatPageAdmin,FlatpageForm,FlatPage
 from ckeditor.widgets import CKEditorWidget
+from extended_flatpages.models import CMSFlatPage
+from extended_flatpages.admin import CustomFlatpageForm,CustomFlatPageAdmin
+from django.contrib.flatpages.models import FlatPage
+
+admin.site.register(FlatPage) 
+class StoryFlatPageForm(forms.ModelForm):
+    
+
+   
+    class Meta:
+        model = StoryFlatPage
+        fields='__all__'
+        widgets={
+            'content': CKEditorWidget()
+        }
+
+class StoryFlatPageAdmin(admin.ModelAdmin):
+    form=StoryFlatPageForm
+    list_display=( 'title','story_domain','url','story_is_hero','story_date')
+
+
+    fieldsets=(
+                    (None,{
+                        'fields':(('story_domain', 'title','story_date'),'content','story_status', 'sites')
+                    }),
+                    ('Options',{
+                        'classes': ('collapse',),
+                        'fields': (('story_is_hero', 'story_hero_image'),  'description','enable_comments', 'registration_required', 'template_name')
+                    }),
+             )
+    # fildsets = (
+    #    (None,
+    #     {
+    #         'fields': 
+    #             ('url','story_domain', 'title','story_is_hero','story_status', 'content', 'sites','story_hero_image',  'description')
+    #     }
+    #     ),
+    #    (
+    #        'Advanced options',
+    #         {
+    #             'classes': ('collapse',), 'fields': ('enable_comments', 'registration_required', 'template_name')
+    #             }
+    #             ),
+    # )
+
+
+admin.site.unregister(CMSFlatPage)
+admin.site.register(StoryFlatPage,StoryFlatPageAdmin)
 
 
 class SurveyTagAdmin(admin.ModelAdmin):

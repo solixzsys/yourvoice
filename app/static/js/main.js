@@ -25,10 +25,16 @@ var msgs=$('.msg1 h2')
 
 
     if($('.mybox').visible()==true){
-        $('nav').addClass('hidden').hide().show('slow')   
+        $('nav').addClass('hidden').hide().show('normal')   
         console.log(' mybox visible.........................');
+if(parseInt($('#sidebar_id').css('width'))<1){
+    $('#sidebar_id').css({'width':'250px'});
+    // $('body').css({'margin-left':'250px'});
+}else{
+    $('#sidebar_id').css({'width':'0'});
+    // $('body').css({'margin-left':'0'});
 
-    }else{
+    }
         $('nav').removeClass('hidden') 
         console.log('mybox not visible.........................');
     }
@@ -36,6 +42,41 @@ var msgs=$('.msg1 h2')
 
 
 
-    })
+})
+
+
+
+$('.toggleit').on('click',function(){
+    if(parseInt($('#sidebar_id').css('width'))<1){
+    $('#sidebar_id').css({'width':'250px'});
+    // $('body').css({'margin-left':'250px'});
+}else{
+    $('#sidebar_id').css({'width':'0'});
+    // $('body').css({'margin-left':'0'});
+
+    }
+
+})
+
+$('.closebtn').on('click',function(){
+    $('#sidebar_id').css({'width':'0'});
+    // $('body').css({'margin-left':'0'});
+})
+
+
+$('#navbtn').on('click',function(){
+    console.log('navbtn click................................')
+    if($(window).width()<768){
+        console.log('less than 768................................')
+       if(parseInt($('#sidebar_id').css('width'))<1){
+    $('#sidebar_id').css({'width':'250px'});
+    // $('body').css({'margin-left':'250px'});
+}else{
+    $('#sidebar_id').css({'width':'0'});
+    // $('body').css({'margin-left':'0'});
+
+    }
+    }
+})
     
 })

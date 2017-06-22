@@ -17,8 +17,11 @@
      background-color:#333333;
 
 }
+.navbar-default{
+    background-color: #111;
+}
 nav ul li a{
-    font-size: 36px;
+    font-size: 150%;
     padding-right: 30px;
     padding-left: 30px; 
 }
@@ -259,11 +262,17 @@ footer{
 
 
 @media screen and (max-width: 1000px){
+.mytoggle{
+    display: none;
+}    
 #header {
     text-align: center;
     height: 100%;
     
 
+}
+form{
+    display: none;
 }
 div,img, h3{
     

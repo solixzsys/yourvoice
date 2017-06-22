@@ -1,0 +1,32 @@
+$(document).ready(function() {
+        // Get media - with autoplay disabled (audio or video)
+            var media = $('video').not("[autoplay='autoplay']");// jQuery("#container").find("iframe").contents().find("#video").get(0).play();
+            //var media = $("#frame").contents().find("#video").not("[autoplay='autoplay']");
+            var tolerancePixel = 40;
+ 
+            function checkMedia(){
+                // Get current browser top and bottom
+                var scrollTop = $(window).scrollTop() + tolerancePixel; //
+                var scrollBottom = $(window).scrollTop() + $(window).height() - tolerancePixel; //
+ 
+                media.each(function(index, el) {
+                    var yTopMedia = $(this).offset().top;
+                    //var yTopMedia = $("#frame").contents().find("#video").offset().top;
+                    var yBottomMedia = $(this).height() + yTopMedia;
+                    //var yBottomMedia = $("#frame").contents().find("#video").height() + yTopMedia;
+ 
+                    if(scrollTop < yBottomMedia && scrollBottom > yTopMedia){ //view explaination in `In brief` section above
+                        $(this).get(0).play();//jQuery("#container").find("iframe").contents().find("#video").get(0).play();
+                        //$("#frame").contents().find("#video").get(0).play();
+                    } else {
+                        $(this).get(0).pause();//jQuery("#container").find("iframe").contents().find("#video").get(0).play();
+                        //$("#frame").contents().find("#video").get(0).pause();
+                    }
+                });
+ 
+                //}
+            }
+		window.onscroll= function(){checkMedia()};
+		//parent.onscroll = function(){checkMedia()};
+        $(document).on('touchmove', checkMedia);
+        });

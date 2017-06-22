@@ -12,6 +12,34 @@ from django.dispatch import receiver
 import random
 import string
 from django.contrib.auth.models import User
+from extended_flatpages.models import CMSFlatPage
+from datetime import datetime
+
+
+class StoryFlatPage(CMSFlatPage):
+    DOMAIN=(
+        ('ECONOMY','Economy'),
+        ('POLITICS','Politics'),
+        ('SOCIAL','Social'),
+
+    )
+    STATE=(
+        ('DRAFT','DRAFT'),        
+        ('UNPUBLISH','UNPUBLISH'),
+        ('PUBLISH','PUBLISH'),
+        ('COMPLETE','COMPLETE'),
+        ('END-OF-LIFE','END-OF-LIFE'),
+    )
+
+    story_is_hero=models.BooleanField(default=False)
+    story_hero_image=models.FileField(upload_to='passport/%Y/%m/%d',blank=True)
+    story_domain=models.CharField(max_length=20,choices=DOMAIN)
+    story_status=models.CharField(max_length=20,choices=STATE,default="DRAFT")
+    story_date=models.DateField(default= datetime.now())
+
+    def save(self, *args, **kwargs):
+        self.url='/'+self.title.replace(' ','-')+'/'
+        return super(StoryFlatPage,self).save(*args, **kwargs)
 
 
 

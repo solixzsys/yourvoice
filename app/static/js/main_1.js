@@ -87,4 +87,21 @@ $('#next').on('click',function(){
     makeajax(sessionStorage.num);
 })
 
+
+
+
+$('#navctrl').on('click',function(){
+    $('#sidebar_id').css({'width':'250px'});
+    $('#content').css({'margin-left':'250px'});
+
+})
+
+$('.closebtn').on('click',function(){
+    $('#sidebar_id').css({'width':'0'});
+    $('#content').css({'margin-left':'0'});
+})
+
+
+
+
 });

@@ -20,6 +20,7 @@ from django.conf.urls import include
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', index),
+    url(r'^result$', result),
     url(r'^test$', test),
     url(r'^jsonpoll$', jsonpoll),
     url(r'^jsonpolloption$', jsonoption),
