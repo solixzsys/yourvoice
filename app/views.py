@@ -7,7 +7,8 @@ from django.core import serializers
 
 def result(request):
     pages=StoryFlatPage.objects.all()
-    return render(request,'result.html',{'pages':pages})
+    hero=StoryFlatPage.objects.filter(story_is_hero=True)[0]
+    return render(request,'result.html',{'pages':pages,'hero':hero})
 
 
 

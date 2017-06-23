@@ -1,16 +1,73 @@
 {% extends "base.html" %}
+{% block extra_style %}
+<style>
+.hero_heading a{
+    font-size:36px;
+    color: #222;
 
+}
+.hero_heading a:hover{
+    text-decoration: none;
+    color: green;
+
+}
+.hero_heading{
+    margin-bottom: 20px;
+}
+body{
+    background-color: white;
+}
+
+.otherrow>:nth-child(odd){
+    clear: left;
+}
+.othercol a, .othercol a:hover{
+    text-decoration: none;
+    color: #555;
+}
+</style>
+
+{% endblock %}
 {%block title%}See Survey Result{% endblock%}
 
 {%block middlecol%}
 <div class="row">
-    <div class="col-xs-12 heroresult">
+    <div class="col-xs-12 heroresult" style="margin-bottom: 20px;text-align: center">
+        
+        <div> 
+            <div class="hero_heading" style="text-align: left"> <a href="{{hero.url}}"> {{ hero.title|safe}}</a></div>
+            <img src="/media/{{hero.story_hero_image}}" style="max-width: 300px;height: 200px"   />
+            
+            <div style="text-align: left">{{ hero.content|safe|truncatewords:"60"}}</div>
+            </div>
+
     </div>
     <div class="row otherrow">
         {%for page in pages%}
-        <div class="col-sm-6">
+        
+        <div class="col-xs-12 col-sm-6 othercol " style="padding: 5px;text-align:left">
             
-        {{page.title}}
+                
+                <div class="panel panel-default">
+                    <a href="{{page.url}}">
+                      <div class="panel-heading " style="text-align: left">
+                            <h3 class="panel-title" style="font-weight: bold">{{page.title|safe}}</h3>
+                      </div>
+                      <div class="panel-body">
+                            <img src="/media/{{page.story_hero_image}}"  width="100%" height="200"/>
+                      </div>
+                      
+                      
+                     <div class="panel-footer">
+                        <p>{{ hero.content|safe|truncatewords:"40"}}</p>
+                     </div>
+                    </a>
+                      
+                </div>
+                
+                
+            
+
         </div>
         {% endfor %}
     </div>

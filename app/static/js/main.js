@@ -24,18 +24,22 @@ var msgs=$('.msg1 h2')
     }
 
 
-    if($('.mybox').visible()==true){
-        $('nav').addClass('hidden').hide().show('normal')   
+    if($('.mybox').visible(true,true)==false){
+        //$('nav').addClass('hidden').hide().show('normal')
+        // $('nav').removeClass('hidden') 
+         $('nav').slideDown('slow')
         console.log(' mybox visible.........................');
-if(parseInt($('#sidebar_id').css('width'))<1){
-    $('#sidebar_id').css({'width':'250px'});
+// if(parseInt($('#sidebar_id').css('width'))<1){
+//     $('#sidebar_id').css({'width':'250px'});
     // $('body').css({'margin-left':'250px'});
-}else{
-    $('#sidebar_id').css({'width':'0'});
-    // $('body').css({'margin-left':'0'});
+ }else{
+//     $('#sidebar_id').css({'width':'0'});
+//     // $('body').css({'margin-left':'0'});
 
-    }
-        $('nav').removeClass('hidden') 
+//     }
+        $('nav').slideUp('slow')
+        
+       // $('nav').addClass('hidden') 
         console.log('mybox not visible.........................');
     }
 
@@ -74,7 +78,7 @@ $('#navbtn').on('click',function(){
 }else{
     $('#sidebar_id').css({'width':'0'});
     // $('body').css({'margin-left':'0'});
-
+console.log('navbtn click................................')
     }
     }
 })

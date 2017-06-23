@@ -17,6 +17,8 @@ from django.conf.urls import url
 from django.contrib import admin
 from app.views import *
 from django.conf.urls import include
+from yourvoice import settings
+from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', index),
@@ -27,3 +29,5 @@ urlpatterns = [
     url(r'^pages/',include('django.contrib.flatpages.urls')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]
+if settings.DEBUG is True:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
