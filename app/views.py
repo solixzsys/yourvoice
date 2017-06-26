@@ -38,11 +38,16 @@ def test(request):
 def jsonpoll(request):
     
     page=request.GET.get('page')
-    print('ppppppppppppppppppp'+str(page))
-    poll_object = Poll.objects.all()[int(page)]
-         
+    section=request.GET.get('section').upper()
+    # print('ppppppppppppppppppp'+str(page))
+    if(section=='ECONOMY'):
+        
+        poll_object = Poll.objects.filter(poll_domain=section)[int(page)]
+        print('...........................'+str(poll_object))
+    else:
+        poll_object = Poll.objects.all()[int(page)]     
     serialized=serializers.serialize('json',[poll_object])
-         
+    
     return HttpResponse(serialized,content_type='application/json')
 
 
@@ -50,10 +55,10 @@ def jsonpoll(request):
 def jsonoption(request):
     
     code=request.GET.get('code')
-    print('cccccccccccccccccccccccccccccccccccccc'+str(code))
+    # print('cccccccccccccccccccccccccccccccccccccc'+str(code))
 
     polloption_object=PollOption.objects.filter(polloption_questioncode=code)
     serialized=serializers.serialize('json',polloption_object)
-    print(serialized)
+    # print(serialized)
     return HttpResponse(serialized,content_type='application/json')
     

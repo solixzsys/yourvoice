@@ -46,7 +46,7 @@
 
 .sidebar2 a:hover{
     background-color: #444;
-    font-size: 22x;
+    font-size: 100%;
 }
 .sidebar2 .closebtn{
     position: absolute;
@@ -173,7 +173,7 @@
             <!--LEFT COLUMN-->
 
             <section id="leftcol">
-                <div class="col-lg-3">
+                <div class="col-lg-3" style="padding-right: 40px">
                 {%block leftcol%}
 
                 <div id="sidebar_id2" class="sidebar2" style="  ">
@@ -219,7 +219,7 @@
 
             <!-- RIGHT COLUMN-->
              <section id="rightside">
-                 <div class="col-lg-3">
+                 <div class="col-lg-3" style="padding-left: 50px">
                  {% block rightcol %}
 
                 {% endblock %}
@@ -257,6 +257,11 @@
         <script src="{% static 'js/jquery.visible.js'%}"></script>
        
        <script>
+
+           $('.closebtn').on('click',function(){
+    $('#sidebar_id').css({'width':'0'});
+    // $('body').css({'margin-left':'0'});
+})
 
 
 

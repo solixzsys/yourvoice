@@ -2,7 +2,7 @@
 {% block extra_style %}
 <style>
 .hero_heading a{
-    font-size:36px;
+    font-size:30px;
     color: #222;
 
 }
@@ -35,7 +35,7 @@ body{
     <div class="col-xs-12 heroresult" style="margin-bottom: 20px;text-align: center">
         
         <div> 
-            <div class="hero_heading" style="text-align: left"> <a href="{{hero.url}}"> {{ hero.title|safe}}</a></div>
+            <div class="hero_heading" style="text-align: left;font-weight: bold"> <a href="{{hero.url}}"> {{ hero.title|safe}}</a></div>
             <img src="/media/{{hero.story_hero_image}}" style="max-width: 300px;height: 200px"   />
             
             <div style="text-align: left">{{ hero.content|safe|truncatewords:"60"}}</div>
@@ -77,6 +77,46 @@ body{
 
 
 
+
+
+{% endblock %}
+
+
+{% block rightcol %}
+
+<div class="panel panel-default">
+      <div class="panel-heading" style="">
+            <h3 class="panel-title"><span style="color: red;font-size: 26px;font-weight: bold "> Today's News</span></h3>
+      </div>
+      <div class="panel-body">
+            Panel content
+      </div>
+      <div class="panel-footer">
+            
+      </div>
+</div>
+<div class="panel panel-default">
+      <div class="panel-heading" style="">
+            <h3 class="panel-title"><span style="color: red;font-size: 26px;font-weight: bold "> Twitter Feed</span></h3>
+      </div>
+      <div class="panel-body">
+            Panel content
+      </div>
+      <div class="panel-footer">
+            
+      </div>
+</div>
+<div class="panel panel-default">
+      <div class="panel-heading" >
+            <h3 class="panel-title"><span style="color: red;font-size: 26px;font-weight: bold "> Facebook Feed</span></h3>
+      </div>
+      <div class="panel-body">
+            Panel content
+      </div>
+      <div class="panel-footer">
+            
+      </div>
+</div>
 
 
 {% endblock %}

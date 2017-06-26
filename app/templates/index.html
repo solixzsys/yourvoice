@@ -40,6 +40,7 @@
             <a href="#">Economy</a>
             <a href="#">Solution & Services</a>
             <a href="#">Poll & Survey</a>
+            <a href="/result">Result</a>
             <a href="#">Society</a>
             <a href="#">Login</a>
             <a href="#">Join Us</a>
@@ -192,11 +193,12 @@ What would you like to do?
 
                         </div>
                         <div class="col-sm-4">
-                             <div class="textboard">
+                             <div class="textboard class="purelink" >
+                                 <a href="/result" style="color:white;text-decoration: none">
                                 <h3 style="">SEE RESULT</h3>
                                  <img class="" src="../static/img/Osibanjo.jpg" style=" " alt="">
                                 <h6>Quick previous and next links for simple pagination implementations with light markup and styles. It's great for simple sites like blogs or magazines</h6>
-
+                                 </a>            
                             </div>
                             
                         </div>
@@ -301,45 +303,19 @@ What would you like to do?
                             <h3>ECONOMIC AGENDA</h3>
                             <div class="panel panel-success">
   <div class="panel-heading">
-    <h4 class="panel-title">How did you think the perpetual lateness in signing nigeria buget would impact on Economy</h4>
+    <h4 class="panel-title" id="titletext"></h4>
   </div>
   <div class="panel-body">
 
-<ul>
-      <li class="radio list-group-item list-success">
-  <label>
-    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-    Option one is this and that&mdash;be sure to include why it's great
-  </label>
-  
-</li>
+<ul id='optionarea' class="list-group">
+     
 
 
-<li class="radio list-group-item">
-  <label>
-    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-    Option two can be something else and selecting it will deselect option one
-  </label>
-</li>
- <li class="radio list-group-item">
-  <label>
-    <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" checked>
-    Option one is this and that&mdash;be sure to include why it's great
-  </label>
-</li>
-
-
-<li class="radio list-group-item">
-  <label>
-    <input type="radio" name="optionsRadios" id="optionsRadios4" value="option4">
-    Option two can be something else and selecting it will deselect option one
-  </label>
-</li>
 
 </ul>
 
 
-
+ <button id="next" style="" type="button"  class="btn btn-info pull-right ">Next</button>
   </div>
 
 
@@ -385,43 +361,19 @@ What would you like to do?
 
                              <div class="panel panel-success">
   <div class="panel-heading">
-    <h4 class="panel-title">Did you think the creation of dedicated route for heardsman would solve the incensant clashes between farmers and heardsman</h4>
+    <h4 class="panel-title" id="titletext2"></h4>
   </div>
   <div class="panel-body">
 
-<ul>
-      <li class="radio list-group-item list-success">
-  <label>
-    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-    Option one is this and that&mdash;be sure to include why it's great
-  </label>
-  
-</li>
+<ul id='optionarea2' class="list-group">
+     
 
 
-<li class="radio list-group-item">
-  <label>
-    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-    Option two can be something else and selecting it will deselect option one
-  </label>
-</li>
- <li class="radio list-group-item">
-  <label>
-    <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" checked>
-    Option one is this and that&mdash;be sure to include why it's great
-  </label>
-</li>
-
-
-<li class="radio list-group-item">
-  <label>
-    <input type="radio" name="optionsRadios" id="optionsRadios4" value="option4">
-    Option two can be something else and selecting it will deselect option one
-  </label>
-</li>
 
 </ul>
 
+
+ <button id="next2" style="" type="button"  class="btn btn-info pull-right ">Next</button>
 
 
   </div>
@@ -607,11 +559,11 @@ What would you like to do?
 
 
 
-        <script src="{% static 'js/jquery.js' %}"></script>
-        
-        <script src="{% static 'js/bootstrap.js' %}"></script>
-        <script src="{% static 'js/main.js' %}"></script>
+        <script src="{% static 'js/jquery.js' %}"></script>        
+        <script src="{% static 'js/bootstrap.js' %}"></script>       
         <script src="{% static 'js/jquery.visible.js'%}"></script>
+         <script src="{% static 'js/main.js' %}"></script>
+        <script src="{% static 'js/main_1.js' %}"></script>
        
 
     </body>   

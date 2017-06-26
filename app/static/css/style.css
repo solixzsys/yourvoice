@@ -24,6 +24,10 @@ nav ul li a{
     font-size: 150%;
     padding-right: 30px;
     padding-left: 30px; 
+    
+}
+.navbar-default .navbar-nav > li > a{
+    color: white;
 }
 
 nav ul li{
@@ -119,6 +123,9 @@ margin-bottom: 20px;
     /*margin-bottom: 150px;*/
 }
 .mybox{
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
     transform: rotate(45deg);
     /*z-index: -1;*/
     position: absolute;
@@ -262,12 +269,17 @@ footer{
 
 
 @media screen and (max-width: 1000px){
+.logo{
+    display: none;
+
+}    
 .mytoggle{
     display: none;
 }    
 #header {
     text-align: center;
     height: 100%;
+    padding-top: 70px;
     
 
 }
@@ -284,9 +296,10 @@ div,img, h3{
 .textboard{
     display: block;
     margin: 0 auto 50px auto;
+    
 }
 .agenda{
-    width: 70%;
+    width: 90%;
 }
 }
 
@@ -330,4 +343,34 @@ div,img, h3{
     margin-right: 10px;
     width: 100px;
     height: 80px;
+}
+
+.purelink a{
+    text-decoration: none;
+    color: white !important;
+}
+.purelink a:hover{
+    text-decoration: none;
+
+}
+
+.optext{
+    margin-left: 20px;
+}
+
+li.optionslist0{
+    border-left: solid 5px #5cb85c;
+
+}
+li.optionslist1{
+    border-left: solid 5px #f0ad4e;
+
+}
+li.optionslist2{
+    border-left: solid 5px #5bc0de;
+
+}
+li.optionslist3{
+    border-left: solid 5px #d9534f;
+
 }

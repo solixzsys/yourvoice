@@ -6,21 +6,21 @@ var msgs=$('.msg1 h2')
 
         if($($('.msg1 h2')[i]).visible()==true){
             $($('.msg1 h2')[i]).addClass('textanim')
-        console.log('msg1 visible.........................');
+        // console.log('msg1 visible.........................');
 
     }else{
         $($('.msg1 h2')[i]).removeClass('textanim')
-        console.log('msg1 not visible.........................');
+        // console.log('msg1 not visible.........................');
     }
         }
 
      if($('.textboard').visible()==true){
             $('.textboardwrapper div').addClass('.textboardanim')
-        console.log(' .textboard visible.........................');
+        // console.log(' .textboard visible.........................');
 
     }else{
         $('.textboardwrapper div').removeClass('.textboardanim')
-        console.log('.textboard not visible.........................');
+        // console.log('.textboard not visible.........................');
     }
 
 
@@ -28,7 +28,7 @@ var msgs=$('.msg1 h2')
         //$('nav').addClass('hidden').hide().show('normal')
         // $('nav').removeClass('hidden') 
          $('nav').slideDown('slow')
-        console.log(' mybox visible.........................');
+        // console.log(' mybox visible.........................');
 // if(parseInt($('#sidebar_id').css('width'))<1){
 //     $('#sidebar_id').css({'width':'250px'});
     // $('body').css({'margin-left':'250px'});
@@ -40,7 +40,7 @@ var msgs=$('.msg1 h2')
         $('nav').slideUp('slow')
         
        // $('nav').addClass('hidden') 
-        console.log('mybox not visible.........................');
+        // console.log('mybox not visible.........................');
     }
 
 
