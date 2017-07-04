@@ -1,16 +1,116 @@
 $(function(){
-    $.ajax({
-        url:'/jsonpoll',
 
-    })
-    .done(
-        function(data){
-            console.log(data)
+    $(window).scroll(function(){
+        var msgs=$('div.col-sm-12.msg1 h4 p');
+        // console.log('SCROLLING...................................'+msgs.length)
+        
+        for(var i=0;i<msgs.length;i++){
+
+        if($(msgs[i]).visible()==true){
+            $(msgs[i]).addClass('textanim')
+            // $(msgs[i]).animate({'font-size':'28px'})
+         console.log('msg1 visible.........................');
+
+    }else{
+        // $(msgs[i]).animate({'font-size':'10px'})
+         $(msgs[i]).removeClass('textanim')
+        
+         console.log('msg1 not visible.........................');
+    }
         }
-    )
-    .fail(
-        function(){
-            console.log('error..............')
-        }
-    )
-});
+
+     if($('.textboard').visible()==true){
+            $('.textboardwrapper div').addClass('.textboardanim')
+        // console.log(' .textboard visible.........................');
+
+    }else{
+        $('.textboardwrapper div').removeClass('.textboardanim')
+        // console.log('.textboard not visible.........................');
+    }
+
+    // if($('#headerwrapper').visible(true,true)==false){
+    //     $('div.nav').hide();
+    // }
+
+
+
+
+
+
+
+    if($('#heroid').visible(true,true)==false){
+        //$('nav').addClass('hidden').hide().show('normal')
+        // $('nav').removeClass('hidden') 
+         $('nav').slideDown('slow')
+         $('#mainnav').css({'display':'none'})
+        // console.log(' mybox visible.........................');
+// if(parseInt($('#sidebar_id').css('width'))<1){
+//     $('#sidebar_id').css({'width':'250px'});
+    // $('body').css({'margin-left':'250px'});
+ }else{
+//     $('#sidebar_id').css({'width':'0'});
+//     // $('body').css({'margin-left':'0'});
+
+//     }
+        $('nav').slideUp('slow')
+        $('#mainnav').css({'display':'block'})
+        
+       // $('nav').addClass('hidden') 
+        // console.log('mybox not visible.........................');
+    }
+
+
+
+
+})
+
+
+//  $(window).resize(function(){
+//     if($(window).width()<1000){
+//         $('nav').removeClass('hidden');
+//         $('mynav').addClass('hidden');
+//         // $('div.quote span').css({'position':'relative'})
+//         $('.textboard img').css({'display':'none'})
+//          console.log('xxxxxxxxxxxxxxxxxxxxx')
+//     }else{
+//         $('nav').addClass('hidden');
+//          $('mynav').removeClass('hidden');
+
+//     }
+//  });
+
+
+$('.toggleit').on('click',function(){
+    if(parseInt($('#sidebar_id').css('width'))<1){
+    $('#sidebar_id').css({'width':'250px'});
+    // $('body').css({'margin-left':'250px'});
+}else{
+    $('#sidebar_id').css({'width':'0'});
+    // $('body').css({'margin-left':'0'});
+
+    }
+
+})
+
+$('.closebtn').on('click',function(){
+    $('#sidebar_id').css({'width':'0'});
+    // $('body').css({'margin-left':'0'});
+})
+
+
+$('#navbtn').on('click',function(){
+    console.log('navbtn click................................')
+    if($(window).width()<768){
+        console.log('less than 768................................')
+       if(parseInt($('#sidebar_id').css('width'))<1){
+    $('#sidebar_id').css({'width':'250px'});
+    // $('body').css({'margin-left':'250px'});
+}else{
+    $('#sidebar_id').css({'width':'0'});
+    // $('body').css({'margin-left':'0'});
+console.log('navbtn click................................')
+    }
+    }
+})
+    
+})

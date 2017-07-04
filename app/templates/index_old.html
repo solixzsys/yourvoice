@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html">
+        <meta name="author" content="">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Mock Up - Let YourVoice be heard</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <!-- Font Awesomes link-->
+       
+        <!-- Bootstrap Core CSS-->
+        {% load staticfiles %}
+       <link href="{% static 'css/bootstrap.css'%}" rel="stylesheet">
+        <link href="{% static 'css/reset.css'%}" rel="stylesheet">
+        <link href="{% static 'css/style.css'%}" rel="stylesheet">
+        <link href="{% static 'css/sidenav.css'%}" rel="stylesheet">
+
+        
+
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+
+<!--VERTICAL SIDE NAV-->
+
+<div id="sidebar_id" class="sidebar">
+            <a href="javascript:void(0)" class="closebtn"  >&times</a>
+             <input type="text" placeholder="Search" class="searchtxt  form-control" style="" />
+                            
+            <a href="#">Politics</a>
+            <a href="#">Economy</a>
+            <a href="#">Solution & Services</a>
+            <a href="#">Poll & Survey</a>
+            <a href="/result">Result</a>
+            <a href="#">Society</a>
+            <a href="/login">Login</a>
+            <a href="/signup">Join Us</a>
+            <a href="#">About Us</a>
+            <a href="#">Contact Us</a>
+
+        </div>
+
+
+
+
+        <!-- HEADER SECTION-->
+
+
+
+
+
+        <section id="header">
+            <!-- NAVBAR -->
+
+            
+            <nav class="navbar  navbar-default navbar-fixed-top  " role="navigation">
+                <div class="container-fluid">
+                <div class="navbar-header">
+                 <button id="navbtn" type="button" class="navbar-toggle  " data-toggle="collapse" >
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><img  width="100" height="30" src="../static/img/yourvoice.png" /></a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class=""><a href="#"><h3>Survey</h3><span class="sr-only">(current)</span></a></li>
+                        <li><a href="/result">Result</a></li>
+                        <li><a href="#">Analysis</a></li>
+                    
+                    </ul>
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right" style="margin-right: 0px; ">
+                        <li style="padding: 1px 10px;background-color: red;border-right: none"><a href="/signup" style="color: white">+Join</a></li>
+                        <li  style="padding: 1px 10px;background-color: green;border-right: none"><a href="/login" style="color: white">Login</a></li>
+                        <li style="border-right: none;margin-left: 10px">
+
+                             <button type="button" class="navbar-toggle mytoggle toggleit " data-toggle="collapse" >
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+
+                        </li>
+
+
+                    </ul>
+
+                    
+
+
+
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+            
+
+
+
+
+
+
+
+
+
+
+            
+            <div class="container-fluid">
+                
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="logo ">
+                        <img  class="" src="../static/img/yourvoice2.svg" />
+                        <div class="sub_logo visible-md visible-lg"><span>WHERE YOUR VOICE MATTERS</span></div>
+                        </div>
+                        
+                    </div>
+                    <div class="col-sm-4 rform">
+                        <div class="rheader ">
+                            <div class="login" style="" > <a href="/login">  Login</a></div>
+                            <div class="join" style="" ><a href="/signup">  +Join</a></div>
+                            <!--<form>-->
+                            <input type="text" placeholder="Search" class="searchtxt hidden-sm hidden-xs form-control" style="" />
+                            
+                            <!--</form>-->
+
+                            
+
+                        </div>
+                   
+
+                    </div>
+                </div>
+                
+                
+            </div>
+
+            <!--HEADER MESSAGE-->
+            
+            <div class="container-fluid" style="padding: 50px 0 0 0">
+                
+                <div class="row">
+                    <div class="col-sm-12 " style="text-align: center; ">
+                        <h2 class="center-block" style="color: white;font-weight: bold">
+                            Welcome to YourVoice, 
+What would you like to do?
+                        </h2>
+                    </div>
+
+                </div>
+                
+                <div class="container-fluid navbox" style="padding: 50px 0;">
+
+                    <div class="row">
+
+
+
+
+
+
+                        
+                        <div class="col-sm-4 textboardwrapper">
+                            <div class="textboard">
+                                <h3 style="">TAKE PART</h3>
+                                
+                                
+                                    
+                                        <img class="" src="../static/img/Dr.-Jim-Yong-Kim.jpg" style="" alt="">
+                                  
+                               
+                                
+                                <h6>Quick previous and next links for simple pagination implementations with light markup and styles. It's great for simple sites like blogs or magazines</h6>
+
+                            </div>
+
+                        </div>
+                        <div class="col-sm-4">
+                             <div class="textboard class="purelink" >
+                                 <a href="/result" style="color:white;text-decoration: none">
+                                <h3 style="">SEE RESULT</h3>
+                                 <img class="" src="../static/img/Osibanjo.jpg" style=" " alt="">
+                                <h6>Quick previous and next links for simple pagination implementations with light markup and styles. It's great for simple sites like blogs or magazines</h6>
+                                 </a>            
+                            </div>
+                            
+                        </div>
+                        <div class="col-sm-4">
+                             <div class="textboard">
+                                <h3 style="">SOLUTION</h3>
+                                <img class="" src="../static/img/Ambode-7-1.jpg" style="" alt="">
+
+                                <h6>Quick previous and next links for simple pagination implementations with light markup and styles. It's great for simple sites like blogs or magazines</h6>
+
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    
+                </div>
+
+
+                <!-- ABOUT YOURVOICE-->
+                
+                <div class="container" >
+                    
+                    <div class="row">
+                        <div class="col-sm-12" style="text-align: center">
+                            <h2 style="color: #008000">
+                                WHAT IS YOURVOICE ?
+                            </h2>
+                        </div>
+                      
+
+                    </div>
+                    
+                </div>
+
+
+                
+                
+                
+                
+                
+                
+            </div>
+           
+            
+            
+           
+            
+            <!--  HERO SECTION-->
+
+        </section>
+         <!-- ANIMATION-->
+            <section id="anim">
+                
+                <div class="container-fluid">
+                    
+                    <div class="row">
+                          <div class="col-xs-12" style="padding-top: -10px;z-index: -1">
+                            <div class="mybox center-block" style="background-color: #008000;width: 30px; height: 30px">
+                                 
+
+                            </div>
+                        </div>
+                        <div class="col-xs-12" style="padding-top: 20px;">
+                            <div class="mybox arrow center-block" style="border-right: solid 2px;border-bottom: solid 2px;border-color: #008000;width: 30px; height: 30px">
+                                 
+
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12" style="padding-top: 22px;">
+                            <div class="mybox arrow2 center-block" style="border-right: solid 2px;border-bottom: solid 2px;border-color: #008000;width: 30px; height: 30px">
+                                 
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+            </section>
+        <!-- CONTENT SECTION -->
+        <section id="content">
+            
+            <div class="container">
+                
+                <div class="row">
+                    
+                    <div class=" col-sm-12 msg1 " style="padding: 100px 0;text-align: center">
+                        <h2>
+                            Youroice is a community of millions of people around the world where voice and view are shared ...
+                        </h2>
+                    </div>
+
+                    
+                </div>
+                
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="agenda center-block">
+                            <h3>ECONOMIC AGENDA</h3>
+                            <div class="panel panel-success">
+  <div class="panel-heading">
+    <h4 class="panel-title" id="titletext"></h4>
+  </div>
+  <div class="panel-body">
+
+<ul id='optionarea' class="list-group">
+     
+
+
+
+</ul>
+
+
+ <button id="next" style="" type="button"  class="btn btn-info pull-right ">Next</button>
+  </div>
+
+
+  <div class="panel-footer">
+      
+      <div class="progress">
+  <div class="progress-bar progress-bar-success" style="width: 35%">
+    <span class="sr-only">35% Complete (success)</span>
+  </div>
+  <div class="progress-bar progress-bar-warning" style="width: 20%">
+    <span class="sr-only">20% Complete (warning)</span>
+  </div>
+  <div class="progress-bar progress-bar-info" style="width: 10%">
+    <span class="sr-only">10% Complete (danger)</span>
+  </div>
+  <div class="progress-bar progress-bar-danger" style="width: 10%">
+    <span class="sr-only">10% Complete (danger)</span>
+  </div>
+</div>
+
+  </div>
+</div>
+                           
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+                
+                <div class="row">
+                    <div class="col-sm-12 msg1 " style="padding: 100px 0">
+                        <h2 style="width: 60%; text-align: right">
+                            For couple of years now, the economy of the nation have being plung into the deep see of recession with several expert in the field be giving there own opinion. Share you view on todays economic agenda ....
+                        </h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="agenda center-block">
+                            <h3><b>ISSUES OF TODAY</b></h3>
+
+                             <div class="panel panel-success">
+  <div class="panel-heading">
+    <h4 class="panel-title" id="titletext2"></h4>
+  </div>
+  <div class="panel-body">
+
+<ul id='optionarea2' class="list-group">
+     
+
+
+
+</ul>
+
+
+ <button id="next2" style="" type="button"  class="btn btn-info pull-right ">Next</button>
+
+
+  </div>
+
+
+  <div class="panel-footer">
+      
+      <div class="progress">
+  <div class="progress-bar progress-bar-success" style="width: 35%">
+    <span class="sr-only">35% Complete (success)</span>
+  </div>
+  <div class="progress-bar progress-bar-warning" style="width: 20%">
+    <span class="sr-only">20% Complete (warning)</span>
+  </div>
+  <div class="progress-bar progress-bar-info" style="width: 10%">
+    <span class="sr-only">10% Complete (danger)</span>
+  </div>
+  <div class="progress-bar progress-bar-danger" style="width: 10%">
+    <span class="sr-only">10% Complete (danger)</span>
+  </div>
+</div>
+
+  </div>
+</div>
+
+
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12 msg1 " style="padding: 100px 0">
+                        <h2 style="width: 60%; text-align: center">
+                            At YourVoice, We collate all your voices and made a critical analysis using our state of the art bescope Data minning and Statistical tools ....
+                        </h2>
+                    </div>
+                </div>
+
+                 <div class="row">
+                    <div class="col-sm-12 latestpoll" >
+                        <div class="agenda center-block">
+                            <h3>LATEST OPPINION POLL RESULT</h3>
+
+                            <ul class="list-group">
+  <li class="list-group-item">
+      <img class="pull-left" src="../static/img/bg1.jpg">
+      <div style="" class="">
+      <h4>
+          Unending Rise in hosing cost
+
+          </h4>
+          <h6>For the past decade, several government initiative have failed to curtail the ...</h6>
+      </div>
+      <div class="clearfix"></div>
+  </li>
+  <li class="list-group-item">
+      <img class="pull-left" src="../static/img/bg1.jpg">
+      <div style="" class="">
+      <h4>
+          Unending Rise in hosing cost
+
+          </h4>
+          <h6>For the past decade, several government initiative have failed to curtail the ...</h6>
+      </div>
+       <div class="clearfix"></div>
+
+  </li>
+  <li class="list-group-item">
+      
+      <img class="pull-left" src="../static/img/bg1.jpg">
+      <div style="" class="">
+      <h4>
+          Unending Rise in hosing cost
+
+          </h4>
+          <h6>For the past decade, several government initiative have failed to curtail the ...</h6>
+      </div>
+       <div class="clearfix"></div>
+  </li>
+  <li class="list-group-item">
+      
+      <img class="pull-left" src="../static/img/bg1.jpg">
+      <div style="" class="">
+      <h4>
+          Unending Rise in hosing cost
+
+          </h4>
+          <h6>For the past decade, several government initiative have failed to curtail the ...</h6>
+      </div>
+       <div class="clearfix"></div>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+                
+                
+            </div>
+            
+            
+        </section>
+
+
+
+                    <!--Footer Section-->
+        <footer>
+            
+            <div class="container farea">
+                
+                <div class="row">
+                    <img src="../static/img/yourvoice2.svg" style="width: 300px;height: 200px" />
+                    <div class="col-sm-12">
+                        <ul>
+                            <li>
+                                About Us
+                            </li>
+                            <li>
+                                Contact Us
+                            </li>
+                            <li>
+                                Privacy
+                            </li>
+                            <li>
+                                Terms and Conditions
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-sm-12 horizontal">
+                        <ul>
+                            <li>
+                                Take Part
+                            </li>
+                            <li>
+                                See Result
+                            </li>
+                            <li>
+                               Economy
+                            </li>
+                            <li>
+                                Politics
+                            </li>
+                            <li>
+                                Social and Family
+                            </li>
+                            <li>
+                                Corporate
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+            </div>
+            
+
+
+
+        </footer>
+
+
+
+
+
+
+
+        <script src="{% static 'js/jquery.js' %}"></script>        
+        <script src="{% static 'js/bootstrap.js' %}"></script>       
+        <script src="{% static 'js/jquery.visible.js'%}"></script>
+         <script src="{% static 'js/main.js' %}"></script>
+        <script src="{% static 'js/main_1.js' %}"></script>
+       
+
+    </body>   

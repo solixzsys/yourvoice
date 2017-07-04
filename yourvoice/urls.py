@@ -19,15 +19,34 @@ from app.views import *
 from django.conf.urls import include
 from yourvoice import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
+
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^$', index),
+    
+    url(r'^$', index,name='home'),
+    url(r'^index2/$', index2,name='home2'),
     url(r'^result$', result),
     url(r'^test$', test),
     url(r'^jsonpoll$', jsonpoll),
     url(r'^jsonpolloption$', jsonoption),
+    url(r'^surveycount$',surveycount),
+    url(r'^dynamictemp$',dynamictemp),
+    url(r'^incrementscore$',incrementscore),
+    url(r'^getquotes$',getQuotes),
+    url(r'^getfeed$',getfeed),
+
+    url(r'^about/$', about,name='about'),
+    url(r'^team/$', ourteam,name='ourteam'),
+    url(r'^services/$', services,name='services'),
     url(r'^pages/',include('django.contrib.flatpages.urls')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    url(r'^signup/$', signup, name='signup'),
+    url(r'^updateprofile/$', update_profile, name='updateprofile'),
+
+    url(r'^login/$', auth_views.login, name='login'),
+    url(r'^logout/$', auth_views.logout, name='logout'),
+    url(r'^oauth/', include('social_django.urls', namespace='social')), 
+    url(r'^admin/', admin.site.urls),
 ]
 if settings.DEBUG is True:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

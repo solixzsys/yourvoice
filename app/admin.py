@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app.models import Poll,PollOption,SurveyTag,StoryFlatPage
+from app.models import Poll,PollOption,SurveyTag,StoryFlatPage,UserPollOption,Quotes,MyFeed
 from django import forms
 
 from ckeditor.fields import RichTextField
@@ -14,6 +14,24 @@ from extended_flatpages.admin import CustomFlatpageForm,CustomFlatPageAdmin
 from django.contrib.flatpages.models import FlatPage
 
 admin.site.register(FlatPage) 
+
+
+class MyFeedAdmin(admin.ModelAdmin):
+    list_display=('title','description','source','domain','date')
+    
+    # search_fields=['quote']
+admin.site.register(MyFeed,MyFeedAdmin)
+
+class QuotesAdmin(admin.ModelAdmin):
+    list_display=('quote','author')
+    exclude=('domain',)
+    search_fields=['quote']
+admin.site.register(Quotes,QuotesAdmin)
+
+class UserPollOptionAdmin(admin.ModelAdmin):
+    list_display=('option','user','date','optiontitle','optionquestion','ipaddress')
+admin.site.register(UserPollOption,UserPollOptionAdmin)
+
 class StoryFlatPageForm(forms.ModelForm):
     
 
@@ -95,7 +113,7 @@ class PollAdmin(admin.ModelAdmin):
     form=PollForm
     list_display=('poll_title','poll_date','poll_domain','poll_state','poll_author','poll_surveytag','poll_code',)
     exclude=('poll_code',)
-    list_filter=('poll_domain','poll_state','poll_date','poll_author')
+    list_filter=('poll_title','poll_domain','poll_state','poll_date','poll_author')
     search_fields=['poll_title','poll_question']
 
     # fieldsets=(
@@ -119,7 +137,7 @@ class PollAdmin(admin.ModelAdmin):
 
             self.fieldsets=(
                     (None,{
-                        'fields':(('poll_title','poll_domain','poll_date','poll_surveytag'),'poll_question')
+                        'fields':(('poll_state','poll_date','poll_surveytag'),'poll_question')
                     }),
                     ('Options',{
                         'classes': ('collapse',),
@@ -131,7 +149,7 @@ class PollAdmin(admin.ModelAdmin):
             
             self.fieldsets=(
                     (None,{
-                        'fields':(('poll_title','poll_domain','poll_date'),'poll_question')
+                        'fields':(('poll_state','poll_date'),'poll_question')
                     }),
                     
             )
@@ -192,10 +210,19 @@ class PollAdmin(admin.ModelAdmin):
 admin.site.register(Poll,PollAdmin)
 
 class PollOptionAdmin(admin.ModelAdmin):
-    list_display=('polloption_text','polloption_score','polloption_questiontitle','polloption_questioncode','polloption_code',)
+    list_display=('polloption_text','polloption_score','polloption_questiontitle','polloption_questioncode','polloption_code','polloption_questiontext')
     exclude=('polloption_questioncode','polloption_code','polloption_score')
-    list_filter=('polloption_questiontitle',)
+    list_filter=('polloption_questiontitle','polloption_questioncode',)
     search_fields=['polloption_questiontitle']
+
+    def polloption_questiontext(self,obj):
+        return Poll.objects.get(poll_code=obj.polloption_questioncode).poll_question
+
+    def save_model(self, request, obj, form, change,**kwargs):
+        print('change PollOption......................... '+str(change))
+        if (change==False):
+            print('yyyyyyyy===========  '+obj.polloption_questioncode)
+            
 
 admin.site.register(PollOption,PollOptionAdmin)    
 

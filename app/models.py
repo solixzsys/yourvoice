@@ -16,6 +16,49 @@ from extended_flatpages.models import CMSFlatPage
 from datetime import datetime
 
 
+
+from django.db import models
+from django.contrib.auth.models import User
+
+
+
+class NigeriaState(models.Model):
+    name=models.CharField(max_length=30, blank=True)
+class LG(models.Model):
+    name=models.CharField(max_length=30, blank=True)
+    state=models.ForeignKey(NigeriaState,blank=True)
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)    
+    firstname=models.CharField(max_length=30,blank=True)
+    lastname=models.CharField(max_length=30,blank=True)
+    phone_number=models.CharField(max_length=30,blank=True)
+    birth_date = models.DateField(null=True, blank=True)
+    location = models.CharField(max_length=30, blank=True)
+    state_of_origin=models.ForeignKey(NigeriaState,blank=True,null=True)
+    local_government=models.ForeignKey(LG,blank=True,null=True)
+    bio = models.TextField(max_length=500, blank=True)
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
+    
+
+
+
+
+
+
+
+
+
+
+
 class StoryFlatPage(CMSFlatPage):
     DOMAIN=(
         ('ECONOMY','Economy'),
@@ -60,7 +103,7 @@ class SurveyTag(models.Model):
 
     )
 
-    surveytag_title=models.TextField()
+    surveytag_title=models.CharField(max_length=100,default="")
     surveytag_description=RichTextField()
     surveytag_tag=models.CharField(max_length=100,default="")
     surveytag_date=models.DateField()
@@ -90,8 +133,8 @@ class PollOption(models.Model):
 
     def save(self, *args, **kwargs):
         
-        
-        self.polloption_code=str(''.join([random.choice(string.ascii_letters+string.digits) for n in range(32)]))
+        if(self.polloption_code==""):
+            self.polloption_code=str(''.join([random.choice(string.ascii_letters+string.digits) for n in range(32)]))
         # self.polloption_questioncode=self.polloption_question.poll_code
         return super(PollOption,self).save(*args, **kwargs)
 
@@ -111,8 +154,8 @@ class Poll(models.Model):
 
     )
 
-    poll_code=models.CharField(max_length=20)
-    poll_title=models.CharField(max_length=50,help_text="Short description that identify the question",default="")
+    poll_code=models.CharField(max_length=200)
+    poll_title=models.CharField(max_length=200,help_text="Short description that identify the question",default="Leave Empty")
     poll_question=RichTextField()
     poll_domain=models.CharField(max_length=20,choices=DOMAIN)
     poll_date=models.DateField()
@@ -124,11 +167,12 @@ class Poll(models.Model):
     def __str__(self):
         return self.poll_title
 
-    # def save(self, *args, **kwargs):
-    #     question=self.poll_question
-    #     hash_object=hashlib.md5(question.encode())
-    #     self.poll_code=str(hash_object.hexdigest())
-    #     return super(Poll,self).save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        # surveytitle=SurveyTag.objects.get(surveytag_title=self.poll_surveytag)
+        # self.poll_title=surveytitle.surveytag_title
+        self.poll_title=self.poll_surveytag.surveytag_title
+        self.poll_domain=self.poll_surveytag.surveytag_domain
+        return super(Poll,self).save(*args, **kwargs)
             
 
 
@@ -140,12 +184,11 @@ class Poll(models.Model):
 #     instance.poll_code=str(hash_object.hexdigest())
 #     # return super(Poll,self).save(*args, **kwargs)
 
-# @receiver(post_save,sender=Poll)
-# def myhandler2(sender,instance,**kwargs):
-#     pass
-#     if kwargs['created']:
-        
-#         print("saved Object ................................................" + str(kwargs))    
+@receiver(post_save,sender=Poll)
+def myhandler3(sender,instance,**kwargs):
+    print('poll post save .................................')
+    objtag=instance.poll_surveytag
+    PollOption.objects.filter(polloption_questioncode=instance.poll_code).update(polloption_questiontitle=objtag.surveytag_title)   
 
 
 @receiver(post_delete,sender=Poll)
@@ -154,4 +197,39 @@ def myhandler2(sender,instance,**kwargs):
     obj_code=instance.poll_code
     PollOption.objects.filter(polloption_questioncode=obj_code).delete()   
 
+
+
+
+class UserPollOption(models.Model):
+    user=models.ForeignKey(User,default=None,blank=True)
+    option=models.ForeignKey(PollOption,default=None,blank=True)
+    ipaddress=models.CharField(max_length=50,default="",blank=True,null=True)
+    date=models.DateField(auto_now=True)
+    optionquestion=models.TextField(default="")
+    optiontitle=models.TextField(default="")
+
+    def save(self,*args,**kwargs):
+        ques=Poll.objects.get(poll_code=self.option.polloption_questioncode)
+        self.optionquestion=ques.poll_question
+        self.optiontitle=self.option.polloption_questiontitle
+        return super(UserPollOption,self).save(*args,**kwargs)
+
+
+class Quotes(models.Model):
+    quote=models.TextField()
+    author=models.CharField(max_length=20)
+    domain=models.CharField(max_length=20,default="")
+
+    def __str__(self):
+        return self.quote
+
+class MyFeed(models.Model):
+    title=models.TextField()
+    description=models.TextField()
+    source=models.CharField(max_length=20)
+    domain=models.CharField(max_length=20)
+    date=models.DateField(auto_now=True)
+
+    def __str__(self):
+        return self.title
 

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+
+{% block leftcol %}
+{% endblock %}
+{% block middlecol %}
+<p style="padding: 30px;">Please endaviour to fill the form below to register your account</p>
+<form class="form-horizontal" method="post" >
+  {% csrf_token %}
+  
+  {% for field in user_form %}
+      <p style="margin-bottom: 10px">
+        <!--{{ field.label_tag }}<br>-->
+        {{ field }}
+        <!--{% if field.help_text %}
+          <small style="color: grey">{{ field.help_text }}</small>
+        {% endif %}-->
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+
+
+
+<div style="margin-top: 50px" class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+         Profile Info
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+       {{ profile_form.as_p }}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+  <button class="btn btn-success pull-right "  type="submit">Save </button>
+</form>
+{% endblock %}

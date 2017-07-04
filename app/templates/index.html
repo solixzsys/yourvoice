@@ -11,24 +11,49 @@
         <title>Mock Up - Let YourVoice be heard</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta property="og:url"           content="http://fxsoftlogix.com" />
+        <meta property="og:type"          content="website" />
+        <meta property="og:title"         content="Udec Initiative" />
+        <meta property="og:description"   content="Business Research and Opinion Survey Platform" />
+        <meta property="og:image"         content=""/>
         
         <!-- Font Awesomes link-->
        
         <!-- Bootstrap Core CSS-->
         {% load staticfiles %}
+        <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
        <link href="{% static 'css/bootstrap.css'%}" rel="stylesheet">
         <link href="{% static 'css/reset.css'%}" rel="stylesheet">
         <link href="{% static 'css/style.css'%}" rel="stylesheet">
         <link href="{% static 'css/sidenav.css'%}" rel="stylesheet">
+        <link href="{% static 'css/style2.css'%}" rel="stylesheet">
+        {% load social_widgets %}
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+
+
 
         
 
     </head>
     <body>
+
+
+
+        <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=804104239738038";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
+                                
 
 <!--VERTICAL SIDE NAV-->
 
@@ -38,82 +63,85 @@
                             
             <a href="#">Politics</a>
             <a href="#">Economy</a>
-            <a href="#">Solution & Services</a>
+            <a href="/services">Solution & Services</a>
             <a href="#">Poll & Survey</a>
             <a href="/result">Result</a>
             <a href="#">Society</a>
-            <a href="#">Login</a>
-            <a href="#">Join Us</a>
-            <a href="#">About Us</a>
+            {% if user.is_authenticated %}
+            <a href="/login">Login Out</a>
+            {% else %}
+            <a href="/login">Login</a>
+            <a href="/signup">Join Us</a>
+            {% endif %}
+            <a href="/about">About Us</a>
+            <a href="/team">Our Team</a>
             <a href="#">Contact Us</a>
 
-        </div>
+ </div>
 
 
 
 
         <!-- HEADER SECTION-->
 
-
-
-
-
-        <section id="header">
-            <!-- NAVBAR -->
-
-            
-            <nav class="navbar  navbar-default navbar-fixed-top  " role="navigation">
+<nav id="navstate" class="navbar navbar-default navbar-fixed-top  " role="navigation">
                 <div class="container-fluid">
                 <div class="navbar-header">
-                 <button id="navbtn" type="button" class="navbar-toggle  " data-toggle="collapse" >
+               
+
+                <button id="navbtn" type="button" class="navbar-toggle  " data-toggle="collapse" >
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"><img  width="100" height="30" src="../static/img/yourvoice.png" /></a>
+
+                <a class="navbar-brand" href="/"><img  width="100" height="30" src="../static/img/yourvoice.png" /></a>
                 </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li class=""><a href="#"><h3>Survey</h3><span class="sr-only">(current)</span></a></li>
-                        <li><a href="/result">Result</a></li>
-                        <li><a href="#">Analysis</a></li>
-                    
-                    </ul>
-                    <form class="navbar-form navbar-left" role="search">
-                        <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                        </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </form>
-                    <ul class="nav navbar-nav navbar-right" style="margin-right: 0px; ">
-                        <li style="padding: 1px 10px;background-color: red;border-right: none"><a href="#" style="color: white">+Join</a></li>
-                        <li  style="padding: 1px 10px;background-color: green;border-right: none"><a href="#" style="color: white">Login</a></li>
-                        <li style="border-right: none;margin-left: 10px">
 
-                             <button type="button" class="navbar-toggle mytoggle toggleit " data-toggle="collapse" >
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-
-                        </li>
+                    <!--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">-->
+      
+      <div class=" mynav navbar-right" style="padding-top: 15px;padding-right: 15px">
+                          
+                            <a href="#">Politics</a>
+                            <a href="#">Economy</a>
+                            <a href="/services">Solution & Services</a>
+                            <!--<a href="#">Poll & Survey</a>-->
+                            <!--<a href="/result">Result</a>-->
+                            <a href="#">Society</a>
+                           {% if user.is_authenticated %}
+                            <a href="/login">Login Out</a>
+                            {% else %}
+                            <a href="/login">Login</a>
+                            <a href="/signup">Join Us</a>
+                            {% endif %}
+                            <!--<a href="/signup">Join Us</a>-->
+                            <a href="#">About Us</a>   
+                            <a href="/team">Our Team</a>
+                            <a href="#">Contact Us</a>
+      </div>
+    <!--</div>-->
+    <!-- /.navbar-collapse -->
 
 
-                    </ul>
-
-                    
-
-
-
-                    </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
-            </nav>
+</nav>
+
+
+
+
+<section id="header">
+
+                
+
+
+
+            <div id="headerwrapper">
+                <!--<div id="headercontainer">-->
+            <!-- NAVBAR -->
             
 
-
+          
 
 
 
@@ -126,28 +154,56 @@
             <div class="container-fluid">
                 
                 <div class="row">
-                    <div class="col-sm-8">
+                    <div class="col-sm-5">
                         <div class="logo ">
-                        <img  class="" src="../static/img/yourvoice2.svg" />
-                        <div class="sub_logo visible-md visible-lg"><span>WHERE YOUR VOICE MATTERS</span></div>
+                        <img  class="" src="../static/img/yourvoice2.svg" width="80%" />
+                        
                         </div>
                         
                     </div>
-                    <div class="col-sm-4 rform">
-                        <div class="rheader ">
-                            <div class="login" style="" >Login</div>
-                            <div class="join" style="" >+Join</div>
-                            <!--<form>-->
-                            <input type="text" placeholder="Search" class="searchtxt hidden-sm hidden-xs form-control" style="" />
+                    <div class="col-sm-7 ">
+                        <div id="mainnav" class="mynav  " >
                             
-                            <!--</form>-->
 
+                                           
+                            <a href="#">Politics</a>
+                            <a href="#">Economy</a>
+                            <a href="/services">Solution & Services</a>
+                            <!--<a href="#">Poll & Survey</a>-->
+                            <!--<a href="/result">Result</a>-->
+                            <a href="#">Society</a>
+                            <a href="/about">About Us</a> 
+                            <a href="/team">Our Team</a>   
+                            <a href="#">Contact Us</a>
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'logout' %}?next={% url 'home' %}">Login Out</a>
+                            <a id="avatar" style="margin-left: 10px" class=" fa fa-user  "></a>
+                            {% else %}
+                            <a href="/login">Login</a>
+                            <a href="/signup">Join Us</a>
+                            {% endif %}
+                            <!--<a href="/signup">Join Us</a>-->
+                            
+                            
                             
 
                         </div>
-                   
+                        
+                        <div  id="avatarbox">
+                            <div  id="avatararrow"></div>
+                            <p ><a href="">You signed in as <span style="color:#f0ad4e ">{{user.username}}</span></a></p>
+                            <hr style="width: 100%"/>
+                            <p><a href="">View Profile</a></p>
+                            <p><a href="">Edit Profile</a></p>
+                            <p><a href="">Help</a></p>
+                            <p><a href="{% url 'logout' %}?next={% url 'home' %}">SignOut</a></p>
+
+                        </div>
+                        
 
                     </div>
+
+                   
                 </div>
                 
                 
@@ -159,17 +215,17 @@
                 
                 <div class="row">
                     <div class="col-sm-12 " style="text-align: center; ">
-                        <h2 class="center-block" style="color: white;font-weight: bold">
-                            Welcome to YourVoice, 
-What would you like to do?
-                        </h2>
+                        <h4 class="center-block hero_text" style="">
+                            Welcome to <span style="font-size: 40px;font-family: Raleway"><h2 style="display: inline"> Udec</h2></span>, 
+                                What would you like to do?
+                        </h4>
                     </div>
 
                 </div>
                 
                 <div class="container-fluid navbox" style="padding: 50px 0;">
 
-                    <div class="row">
+                    <div id="heroid" class="row">
 
 
 
@@ -177,11 +233,11 @@ What would you like to do?
 
 
                         
-                        <div class="col-sm-4 textboardwrapper">
+                        <div class="col-md-4 textboardwrapper">
                             <div class="textboard">
-                                <h3 style="">TAKE PART</h3>
+                                <h4 style="">POLL & SURVEY <i class="fa fa-line-chart fa-lg pull-right"></i></h4>
                                 
-                                
+                                <!--<div class="clearfix"></div>-->
                                     
                                         <img class="" src="../static/img/Dr.-Jim-Yong-Kim.jpg" style="" alt="">
                                   
@@ -192,22 +248,22 @@ What would you like to do?
                             </div>
 
                         </div>
-                        <div class="col-sm-4">
-                             <div class="textboard class="purelink" >
+                        <div class="col-md-4">
+                             <div class="textboard purelink" >
                                  <a href="/result" style="color:white;text-decoration: none">
-                                <h3 style="">SEE RESULT</h3>
+                                <h4 style="">RESULT & ANALYSIS <i class="fa fa-bar-chart fa-lg pull-right"></i></h4>
                                  <img class="" src="../static/img/Osibanjo.jpg" style=" " alt="">
                                 <h6>Quick previous and next links for simple pagination implementations with light markup and styles. It's great for simple sites like blogs or magazines</h6>
                                  </a>            
                             </div>
                             
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-md-4">
                              <div class="textboard">
-                                <h3 style="">SOLUTION</h3>
+                                <h4 style="">SOLUTION & SERVICES</h4>
                                 <img class="" src="../static/img/Ambode-7-1.jpg" style="" alt="">
 
-                                <h6>Quick previous and next links for simple pagination implementations with light markup and styles. It's great for simple sites like blogs or magazines</h6>
+                                <h6>Quick previous and next links for simple pagination implementations with light markup and styles. It's great for simple sites like blogs or magazines</h4>
 
                             </div>
                             
@@ -223,9 +279,19 @@ What would you like to do?
                 <div class="container" >
                     
                     <div class="row">
-                        <div class="col-sm-12" style="text-align: center">
+                        <div class=" col-sm-12 quote"style="height:200px" >
+                            <blockquote>
+                           <span style="display: block"> </span>
+                           <i class="pull-right" style="text-align: right;font-size: 50%;display: block;color:  #f0ad4e;"></i>
+                            </blockquote>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        
+                        <div class="col-sm-12" style="text-align: center;padding-top: 50px">
                             <h2 style="color: #008000">
-                                WHAT IS YOURVOICE ?
+                                <!--ONLY U CAN DECIDE !-->
                             </h2>
                         </div>
                       
@@ -248,10 +314,13 @@ What would you like to do?
            
             
             <!--  HERO SECTION-->
+                <!--</div>-->
+            </div>
+            
 
-        </section>
+</section>
          <!-- ANIMATION-->
-            <section id="anim">
+ <!--<section id="anim">
                 
                 <div class="container-fluid">
                     
@@ -280,64 +349,85 @@ What would you like to do?
                     
                 </div>
                 
-            </section>
+</section>-->
         <!-- CONTENT SECTION -->
-        <section id="content">
+<section id="content">
             
-            <div class="container">
-                
-                <div class="row">
+            <div class="container-fluid">
+    <!-- 1 iteration row begin -->   
+    <script type="text/template" id="dynamictemplate"> 
+
+                <div id="%banner%"  class="row">
                     
                     <div class=" col-sm-12 msg1 " style="padding: 100px 0;text-align: center">
-                        <h2>
-                            Youroice is a community of millions of people around the world where voice and view are shared ...
-                        </h2>
+                        <h4>
+                            <!--Youroice is a community of millions of people around the world where voice and view are shared ...-->
+                            %surveydescription%
+                            <hr style="border-bottom: solid 1px grey;opacity: 0.3;width: 30%;margin-top:100px">
+                        </h4>
                     </div>
 
                     
                 </div>
-                
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="agenda center-block">
-                            <h3>ECONOMIC AGENDA</h3>
-                            <div class="panel panel-success">
-  <div class="panel-heading">
-    <h4 class="panel-title" id="titletext"></h4>
-  </div>
-  <div class="panel-body">
-
-<ul id='optionarea' class="list-group">
      
+                <div id="%rowid%" class="row">
+                    <div style="height:100vh ;overflow:hidden" class="col-sm-4" id="feedinformer">
+                        <div style="position:absolute"  id="feedspace">
+                           <h3 class="title"></h3>
+                           <p class="desc"></p>
+
+
+                        </div>
+                        </div>
+                    <div class="col-sm-8">
+                       
+                        <div class="agenda center-block">
+                            <h3>
+                                <!--ECONOMIC AGENDA-->
+                                %surveytitle%
+
+                                </h3>
+                            <div class="panel panel-success">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title" id="%titletext%"></h4>
+                                        </div>
+                                        <div class="panel-body">
+
+                                            <ul id='optionarea' class="list-group">
+                                                
 
 
 
-</ul>
+                                            </ul>
+
+                                            
+                                        <button  id="%next%" data-titletext="%titletext%" data-row="%rowid%" name="%btntag%" style="" type="button"  class="btnpoll btn btn-info pull-right ">Next</button>
+                                        </div>
 
 
- <button id="next" style="" type="button"  class="btn btn-info pull-right ">Next</button>
-  </div>
+                                                <div class="panel-footer">
+                                                    
+                                                            <div class="progress">
+                                                        <div class="progress-bar progress-bar-success" style="width: 35%">
+                                                            <span class="sr-only">35% Complete (success)</span>
+                                                        </div>
+                                                        <div class="progress-bar progress-bar-warning" style="width: 20%">
+                                                            <span class="sr-only">20% Complete (warning)</span>
+                                                        </div>
+                                                        <div class="progress-bar progress-bar-info" style="width: 10%">
+                                                            <span class="sr-only">10% Complete (danger)</span>
+                                                        </div>
+                                                        <div class="progress-bar progress-bar-danger" style="width: 10%">
+                                                            <span class="sr-only">10% Complete (danger)</span>
+                                                        </div>
+                                                        </div>
 
-
-  <div class="panel-footer">
-      
-      <div class="progress">
-  <div class="progress-bar progress-bar-success" style="width: 35%">
-    <span class="sr-only">35% Complete (success)</span>
-  </div>
-  <div class="progress-bar progress-bar-warning" style="width: 20%">
-    <span class="sr-only">20% Complete (warning)</span>
-  </div>
-  <div class="progress-bar progress-bar-info" style="width: 10%">
-    <span class="sr-only">10% Complete (danger)</span>
-  </div>
-  <div class="progress-bar progress-bar-danger" style="width: 10%">
-    <span class="sr-only">10% Complete (danger)</span>
-  </div>
-</div>
-
-  </div>
-</div>
+                                                </div>
+                                                
+                                   
+                                                
+                            </div> 
+                            
                            
 
 
@@ -345,9 +435,17 @@ What would you like to do?
                     </div>
 
                 </div>
+    </script>      
+     <!--<a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-url="http://fxsoftlogix.com" data-via="solixz" data-hashtags="udecinit" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script> 
+    <div class="g-plusone" data-annotation="inline" data-width="300" data-href="http://fxsoftlogix.com"></div> 
 
-                
-                <div class="row">
+    <div class="fb-share-button" data-href="http://fxsoftlogix.com" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Ffxsoftlogix.com%2F&amp;src=sdkpreparse">Share</a></div>
+               -->
+    <!-- 1 iteration row end -->
+            </div>
+            <div class="container">
+    <!-- 2 iteration row begin -->            
+                <!--<div class="row">
                     <div class="col-sm-12 msg1 " style="padding: 100px 0">
                         <h2 style="width: 60%; text-align: right">
                             For couple of years now, the economy of the nation have being plung into the deep see of recession with several expert in the field be giving there own opinion. Share you view on todays economic agenda ....
@@ -360,44 +458,44 @@ What would you like to do?
                             <h3><b>ISSUES OF TODAY</b></h3>
 
                              <div class="panel panel-success">
-  <div class="panel-heading">
-    <h4 class="panel-title" id="titletext2"></h4>
-  </div>
-  <div class="panel-body">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title" id="titletext2"></h4>
+                                </div>
+                                <div class="panel-body">
 
-<ul id='optionarea2' class="list-group">
-     
-
-
-
-</ul>
+                                        <ul id='optionarea2' class="list-group">
+                                            
 
 
- <button id="next2" style="" type="button"  class="btn btn-info pull-right ">Next</button>
+
+                                        </ul>
 
 
-  </div>
+                                        <button id="next2" style="" type="button"  class="btn btn-info pull-right ">Next</button>
 
 
-  <div class="panel-footer">
-      
-      <div class="progress">
-  <div class="progress-bar progress-bar-success" style="width: 35%">
-    <span class="sr-only">35% Complete (success)</span>
-  </div>
-  <div class="progress-bar progress-bar-warning" style="width: 20%">
-    <span class="sr-only">20% Complete (warning)</span>
-  </div>
-  <div class="progress-bar progress-bar-info" style="width: 10%">
-    <span class="sr-only">10% Complete (danger)</span>
-  </div>
-  <div class="progress-bar progress-bar-danger" style="width: 10%">
-    <span class="sr-only">10% Complete (danger)</span>
-  </div>
-</div>
+                                </div>
 
-  </div>
-</div>
+
+                                <div class="panel-footer">
+                                    
+                                    <div class="progress">
+                                <div class="progress-bar progress-bar-success" style="width: 35%">
+                                    <span class="sr-only">35% Complete (success)</span>
+                                </div>
+                                <div class="progress-bar progress-bar-warning" style="width: 20%">
+                                    <span class="sr-only">20% Complete (warning)</span>
+                                </div>
+                                <div class="progress-bar progress-bar-info" style="width: 10%">
+                                    <span class="sr-only">10% Complete (danger)</span>
+                                </div>
+                                <div class="progress-bar progress-bar-danger" style="width: 10%">
+                                    <span class="sr-only">10% Complete (danger)</span>
+                                </div>
+                                </div>
+
+                                </div>
+                            </div>
 
 
 
@@ -407,13 +505,74 @@ What would you like to do?
                         </div>
                     </div>
 
-                </div>
+                </div>-->
+         <!-- 2 iteration row end --> 
 
+         <!-- SERVICES AND SOLUTIONS-->
+
+        
+        <div class="container" style="padding: 50px 0">
+            
+            <div class="row">
+                <div class="col-sm-12" style="text-align: center">
+                    <span class="sectiontitle">
+                    <h2>Services and Solutions</h2>
+                    </span>
+                </div>
+                <div class="col-sm-4 "  style="text-align: center">
+                    <ul class="service-list">
+                        <li><h3>Market Research</h3></li>
+                        <li><h6>I have made two files for this purpose. The class 
+                            file contains class and function to fetch the required data. And the usage file 
+                            contains code to display it. I have written enough comments in the code 
+                            for better understanding.
+                            </h6>
+                         </li>
+                        
+                    </ul>
+                </div>
+                <div class="col-sm-4"  style="text-align: center">
+                    <ul class="service-list" style="width:80%">
+                        <li><h3>Election Prediction</h3></li>
+                        <li><h6>I have made two files for this purpose. The class 
+                            file contains class and function to fetch the required data. And the usage file 
+                            contains code to display it. I have written enough comments in the code 
+                            for better understanding.
+                            </h6>
+                         </li>
+                        
+                    </ul>
+                </div>
+                <div class="col-sm-4"  style="text-align: center">
+                    <ul class="service-list">
+                        <li><h3>Product Analysis</h3></li>
+                        <li><h6>I have made two files for this purpose. The class 
+                            file contains class and function to fetch the required data. And the usage file 
+                            contains code to display it. I have written enough comments in the code 
+                            for better understanding.
+                            </h6>
+                         </li>
+                        
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+        
+
+
+
+
+         <!-- SERVICES AND SOLUTIONS END-->
+
+
+
+         <!-- 3 iteration row begin --> 
                 <div class="row">
                     <div class="col-sm-12 msg1 " style="padding: 100px 0">
-                        <h2 style="width: 60%; text-align: center">
+                        <h4 style=" text-align: center; color: #cb7a08;">
                             At YourVoice, We collate all your voices and made a critical analysis using our state of the art bescope Data minning and Statistical tools ....
-                        </h2>
+                        </h4>
                     </div>
                 </div>
 
@@ -423,55 +582,55 @@ What would you like to do?
                             <h3>LATEST OPPINION POLL RESULT</h3>
 
                             <ul class="list-group">
-  <li class="list-group-item">
-      <img class="pull-left" src="../static/img/bg1.jpg">
-      <div style="" class="">
-      <h4>
-          Unending Rise in hosing cost
+                                    <li class="list-group-item">
+                                        <img class="pull-left" src="../static/img/bg1.jpg">
+                                        <div style="" class="">
+                                        <h4>
+                                            Unending Rise in hosing cost
 
-          </h4>
-          <h6>For the past decade, several government initiative have failed to curtail the ...</h6>
-      </div>
-      <div class="clearfix"></div>
-  </li>
-  <li class="list-group-item">
-      <img class="pull-left" src="../static/img/bg1.jpg">
-      <div style="" class="">
-      <h4>
-          Unending Rise in hosing cost
+                                            </h4>
+                                            <h6>For the past decade, several government initiative have failed to curtail the ...</h6>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <img class="pull-left" src="../static/img/bg1.jpg">
+                                        <div style="" class="">
+                                        <h4>
+                                            Unending Rise in hosing cost
 
-          </h4>
-          <h6>For the past decade, several government initiative have failed to curtail the ...</h6>
-      </div>
-       <div class="clearfix"></div>
+                                            </h4>
+                                            <h6>For the past decade, several government initiative have failed to curtail the ...</h6>
+                                        </div>
+                                        <div class="clearfix"></div>
 
-  </li>
-  <li class="list-group-item">
-      
-      <img class="pull-left" src="../static/img/bg1.jpg">
-      <div style="" class="">
-      <h4>
-          Unending Rise in hosing cost
+                                    </li>
+                                    <li class="list-group-item">
+                                        
+                                        <img class="pull-left" src="../static/img/bg1.jpg">
+                                        <div style="" class="">
+                                        <h4>
+                                            Unending Rise in hosing cost
 
-          </h4>
-          <h6>For the past decade, several government initiative have failed to curtail the ...</h6>
-      </div>
-       <div class="clearfix"></div>
-  </li>
-  <li class="list-group-item">
-      
-      <img class="pull-left" src="../static/img/bg1.jpg">
-      <div style="" class="">
-      <h4>
-          Unending Rise in hosing cost
+                                            </h4>
+                                            <h6>For the past decade, several government initiative have failed to curtail the ...</h6>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        
+                                        <img class="pull-left" src="../static/img/bg1.jpg">
+                                        <div style="" class="">
+                                        <h4>
+                                            Unending Rise in hosing cost
 
-          </h4>
-          <h6>For the past decade, several government initiative have failed to curtail the ...</h6>
-      </div>
-       <div class="clearfix"></div>
-  </li>
-  
-</ul>
+                                            </h4>
+                                            <h6>For the past decade, several government initiative have failed to curtail the ...</h6>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </li>
+                                    
+                        </ul>
 
 
 
@@ -496,55 +655,138 @@ What would you like to do?
             
         </section>
 
+        <!-- TEAM SECTION-->
+<section id="ourteam">
+    
+    <div id="teamwrapper" class="container-fluid">
+        
+        <div class="row">
+            
+            <div class="section-title-col col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <span class="sectiontitle">
+                    <h2>Our Team</h2>
+                </span>
+            </div>
+            
+        </div>
+        
+        <div class="row">
+            <div class="col-sm-3 img-col">             
+                <ul>
+                        <li><img src="../static/img/Ambode-7-1.jpg" alt="" class="img-circle center-block"></li>
+                       <li> <span>Mr Abc123</span></li>
+                </ul>
+                   
+            </div>
+             <div class="col-sm-3 img-col">             
+                
+                       <ul>
+                        <li><img src="../static/img/Ambode-7-1.jpg" alt="" class="img-circle center-block"></li>
+                       <li> <span>Mr Abc123</span></li>
+                </ul>
+                   
+            </div>
+             <div class="col-sm-3 img-col">             
+                
+                        <ul>
+                        <li><img src="../static/img/Ambode-7-1.jpg" alt="" class="img-circle center-block"></li>
+                       <li> <span>Mr Abc123</span></li>
+                </ul>
+            </div>
+            <div class="col-sm-3 img-col">             
+                
+                        <ul>
+                        <li><img src="../static/img/Ambode-7-1.jpg" alt="" class="img-circle center-block"></li>
+                       <li> <span>Mr Abc123</span></li>
+                </ul>
+            </div>
+        </div>
+        
+        
+    </div>
+    
+
+</section>
 
 
                     <!--Footer Section-->
         <footer>
             
-            <div class="container farea">
+            <div class="container-fluid farea">
                 
-                <div class="row">
-                    <img src="../static/img/yourvoice2.svg" style="width: 300px;height: 200px" />
-                    <div class="col-sm-12">
-                        <ul>
-                            <li>
-                                About Us
-                            </li>
-                            <li>
-                                Contact Us
-                            </li>
-                            <li>
-                                Privacy
-                            </li>
-                            <li>
-                                Terms and Conditions
-                            </li>
-                        </ul>
-                    </div>
+                <div class="row" style="padding: 30px 0">
+                    
+                    <div class="col-xs-12 col-sm- col-md-12 col-lg-12">
+                        
 
-                    <div class="col-sm-12 horizontal">
-                        <ul>
-                            <li>
-                                Take Part
-                            </li>
-                            <li>
-                                See Result
-                            </li>
-                            <li>
-                               Economy
-                            </li>
-                            <li>
-                                Politics
-                            </li>
-                            <li>
-                                Social and Family
-                            </li>
-                            <li>
-                                Corporate
-                            </li>
-                        </ul>
+                            <div  class="footer-nav" >
+                            
+
+                                           
+                            <a href="#">Politics</a>
+                            <a href="#">Economy</a>
+                            <!--<a href="#">Solution & Services</a>-->
+                            <!--<a href="#">Poll & Survey</a>-->
+                            <!--<a href="/result">Result</a>-->
+                            <a href="#">Society</a>
+                            <a href="#">About Us</a> 
+                            <a href="#">Contact Us</a>
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'logout' %}?next={% url 'home' %}">Login Out</a>
+                            
+                            {% else %}
+                            <a href="/login">Login</a>
+                            <a href="/signup">Join Us</a>
+                            {% endif %}
+                            <!--<a href="/signup">Join Us</a>-->
+                            
+                            
+                            
+
+                        </div>
+
                     </div>
-                </div>
+                    
+                    
+                   
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-sm-4">
+
+                                        <a class="twitter-timeline"  href="https://twitter.com/hashtag/unity3d" data-widget-id="882244242508328960">#unity3d Tweets</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          
+                        </div>
+                        
+                        <div id="social-icon-col" class="col-xs-12 col-sm-8 pull-left "style="text-align:center" >
+                            <div class="social-buttons">
+                               <!--<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Ffxsoftlogix.com%2F&amp;src=sdkpreparse">
+                                    <i class="fa fa-4x fa-facebook-square"></i>
+                                </a>
+                                
+                                <a href="https://twitter.com/share"  data-size="large" data-url="http://fxsoftlogix.com" data-via="solixz" data-hashtags="udec" data-show-count="false"><i class="fa fa-4x fa-twitter-square"></i></a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+                               <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+                            <script type="IN/Share" data-url="http://fxsoftlogix.com"></script>
+                                </a>
+                                <a href="mailto:name@mail.com?cc=info@bedjango.com&amp;subject=Check%20this%20article%20out!!&amp;body=Link%20with%20interesting%20content%20about%20Django%0D%0Ahttp://www.bedjango.com/blog/how-add-buttons-django-admin/" class="send-email">
+                                    <i class="fa fa-4x fa-google-plus-square"></i>
+                                </a>-->
+                                <!--{% social_widget_render 'facebook/likebox.html' href='https://www.facebook.com/FacebookDevelopers' %}-->
+
+                                <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+<script type="IN/Share" data-url="http://fxsoftlogix.com"></script>
+                                {% social_widget_render "twitter/follow_button.html" username="solixz" show_screen_name=True %}
+                                <div class="fb-share-button" data-href="http://fxsoftlogix.com" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Ffxsoftlogix.com%2F&amp;src=sdkpreparse">Share</a></div>
+                                <!--{% social_widget_render "facebook/share_button.html" locale="en_US" app_id=12345678 href="developers.facebook.com" layout="none" %}-->
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                
                 
             </div>
             
@@ -564,6 +806,6 @@ What would you like to do?
         <script src="{% static 'js/jquery.visible.js'%}"></script>
          <script src="{% static 'js/main.js' %}"></script>
         <script src="{% static 'js/main_1.js' %}"></script>
-       
+        
 
     </body>   

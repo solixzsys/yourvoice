@@ -1,16 +1,21 @@
 $(function(){
-var msgs=$('.msg1 h2')
+
     $(window).scroll(function(){
+        var msgs=$('div.col-sm-12.msg1 h4 p');
+        // console.log('SCROLLING...................................'+msgs.length)
         
         for(var i=0;i<msgs.length;i++){
 
-        if($($('.msg1 h2')[i]).visible()==true){
-            $($('.msg1 h2')[i]).addClass('textanim')
-        // console.log('msg1 visible.........................');
+        if($(msgs[i]).visible()==true){
+            $(msgs[i]).addClass('textanim')
+            // $(msgs[i]).animate({'font-size':'28px'})
+         console.log('msg1 visible.........................');
 
     }else{
-        $($('.msg1 h2')[i]).removeClass('textanim')
-        // console.log('msg1 not visible.........................');
+        // $(msgs[i]).animate({'font-size':'10px'})
+         $(msgs[i]).removeClass('textanim')
+        
+         console.log('msg1 not visible.........................');
     }
         }
 
@@ -23,11 +28,21 @@ var msgs=$('.msg1 h2')
         // console.log('.textboard not visible.........................');
     }
 
+    // if($('#headerwrapper').visible(true,true)==false){
+    //     $('div.nav').hide();
+    // }
 
-    if($('.mybox').visible(true,true)==false){
+
+
+
+
+
+
+    if($('#heroid').visible(true,true)==false){
         //$('nav').addClass('hidden').hide().show('normal')
         // $('nav').removeClass('hidden') 
          $('nav').slideDown('slow')
+         $('#mainnav').css({'display':'none'})
         // console.log(' mybox visible.........................');
 // if(parseInt($('#sidebar_id').css('width'))<1){
 //     $('#sidebar_id').css({'width':'250px'});
@@ -38,6 +53,7 @@ var msgs=$('.msg1 h2')
 
 //     }
         $('nav').slideUp('slow')
+        $('#mainnav').css({'display':'block'})
         
        // $('nav').addClass('hidden') 
         // console.log('mybox not visible.........................');
@@ -48,6 +64,20 @@ var msgs=$('.msg1 h2')
 
 })
 
+
+//  $(window).resize(function(){
+//     if($(window).width()<1000){
+//         $('nav').removeClass('hidden');
+//         $('mynav').addClass('hidden');
+//         // $('div.quote span').css({'position':'relative'})
+//         $('.textboard img').css({'display':'none'})
+//          console.log('xxxxxxxxxxxxxxxxxxxxx')
+//     }else{
+//         $('nav').addClass('hidden');
+//          $('mynav').removeClass('hidden');
+
+//     }
+//  });
 
 
 $('.toggleit').on('click',function(){

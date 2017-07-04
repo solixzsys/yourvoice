@@ -5,12 +5,14 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
          {% load staticfiles %}
+         <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
        <link href="{% static 'css/bootstrap.css'%}" rel="stylesheet">
         <link href="{% static 'css/reset.css'%}" rel="stylesheet">
         <link href="{% static 'css/style.css'%}" rel="stylesheet">
         <link href="{% static 'css/sidenav.css'%}" rel="stylesheet">
-        
+        <link href="{% static 'css/style2.css'%}" rel="stylesheet">
         {% block extra_style %}{% endblock %}
+       
         {% block side_nav_style %}
 
         <style>
@@ -68,6 +70,10 @@
 
 }
 
+nav{
+    display: block;
+}
+
         </style>
         
         
@@ -85,16 +91,10 @@
         <section id="header">
 
             
-            
-            <nav class="navbar navbar-default navbar-fixed-top " role="navigation">
+            <nav id="navstate" class="navbar navbar-default navbar-fixed-top  " role="navigation">
                 <div class="container-fluid">
                 <div class="navbar-header">
-                <!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>-->
+               
 
                 <button id="navbtn" type="button" class="navbar-toggle  " data-toggle="collapse" >
                     <span class="sr-only">Toggle navigation</span>
@@ -105,28 +105,31 @@
 
                 <a class="navbar-brand" href="/"><img  width="100" height="30" src="../static/img/yourvoice.png" /></a>
                 </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li class=""><a href="#"><h3>Survey</h3><span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">Result</a></li>
-                        <li><a href="#">Analysis</a></li>
-                    
-                    </ul>
-                    <form class="navbar-form navbar-left" role="search">
-                        <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                        </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </form>
-                    <ul class="nav navbar-nav navbar-right" style="margin-right: 0px; ">
-                        <li style="padding: 1px 10px;background-color: red;border-right: none"><a href="#" style="color: white">+Join</a></li>
-                        <li  style="padding: 1px 10px;background-color: green;border-right: none"><a href="#" style="color: white">Login</a></li>
-                        
-                    </ul>
-                    </div><!-- /.navbar-collapse -->
+
+                    <!--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">-->
+      
+      <div class=" mynav navbar-right" style="padding-top: 15px;padding-right: 15px">
+                          
+                            <a href="#">Politics</a>
+                            <a href="#">Economy</a>
+                            <a href="/services">Solution & Services</a>
+                            <!--<a href="#">Poll & Survey</a>-->
+                            <!--<a href="/result">Result</a>-->
+                            <a href="#">Society</a>
+                            <a href="/login">Login</a>
+                            <!--<a href="/signup">Join Us</a>-->
+                            <a href="/about">About Us</a> 
+                            <a href="/team">Our Team</a>     
+                            <a href="#">Contact Us</a>
+      </div>
+    <!--</div>-->
+    <!-- /.navbar-collapse -->
+
+
                 </div><!-- /.container-fluid -->
-            </nav>
+</nav>
+
+           
             
 
 
@@ -139,12 +142,13 @@
             <a href="/">Home</a>                
             <a href="#">Politics</a>
             <a href="#">Economy</a>
-            <a href="#">Solution & Services</a>
+            <a href="/services">Solution & Services</a>
             <a href="#">Poll & Survey</a>
             <a href="#">Society</a>
             <a href="#">Login</a>
             <a href="#">Join Us</a>
-            <a href="#">About Us</a>
+            <a href="/about">About Us</a>
+            <a href="/team">Our Team</a>
             <a href="#">Contact Us</a>
 
         </div>
@@ -183,12 +187,12 @@
             <a href="/">Home</a>                   
             <a href="#">Politics</a>
             <a href="#">Economy</a>
-            <a href="#">Solution & Services</a>
+            <a href="/services">Solution & Services</a>
             <a href="#">Poll & Survey</a>
             <a href="#">Society</a>
-            <a href="#">Login</a>
+            <a href="/login">Login</a>
             <a href="#">Join Us</a>
-            <a href="#">About Us</a>
+            <a href="/about">About Us</a>
             <a href="#">Contact Us</a>
 
         </div>
@@ -285,6 +289,7 @@ console.log('navbtn click................................')
 
 
            </script>
+            {% block extra_script %}{% endblock %}
     
     </body>
 </html>

@@ -27,8 +27,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 SITE_ID=2
-
-
+LOGIN_URL = 'login'
+LOGOUT_URL = '/'
+LOGIN_REDIRECT_URL = 'home'
+SOCIAL_AUTH_GITHUB_KEY ='4b1a2dab9a58916d83c0'
+SOCIAL_AUTH_GITHUB_SECRET ='ab16d38de110c7ac79f7aeca7df40e90906ecfd2'
+SOCIAL_AUTH_TWITTER_KEY =  '2SOHLWVAXQ4mxqMmT5egdMMci'
+SOCIAL_AUTH_TWITTER_SECRET = 'EHUNWoBh5mAwfJKtu4YPb4SWHGP0n2ZzaGzRfseCvyib3GvQVP'
+SOCIAL_AUTH_FACEBOOK_KEY = '103655610273199'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'b1aba217a1bed8094e8dc0fced56ec1e'
 
 
 # Application definition
@@ -45,6 +52,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
    'django.contrib.sites',
     'django.contrib.flatpages',
+    'social_django',
+    "social_widgets",
 ]
 
 MIDDLEWARE = [
@@ -56,6 +65,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'yourvoice.urls'
@@ -73,10 +83,20 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 WSGI_APPLICATION = 'yourvoice.wsgi.application'
 
@@ -84,12 +104,33 @@ WSGI_APPLICATION = 'yourvoice.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'bigwan',
+        'USER': 'root',
+        'PASSWORD': 'Adisco@82',
+        'HOST': 'localhost',
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+        }
     }
 }
+
+
+
+
+
 
 
 # Password validation
