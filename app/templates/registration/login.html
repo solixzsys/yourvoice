@@ -4,3 +4,74 @@
  
 
 
+{%block leftcol%}
+
+{% endblock %}
+
+{%block middlecol%}
+
+<div class="bform" style="border: solid 1px grey;border-radius: 5px;padding: 50px;">
+    
+    
+            
+<h2 style="padding: 20px 0; ">Login</h2>
+
+<h5 style="padding: 20px 0">Using Socials</h5>
+
+
+
+<!--<a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>-->
+<!--<a href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a><br>-->
+      <!--<a href="{% url 'social:begin' 'facebook' %}"><i class="fa fa-4x fa-facebook-square">kiuoiu</i></a>-->
+    <a href="{% url 'social:begin' 'twitter' %}"  class="btn btn-block btn-social btn-twitter">
+           <span class="fa fa-twitter"></span> Sign in with Twitter
+    </a>
+    <a href="{% url 'social:begin' 'facebook' %}"  class="btn btn-block btn-social btn-facebook">
+           <span class="fa fa-facebook"></span> Sign in with facebook
+    </a>
+
+
+
+<div style="padding: 40px 0; text-align: center" class="center-block">OR </div>
+  <form method="post" style="">
+    {% csrf_token %}
+    {% for field in form %}
+      <p style="padding-bottom: 20px">
+        <!--{{ field.label_tag }}<br>-->
+        {{ field }}
+        {% if field.help_text %}
+          <small style="color: grey">{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+    <button style="margin: 10px 0" class="btn btn-large btn-primary pull-right" type="submit">Login</button>
+  </form>
+
+
+
+            
+        </div>
+   
+
+
+{% endblock %}
+{%block rightcol%}
+
+{% endblock %}
+
+
+{% block extra_script %}
+<script>
+$(function(){
+    $('#id_username').addClass('form-control');
+    $('#id_username').attr({'placeholder':'Enter Email'});
+
+    $('#id_password').addClass('form-control');
+    $('#id_password').attr({'placeholder':'Password'});
+})
+
+    </script>
+{% endblock %}

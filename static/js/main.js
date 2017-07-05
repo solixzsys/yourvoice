@@ -113,4 +113,21 @@ console.log('navbtn click................................')
     }
 })
     
+
+
+// Using default configuration 
+    $('#carousel').carouFredSel(); 
+     // Using custom configuration 
+    $('#carousel').carouFredSel({ 
+        items                : 2, 
+        direction            : "up", 
+        scroll : { 
+            items            : 1, 
+            easing           : "elastic", 
+            duration         : 1000, 
+            pauseOnHover     : true 
+        } 
+    }); 
+
+
 })

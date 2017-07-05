@@ -423,10 +423,10 @@ section#ourteam{
 }
 #teamwrapper{
     padding: 50px 0;
-    background-color: rgba(240, 248, 255, 0.35);
+    background-color: rgba(240, 248, 255, 0.55);
 }
 .farea{
-    padding: 50px 0;
+    padding: 30px 0;
 }
 
 #social-icon-col{
@@ -440,4 +440,25 @@ div.footer-nav a{
     color: white;
     padding-left: 30px;
 
+}
+.service-list{
+    width: 70%;
+    padding-top: 30px;
+}
+
+.service-list li{
+    padding-top: 20px;
+}
+.service-list h3{
+    color: #cb7a08;
+}
+
+.footer-subhead{
+    font-family: 'Alfa Slab One',Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+    font-weight: bold;
+    padding: 20px 0;
+    
+}
+#map{
+    width: 80%;
 }

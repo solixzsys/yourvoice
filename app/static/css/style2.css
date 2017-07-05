@@ -452,3 +452,13 @@ div.footer-nav a{
 .service-list h3{
     color: #cb7a08;
 }
+
+.footer-subhead{
+    font-family: 'Alfa Slab One',Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+    font-weight: bold;
+    padding: 20px 0;
+    
+}
+#map{
+    width: 80%;
+}
