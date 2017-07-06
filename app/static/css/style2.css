@@ -369,26 +369,26 @@ div.mynav{
 }
 
 #row_1 #feedspace h3.title{
-    color: orangered;
+    color: #333;
     font-size: 30px;
-    padding: 20px;
+    /*padding: 20px;*/
 }
 #row_1 #feedspace p.desc{
     color:blue;
     /*font-size: 20px;*/
-    padding: 20px;
+    /*padding: 20px;*/
 }
 #row_1{
     padding-top: 100px;
-    background: url(../img/gallery-background.jpg);
-    background-repeat: repeat-x;
+    /*background: url(../img/gallery-background.jpg);
+    background-repeat: repeat-x;*/
     margin-left: -15px;
     margin-right: -15px;
 }
 #row_0{
     padding-top: 100px;
-    background: url(../img/gallery-background.jpg);
-    background-repeat: repeat-x;
+    /*background: url(../img/gallery-background.jpg);
+    background-repeat: repeat-x repeat-y;*/
     margin-left: -15px;
     margin-right: -15px;
 }

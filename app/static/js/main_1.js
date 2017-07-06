@@ -192,9 +192,12 @@ var retrive_polls=function(){
             console.log('data,,,,,,,,,,,,,,,,,,,,,'+v['fields'].poll_question)
 
             obj['question'+i]=v['fields'].poll_question;
+             $('#row_'+i+' #feedspace h3.title').html(v['fields'].poll_question)
+            // $('#row_'+i+'  #feedspace p.desc').html('abc')
             $.ajax({
                 url:'/jsonpolloption',
                 data:{'code': v['fields'].poll_code}
+
                 
             })
             .done(function(data){
@@ -239,7 +242,7 @@ var makechart=function(i,x1,x2,x3,x4,ques){
             data: {
                 labels: [x1,x2,x3,x4],
                 datasets: [{
-                label: ques,
+                // label: ques,
                 data: [12, 19, 3, 17],
                 backgroundColor: "rgba(153,255,51,0.4)"
                 }]

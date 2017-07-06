@@ -118,7 +118,24 @@ console.log('navbtn click................................')
 // Using default configuration 
     // $('#carousel').carouFredSel(); 
      // Using custom configuration 
+     if($(window).width()<1000){
     $('#carousel').carouFredSel({ 
+
+        items                : 1,
+        responsive: true,
+	    width: '100%', 
+        direction            : "left", 
+        scroll : { 
+            items            : 2, 
+            // easing           : "elastic", 
+            duration         : 1000, 
+            pauseOnHover     : true 
+        } 
+    }); 
+     }else{
+
+
+          $('#carousel').carouFredSel({ 
 
         items                : 4,
         responsive: true,
@@ -131,6 +148,10 @@ console.log('navbtn click................................')
             pauseOnHover     : true 
         } 
     }); 
+
+
+
+     }
 
 
 })

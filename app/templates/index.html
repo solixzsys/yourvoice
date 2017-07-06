@@ -355,7 +355,7 @@
 
                 <div id="%banner%"  class="row">
                     
-                    <div class=" col-sm-12 msg1 " style="padding: 100px 0;text-align: center">
+                    <div class=" col-sm-12 msg1 " >
                         <h4>
                             <!--Youroice is a community of millions of people around the world where voice and view are shared ...-->
                             %surveydescription%
@@ -738,20 +738,20 @@
                                            
                             <a href="#">Politics</a>
                             <a href="#">Economy</a>
-                            <!--<a href="#">Solution & Services</a>-->
+                            <a href="/services">Solution & Services</a>
                             <!--<a href="#">Poll & Survey</a>-->
                             <!--<a href="/result">Result</a>-->
                             <a href="#">Society</a>
-                            <a href="#">About Us</a> 
+                            <a href="/about">About Us</a> 
+                            <a href="/team">Our Team</a>   
                             <a href="#">Contact Us</a>
                             {% if user.is_authenticated %}
                             <a href="{% url 'logout' %}?next={% url 'home' %}">Login Out</a>
-                            
+                            <a id="avatar" style="margin-left: 10px" class=" fa fa-user  "></a>
                             {% else %}
                             <a href="/login">Login</a>
                             <a href="/signup">Join Us</a>
                             {% endif %}
-                            <!--<a href="/signup">Join Us</a>-->
                             
                             
                             

@@ -31,7 +31,7 @@ $(function(){
 
     }
     retrive_quotes();
-    retrive_feed();
+    // retrive_feed();
 
      attachbtn();
      retrive_polls();
@@ -145,9 +145,9 @@ var retrive_feed=function(){
         console.log('reading........................')
        // $('#row_1 #feedspace').show('slow')
         //      $('.quote i').html("--- "+data[0]['fields'].author).hide('slow').show('slow')
-         var k=1
-         $('#row_1 #feedspace h3.title').html(data[0]['fields'].title)
-        $('#row_1 #feedspace p.desc').html(data[0]['fields'].description)
+        //  var k=1
+        //  $('#row_1 #feedspace h3.title').html(data[0]['fields'].title)
+        // $('#row_1 #feedspace p.desc').html(data[0]['fields'].description)
         setInterval(function(){
            
             
@@ -180,7 +180,50 @@ var retrive_polls=function(){
 
     })
     .done(function(data){
-        console.log('from getpolls...........'+data)
+         console.log('from getpolls...........'+data)
+        var x1=0;
+        var x2=0;
+        var x3=0;
+        var x4=0;
+        obj={};
+        objs=[];
+        opts=[]
+        $.each(data,function(i,v){
+            console.log('data,,,,,,,,,,,,,,,,,,,,,'+v['fields'].poll_question)
+
+            obj['question'+i]=v['fields'].poll_question;
+             $('#row_'+i+' #feedspace h3.title').html(v['fields'].poll_question)
+            // $('#row_'+i+'  #feedspace p.desc').html('abc')
+            $.ajax({
+                url:'/jsonpolloption',
+                data:{'code': v['fields'].poll_code}
+
+                
+            })
+            .done(function(data){
+                console.log('first ajax................'+obj['question'+i])
+                obj['options']=data
+                x1 =data[0]['fields'].polloption_text
+                x2=data[1]['fields'].polloption_text
+                 x3=data[2]['fields'].polloption_text
+                x4=data[3]['fields'].polloption_text
+                 console.log('from getoptions...........'+obj['question'+i])
+                 makechart(i,x1,x2,x3,x4,obj['question'+i]);
+
+            })
+            .fail(function(){
+                console.log('error from getoptions.........................')
+            })
+            objs.push(obj);
+
+        })
+        // console.log('Complete objs................'+opts[0].object);
+
+
+       
+
+
+
 
 
 
@@ -189,6 +232,25 @@ var retrive_polls=function(){
         console.log('error from getpolls.........................')
 
     })
+}
+
+
+var makechart=function(i,x1,x2,x3,x4,ques){
+     var ctx = $('#myChart_'+i);
+            var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [x1,x2,x3,x4],
+                datasets: [{
+                // label: ques,
+                data: [12, 19, 3, 17],
+                backgroundColor: "rgba(153,255,51,0.4)"
+                }]
+            }
+            });
+
+
+}
 
 var retrive_quotes=function(){
     $.ajax({
@@ -448,7 +510,7 @@ $('#avatar').click(function(e){
     $('#avatarbox').css({'display':'none'});
 
     }
-})
+});
 
 
 

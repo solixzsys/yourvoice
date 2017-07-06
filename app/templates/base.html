@@ -121,11 +121,16 @@ nav{
                             <!--<a href="#">Poll & Survey</a>-->
                             <!--<a href="/result">Result</a>-->
                             <a href="#">Society</a>
-                            <a href="/login">Login</a>
-                            <!--<a href="/signup">Join Us</a>-->
                             <a href="/about">About Us</a> 
-                            <a href="/team">Our Team</a>     
+                            <a href="/team">Our Team</a>   
                             <a href="#">Contact Us</a>
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'logout' %}?next={% url 'home' %}">Login Out</a>
+                            <a id="avatar" style="margin-left: 10px" class=" fa fa-user  "></a>
+                            {% else %}
+                            <a href="/login">Login</a>
+                            <a href="/signup">Join Us</a>
+                            {% endif %}
       </div>
     <!--</div>-->
     <!-- /.navbar-collapse -->
@@ -144,17 +149,22 @@ nav{
             <a href="javascript:void(0)" class="closebtn"  >&times</a>
              <input type="text" placeholder="Search" class="searchtxt  form-control" style="" />
 
-            <a href="/">Home</a>                
-            <a href="#">Politics</a>
-            <a href="#">Economy</a>
-            <a href="/services">Solution & Services</a>
-            <a href="#">Poll & Survey</a>
-            <a href="#">Society</a>
-            <a href="#">Login</a>
-            <a href="#">Join Us</a>
-            <a href="/about">About Us</a>
-            <a href="/team">Our Team</a>
-            <a href="#">Contact Us</a>
+                             <a href="#">Politics</a>
+                            <a href="#">Economy</a>
+                            <a href="/services">Solution & Services</a>
+                            <!--<a href="#">Poll & Survey</a>-->
+                            <!--<a href="/result">Result</a>-->
+                            <a href="#">Society</a>
+                            <a href="/about">About Us</a> 
+                            <a href="/team">Our Team</a>   
+                            <a href="#">Contact Us</a>
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'logout' %}?next={% url 'home' %}">Login Out</a>
+                            <a id="avatar" style="margin-left: 10px" class=" fa fa-user  "></a>
+                            {% else %}
+                            <a href="/login">Login</a>
+                            <a href="/signup">Join Us</a>
+                            {% endif %}
 
         </div>
 
@@ -189,16 +199,22 @@ nav{
             <!--<a href="javascript:void(0)" class="closebtn"  >&times</a>-->
              <input type="text" placeholder="Search" class="searchtxt  form-control" style="" />
 
-            <a href="/">Home</a>                   
-            <a href="#">Politics</a>
-            <a href="#">Economy</a>
-            <a href="/services">Solution & Services</a>
-            <a href="#">Poll & Survey</a>
-            <a href="#">Society</a>
-            <a href="/login">Login</a>
-            <a href="#">Join Us</a>
-            <a href="/about">About Us</a>
-            <a href="#">Contact Us</a>
+                            <a href="#">Politics</a>
+                            <a href="#">Economy</a>
+                            <a href="/services">Solution & Services</a>
+                            <!--<a href="#">Poll & Survey</a>-->
+                            <!--<a href="/result">Result</a>-->
+                            <a href="#">Society</a>
+                            <a href="/about">About Us</a> 
+                            <a href="/team">Our Team</a>   
+                            <a href="#">Contact Us</a>
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'logout' %}?next={% url 'home' %}">Login Out</a>
+                            <a id="avatar" style="margin-left: 10px" class=" fa fa-user  "></a>
+                            {% else %}
+                            <a href="/login">Login</a>
+                            <a href="/signup">Join Us</a>
+                            {% endif %}
 
         </div>
 
@@ -261,22 +277,22 @@ nav{
                             
 
                                            
-                            <a href="#">Politics</a>
+                             <a href="#">Politics</a>
                             <a href="#">Economy</a>
-                            <!--<a href="#">Solution & Services</a>-->
+                            <a href="/services">Solution & Services</a>
                             <!--<a href="#">Poll & Survey</a>-->
                             <!--<a href="/result">Result</a>-->
                             <a href="#">Society</a>
-                            <a href="#">About Us</a> 
+                            <a href="/about">About Us</a> 
+                            <a href="/team">Our Team</a>   
                             <a href="#">Contact Us</a>
                             {% if user.is_authenticated %}
                             <a href="{% url 'logout' %}?next={% url 'home' %}">Login Out</a>
-                            
+                            <a id="avatar" style="margin-left: 10px" class=" fa fa-user  "></a>
                             {% else %}
                             <a href="/login">Login</a>
                             <a href="/signup">Join Us</a>
                             {% endif %}
-                            <!--<a href="/signup">Join Us</a>-->
                             
                             
                             
