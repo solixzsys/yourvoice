@@ -9,13 +9,13 @@ $(function(){
         if($(msgs[i]).visible()==true){
             $(msgs[i]).addClass('textanim')
             // $(msgs[i]).animate({'font-size':'28px'})
-         console.log('msg1 visible.........................');
+        //  console.log('msg1 visible.........................');
 
     }else{
         // $(msgs[i]).animate({'font-size':'10px'})
          $(msgs[i]).removeClass('textanim')
         
-         console.log('msg1 not visible.........................');
+        //  console.log('msg1 not visible.........................');
     }
         }
 
@@ -122,7 +122,7 @@ console.log('navbtn click................................')
 
         items                : 4,
         responsive: true,
-	    width: '80%', 
+	    width: '100%', 
         direction            : "left", 
         scroll : { 
             items            : 2, 

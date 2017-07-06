@@ -117,7 +117,7 @@ def index2(request):
 
 
 
-    return render(request,'index2.html',{'objccc':poll_object})    
+    return render(request,'index3.html',{'objccc':poll_object})    
 
 def test(request):
     polls_dict={}
@@ -166,7 +166,7 @@ def jsonpoll(request):
 def jsonoption(request):
     
     code=request.GET.get('code')
-    # print('cccccccccccccccccccccccccccccccccccccc'+str(code))
+    print('cccccccccccccccccccccccccccccccccccccc'+str(code))
 
     polloption_object=PollOption.objects.filter(polloption_questioncode=code)
     serialized=serializers.serialize('json',polloption_object)
@@ -239,3 +239,10 @@ def getfeed(request):
 
     # print('quote------ '+serialized)
     return HttpResponse(serialized,content_type='application/json')    
+
+def getpolls(request):
+    polls= random.sample(list( Poll.objects.all()),2)    
+    serialized=serializers.serialize('json',polls)
+
+    # print('quote------ '+serialized)
+    return HttpResponse(serialized,content_type='application/json')

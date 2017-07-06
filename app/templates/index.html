@@ -230,15 +230,16 @@
                         
                         <div class="col-md-4 textboardwrapper">
                             <div class="textboard">
-                                <h4 style="">POLL & SURVEY <i class="fa fa-line-chart fa-lg pull-right"></i></h4>
+                                <h4 style="">POLL & SURVEY <i class="fa fa-hand-paper-o fa-lg pull-right"></i></h4>
                                 
                                 <!--<div class="clearfix"></div>-->
                                     
-                                        <img class="" src="../static/img/Dr.-Jim-Yong-Kim.jpg" style="" alt="">
+                                        <img class="" src="../static/img/chart.png" style="" alt="">
                                   
                                
                                 
-                                <h6>Quick previous and next links for simple pagination implementations with light markup and styles. It's great for simple sites like blogs or magazines</h6>
+                                <!--<h6>Quick previous and next links for simple pagination implementations with light markup and styles. It's great for simple sites like blogs or magazines</h6>-->
+                                <h6>{{obj.0.poll_question |safe}}</h6>
 
                             </div>
 
@@ -255,7 +256,7 @@
                         </div>
                         <div class="col-md-4">
                              <div class="textboard">
-                                <h4 style="">SOLUTION & SERVICES</h4>
+                                <h4 style="">SOLUTION & SERVICES <i class="fa fa-camera-retro  pull-right"></i></h4>
                                 <img class="" src="../static/img/Ambode-7-1.jpg" style="" alt="">
 
                                 <h6>Quick previous and next links for simple pagination implementations with light markup and styles. It's great for simple sites like blogs or magazines</h4>
@@ -366,22 +367,27 @@
                 </div>
      
                 <div id="%rowid%" class="row">
-                    <div style="height:100vh ;overflow:hidden" class="col-sm-4" id="feedinformer">
+                    <div class="col-sm-1">
+                        </div>
+                    <div style="height:100vh ;overflow:hidden" class="col-sm-3" id="feedinformer">
                         <div style="position:absolute"  id="feedspace">
                            <h3 class="title"></h3>
                            <p class="desc"></p>
+                           <canvas id="%myChart%" width="400" height="400">
+
+                           </canvas>
 
 
                         </div>
                         </div>
-                    <div class="col-sm-8">
+                    <div class="col-sm-6">
                        
                         <div class="agenda center-block">
-                            <h3>
+                            <h4 class="agenda-tittle">
                                 <!--ECONOMIC AGENDA-->
                                 %surveytitle%
 
-                                </h3>
+                                </h4>
                             <div class="panel panel-success">
                                         <div class="panel-heading">
                                             <h4 class="panel-title" id="%titletext%"></h4>
@@ -428,6 +434,8 @@
 
                         </div>
                     </div>
+                     <div class="col-sm-2">
+                        </div>
 
                 </div>
     </script>      
@@ -516,6 +524,7 @@
                 </div>
                 <div class="col-sm-4 "  style="text-align: center">
                     <ul class="service-list">
+                        <li><i class="fa fa-bicycle fa-3x"></i></li>
                         <li><h3>Market Research</h3></li>
                         <li><h6>I have made two files for this purpose. The class 
                             file contains class and function to fetch the required data. And the usage file 
@@ -528,6 +537,7 @@
                 </div>
                 <div class="col-sm-4"  style="text-align: center">
                     <ul class="service-list" style="width:80%">
+                        <li><i class="fa fa-hourglass-end fa-3x"></i></li>
                         <li><h3>Election Prediction</h3></li>
                         <li><h6>I have made two files for this purpose. The class 
                             file contains class and function to fetch the required data. And the usage file 
@@ -540,6 +550,7 @@
                 </div>
                 <div class="col-sm-4"  style="text-align: center">
                     <ul class="service-list">
+                        <li><i class="fa fa-product-hunt fa-3x"></i></li>
                         <li><h3>Product Analysis</h3></li>
                         <li><h6>I have made two files for this purpose. The class 
                             file contains class and function to fetch the required data. And the usage file 
@@ -666,8 +677,8 @@
         </div>
         
         <div class="row" >
-            <div class="col-sm-12 img-col" id="carousel" style="float: left;width: auto;margin: 0 100px;">             
-                <ul style="float: left;padding:0 50px;text-align: center">
+            <div class="col-sm-12 img-col" id="carousel" style="float: left;text-align: center">             
+                <ul style="float: left;text-align: center">
                         <li><img src="../static/img/Ambode-7-1.jpg" alt="" class="img-circle center-block"></li>
                        <li> <span>Mr Abc123</span></li>
                 </ul>
@@ -675,7 +686,7 @@
             <!--</div>-->
              <!--<div class="col-sm-3 img-col">             -->
                 
-                       <ul style="float: left;padding:0 50px;text-align: center">
+                       <ul style="float: left;text-align: center">
                         <li><img src="../static/img/Ambode-7-1.jpg" alt="" class="img-circle center-block"></li>
                        <li> <span>Mr Abc456</span></li>
                 </ul>
@@ -683,21 +694,21 @@
             <!--</div>-->
              <!--<div class="col-sm-3 img-col">             -->
                 
-                        <ul style="float: left;padding:0 50px;text-align: center">
+                        <ul style="float: left;text-align: center">
                         <li><img src="../static/img/Ambode-7-1.jpg" alt="" class="img-circle center-block"></li>
                        <li> <span>Mr Abc789</span></li>
                 </ul>
             <!--</div>-->
             <!--<div class="col-sm-3 img-col">             -->
                 
-                        <ul style="float: left;padding:0 50px;text-align: center">
+                        <ul style="float: left;text-align: center">
                         <li><img src="../static/img/Ambode-7-1.jpg" alt="" class="img-circle center-block"></li>
                        <li> <span>Mr Efg123</span></li>
                 </ul>
             <!--</div>-->
              <!--<div class="col-sm-3 img-col">             -->
                 
-                        <ul style="float: left;padding:0 50px;text-align: center">
+                        <ul style="float: left;text-align: center">
                         <li><img src="../static/img/Ambode-7-1.jpg" alt="" class="img-circle center-block"></li>
                        <li> <span>Mr Abc456</span></li>
                 </ul>
@@ -861,6 +872,7 @@
         <script src="{% static 'js/bootstrap.js' %}"></script>       
         <script src="{% static 'js/jquery.visible.js'%}"></script>
         <script src="{% static 'js/jquery.carouFredSel-6.2.1.js'%}"></script>
+        <script src="{% static 'js/Chart.js' %}"></script>
          <script src="{% static 'js/main.js' %}"></script>
         <script src="{% static 'js/main_1.js' %}"></script>
         

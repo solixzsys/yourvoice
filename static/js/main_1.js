@@ -18,6 +18,7 @@ $(function(){
              .replace(/%btntag%/,data[i]['fields'].surveytag_tag)
              .replace(/%banner%/,"banner_"+i)
              .replace(/%next%/,"next_"+i)
+             .replace(/%myChart%/,"myChart_"+i)
              );
 
 
@@ -33,7 +34,7 @@ $(function(){
     retrive_feed();
 
      attachbtn();
-     
+     retrive_polls();
 
 
     })
@@ -155,12 +156,12 @@ var retrive_feed=function(){
             if(k>data.length-1){
                 k=1;
             }
-            console.log('k============== '+k)
+            // console.log('k============== '+k)
              $('#row_1 #feedspace h3.title').html(data[k]['fields'].title)
         $('#row_1 #feedspace p.desc').html(data[k]['fields'].description)
         $('#feedspace').animate({top:"+100px"},3000).animate({top:"-20px"},1000).animate({opacity:1},2000).animate({opacity:0},1000)
 
-         console.log('title--------------------------------  '+data[0]['fields'].title)
+        //  console.log('title--------------------------------  '+data[0]['fields'].title)
             k=k+1
         },10000)
 
@@ -173,6 +174,21 @@ var retrive_feed=function(){
 }
 
 
+var retrive_polls=function(){
+    $.ajax({
+        url:'/getpolls',
+
+    })
+    .done(function(data){
+        console.log('from getpolls...........'+data)
+
+
+
+    })
+    .fail(function(){
+        console.log('error from getpolls.........................')
+
+    })
 
 var retrive_quotes=function(){
     $.ajax({

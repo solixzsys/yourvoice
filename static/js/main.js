@@ -9,13 +9,13 @@ $(function(){
         if($(msgs[i]).visible()==true){
             $(msgs[i]).addClass('textanim')
             // $(msgs[i]).animate({'font-size':'28px'})
-         console.log('msg1 visible.........................');
+        //  console.log('msg1 visible.........................');
 
     }else{
         // $(msgs[i]).animate({'font-size':'10px'})
          $(msgs[i]).removeClass('textanim')
         
-         console.log('msg1 not visible.........................');
+        //  console.log('msg1 not visible.........................');
     }
         }
 
@@ -116,14 +116,17 @@ console.log('navbtn click................................')
 
 
 // Using default configuration 
-    $('#carousel').carouFredSel(); 
+    // $('#carousel').carouFredSel(); 
      // Using custom configuration 
     $('#carousel').carouFredSel({ 
-        items                : 2, 
-        direction            : "up", 
+
+        items                : 4,
+        responsive: true,
+	    width: '100%', 
+        direction            : "left", 
         scroll : { 
-            items            : 1, 
-            easing           : "elastic", 
+            items            : 2, 
+            // easing           : "elastic", 
             duration         : 1000, 
             pauseOnHover     : true 
         } 

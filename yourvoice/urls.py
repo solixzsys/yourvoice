@@ -24,7 +24,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     
     url(r'^$', index,name='home'),
-    url(r'^index2/$', index2,name='home2'),
+    url(r'^index3/$', index2,name='home2'),
     url(r'^result$', result),
     url(r'^test$', test),
     url(r'^jsonpoll$', jsonpoll),
@@ -34,6 +34,7 @@ urlpatterns = [
     url(r'^incrementscore$',incrementscore),
     url(r'^getquotes$',getQuotes),
     url(r'^getfeed$',getfeed),
+    url(r'^getpolls$',getpolls),
 
     url(r'^about/$', about,name='about'),
     url(r'^team/$', ourteam,name='ourteam'),
