@@ -1,6 +1,59 @@
 $(function(){
+    
 
     $(window).scroll(function(){
+
+
+
+        if($(window).width()<1000){
+    $('#carousel').carouFredSel({ 
+
+        items                : 1,
+        responsive: true,
+	    width: '100%', 
+        direction            : "left", 
+        scroll : { 
+            items            : 2, 
+            // easing           : "elastic", 
+            duration         : 1000, 
+            pauseOnHover     : true 
+        } 
+    }); 
+     }else{
+
+
+          $('#carousel').carouFredSel({ 
+
+        items                : 4,
+        responsive: true,
+	    width: '100%', 
+        direction            : "left", 
+        scroll : { 
+            items            : 2, 
+            // easing           : "elastic", 
+            duration         : 1000, 
+            pauseOnHover     : true 
+        } 
+    }); 
+     }
+
+
+
+
+
+
+
+        if($(window).width()> 1000){
+            $('#col_1 div.agenda').removeClass('center-block');
+            $('#col_1 div.agenda').addClass('pull-right');
+            $('#col_0 div.agenda').removeClass('center-block');
+        }else{
+             $('#col_1 div.agenda').css({'margin-bottom':'50px'});
+             $('ul.service-list').addClass('center-block');
+             $('.msg1').css({'padding':'50px 10px'});
+
+        }
+
         var msgs=$('div.col-sm-12.msg1 h4 p');
         // console.log('SCROLLING...................................'+msgs.length)
         
@@ -118,40 +171,6 @@ console.log('navbtn click................................')
 // Using default configuration 
     // $('#carousel').carouFredSel(); 
      // Using custom configuration 
-     if($(window).width()<1000){
-    $('#carousel').carouFredSel({ 
-
-        items                : 1,
-        responsive: true,
-	    width: '100%', 
-        direction            : "left", 
-        scroll : { 
-            items            : 2, 
-            // easing           : "elastic", 
-            duration         : 1000, 
-            pauseOnHover     : true 
-        } 
-    }); 
-     }else{
-
-
-          $('#carousel').carouFredSel({ 
-
-        items                : 4,
-        responsive: true,
-	    width: '100%', 
-        direction            : "left", 
-        scroll : { 
-            items            : 2, 
-            // easing           : "elastic", 
-            duration         : 1000, 
-            pauseOnHover     : true 
-        } 
-    }); 
-
-
-
-     }
-
+     
 
 })

@@ -80,7 +80,7 @@ $(function(){
     })
     .done(
         function(data){
-             console.log('uuu...........................'+ cid)
+             console.log('uuu...........................'+ data[0]['fields'].poll_question)
              optionajax(data[0]['fields'].poll_code,cid)
             h=$('#'+sect)
             console.log('tttttttttttttttttnn    '+h)
@@ -92,7 +92,7 @@ $(function(){
             
             sessionStorage[stag]=0;
             console.log('error..............'+sessionStorage[stag])
-            makeajax(stag,sessionStorage[stag],sect,cid)
+            makeajax(stag,sessionStorage[stag],sect,rid)
         }
     )
 
@@ -112,16 +112,12 @@ var optionajax=function(code,cid){
             // console.log('from 1..............'+data)
             // console.log('ssss'+data.length)
             a=$('#'+cid +' ul#optionarea')
-            console.log('xxxxxxxxxxxxxxxx...'+'#'+cid +' ul#optionarea')
+            console.log('#'+cid +' ul#optionarea')
             // a=$('#optionarea')
             a.html("")
             for(var i=0;i<data.length;i++){
                // a.append('kkk')
-                //  a.append('<li class="optionslist'+i+'   list-group-item radio">\
-                //  <label>\
-                //  <input type="radio" data-colid="'+cid+'" data-value='+data[i]['fields'].polloption_code+' name="optionsRadios" id="optionsRadios'+i+'" value="option'+i+'" checked><span style="" class="optext">'+data[i]["fields"].polloption_text+'</span>\
-                //  </label><b  class="scoreboard badge pull-right">'+ data[i]['fields'].polloption_score+'  </b></li>').hide().show('slow')
-                 a.append('<li class="optionslist'+i+'   list-group-item radio"><label><input type="radio" data-colid="'+cid+'" data-value='+data[i]['fields'].polloption_code+' name="optionsRadios" id="optionsRadios'+i+'" value="option'+i+'" checked><span class="optext">'+data[i]['fields'].polloption_text+'</span></label><b  class="scoreboard badge pull-right">'+ data[i]['fields'].polloption_score+'  </b></li>').hide().show('slow')
+                 a.append('<li class="optionslist'+i+'   list-group-item radio"><label><input type="radio" data-colid="'+cid+'" data-value='+data[i]['fields'].polloption_code+' name="optionsRadios" id="optionsRadios'+i+'" value="option'+i+' checked><span class="optext">'+data[i]['fields'].polloption_text+'</span></label><b  class="scoreboard badge pull-right">'+ data[i]['fields'].polloption_score+'  </b></li>').hide().show('slow')
             }
             //  a.html(data[0]['fields'].polloption_text)
            attachradio();
@@ -310,11 +306,11 @@ for(var i=0;i< dynamicbtn.length;i++){
 
         if(sessionStorage[n]){
             sessionStorage[n]=Number(sessionStorage[n])+1;
-              makeajax($(this).attr('name'),sessionStorage[n],$(this).attr('data-titletext'),$(this).attr('data-col'))
+              makeajax($(this).attr('name'),sessionStorage[n],$(this).attr('data-titletext'),$(this).attr('data-row'))
 
         }else{
             sessionStorage.setItem(n,1)
-            makeajax($(this).attr('name'),1,$(this).attr('data-titletext'),$(this).attr('data-col'))
+            makeajax($(this).attr('name'),1,$(this).attr('data-titletext'),$(this).attr('data-row'))
         }
 
 

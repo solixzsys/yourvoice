@@ -11,7 +11,7 @@ $(function(){
 
 
             var template=$('#dynamictemplate').html();
-             $('#content div.container-fluid').prepend(template.replace(/%surveydescription%/,data[i]['fields'].surveytag_description)
+             $('#content div.container').prepend(template.replace(/%surveydescription%/,data[i]['fields'].surveytag_description)
              .replace(/%surveytitle%/,data[i]['fields'].surveytag_title)
              .replace(/%rowid%/g,"row_"+i)
              .replace(/%titletext%/g,"titletext_"+i)
@@ -116,7 +116,7 @@ var optionajax=function(code,rid){
             a.html("")
             for(var i=0;i<data.length;i++){
                // a.append('kkk')
-                 a.append('<li class="optionslist'+i+'   list-group-item radio"><label><input type="radio" data-rowid="'+rid+'" data-value='+data[i]['fields'].polloption_code+' name="optionsRadios" id="optionsRadios'+i+'" value="option'+i+' checked><span class="optext">'+data[i]['fields'].polloption_text+'</span></label><b  class="scoreboard badge pull-right">'+ data[i]['fields'].polloption_score+'  </b></li>').hide().show('slow')
+                //  a.append('<li class="optionslist'+i+'   list-group-item radio"><label><input type="radio" data-rowid="'+rid+'" data-value="'+data[i]['fields'].polloption_code+'" name="optionsRadios" id="optionsRadios'+i+'" value="option'+i+'" checked><span class="optext" style="padding-right:20px">'+data[i]['fields'].polloption_text+'</span></label><b  class="scoreboard badge pull-right">'+ data[i]['fields'].polloption_score+'  </b></li>').hide().show('slow')
             }
             //  a.html(data[0]['fields'].polloption_text)
            attachradio();

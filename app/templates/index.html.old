@@ -347,59 +347,47 @@
                 
 </section>-->
         <!-- CONTENT SECTION -->
-
-
-<div class="container" >
-    
-
-
-    <div class="row" style="padding-top: 10em">
-        <div class="col-sm-12">
-            <div>
-                <span style=""><h3 style="padding:0.5em; border-radius: 5px; border:solid 2px rgba(200, 200,200, 0.4);color: #cb7a08"><i class="fa fa-anchor"></i>Take Part in U decide Poll  </h3></span>
-            </div>
-        
-        </div>
-        
-        
-    </div>
-    </div>
-<section id="content" style="padding-top: 1em">
-    
+<section id="content">
             
             <div class="container">
     <!-- 1 iteration row begin -->   
-    
-    <div id="row_0" class="row">
-
     <script type="text/template" id="dynamictemplate"> 
 
-   
-
-                <!--<div id="%banner%"  class="row">
+                <div id="%banner%"  class="row">
                     
                     <div class=" col-sm-12 msg1 " >
                         <h4>
-                           
+                            <!--Youroice is a community of millions of people around the world where voice and view are shared ...-->
                             %surveydescription%
                             <hr style="border-bottom: solid 1px grey;opacity: 0.3;width: 30%;margin-top:100px">
                         </h4>
                     </div>
 
                     
-                </div>-->
+                </div>
      
-                
-                   
-                    
-                    <div id="%colid%" class="col-sm-6">
+                <div id="%rowid%" class="row">
+                    <div class="col-sm-1">
+                        </div>
+                    <div style="height:100vh ;overflow:hidden" class="col-sm-3" id="feedinformer">
+                        <div style="position:absolute"  id="feedspace">
+                           <h3 class="title"></h3>
+                           <p class="desc"></p>
+                           <canvas id="%myChart%" width="400" height="400">
+
+                           </canvas>
+
+
+                        </div>
+                        </div>
+                    <div class="col-sm-6">
                        
                         <div class="agenda center-block">
                             <h4 class="agenda-tittle">
                                 <!--ECONOMIC AGENDA-->
                                 %surveytitle%
 
-                            </h4>
+                                </h4>
                             <div class="panel panel-success">
                                         <div class="panel-heading">
                                             <h4 class="panel-title" id="%titletext%"></h4>
@@ -414,7 +402,7 @@
                                             </ul>
 
                                             
-                                        <button  id="%next%" data-titletext="%titletext%" data-col="%colid%" data-row="%rowid%" name="%btntag%" style="" type="button"  class="btnpoll btn btn-info pull-right ">Next</button>
+                                        <button  id="%next%" data-titletext="%titletext%" data-row="%rowid%" name="%btntag%" style="" type="button"  class="btnpoll btn btn-info pull-right ">Next</button>
                                         </div>
 
 
@@ -446,14 +434,81 @@
 
                         </div>
                     </div>
-                     
+                     <div class="col-sm-2">
+                        </div>
 
-                
-    </script>   
-    </div>   
-   
-     </div>
-            
+                </div>
+    </script>      
+     <!--<a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-url="http://fxsoftlogix.com" data-via="solixz" data-hashtags="udecinit" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script> 
+    <div class="g-plusone" data-annotation="inline" data-width="300" data-href="http://fxsoftlogix.com"></div> 
+
+    <div class="fb-share-button" data-href="http://fxsoftlogix.com" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Ffxsoftlogix.com%2F&amp;src=sdkpreparse">Share</a></div>
+               -->
+    <!-- 1 iteration row end -->
+            </div>
+            <div class="container">
+    <!-- 2 iteration row begin -->            
+                <!--<div class="row">
+                    <div class="col-sm-12 msg1 " style="padding: 100px 0">
+                        <h2 style="width: 60%; text-align: right">
+                            For couple of years now, the economy of the nation have being plung into the deep see of recession with several expert in the field be giving there own opinion. Share you view on todays economic agenda ....
+                        </h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="agenda center-block">
+                            <h3><b>ISSUES OF TODAY</b></h3>
+
+                             <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title" id="titletext2"></h4>
+                                </div>
+                                <div class="panel-body">
+
+                                        <ul id='optionarea2' class="list-group">
+                                            
+
+
+
+                                        </ul>
+
+
+                                        <button id="next2" style="" type="button"  class="btn btn-info pull-right ">Next</button>
+
+
+                                </div>
+
+
+                                <div class="panel-footer">
+                                    
+                                    <div class="progress">
+                                <div class="progress-bar progress-bar-success" style="width: 35%">
+                                    <span class="sr-only">35% Complete (success)</span>
+                                </div>
+                                <div class="progress-bar progress-bar-warning" style="width: 20%">
+                                    <span class="sr-only">20% Complete (warning)</span>
+                                </div>
+                                <div class="progress-bar progress-bar-info" style="width: 10%">
+                                    <span class="sr-only">10% Complete (danger)</span>
+                                </div>
+                                <div class="progress-bar progress-bar-danger" style="width: 10%">
+                                    <span class="sr-only">10% Complete (danger)</span>
+                                </div>
+                                </div>
+
+                                </div>
+                            </div>
+
+
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>-->
          <!-- 2 iteration row end --> 
 
          <!-- SERVICES AND SOLUTIONS-->
@@ -520,7 +575,7 @@
 
          <!-- 3 iteration row begin --> 
                 <div class="row">
-                    <div class="col-sm-12 msg1 " style="padding: 100px 100px">
+                    <div class="col-sm-12 msg1 " style="padding: 100px 0">
                         <h4 style=" text-align: center; color: #333333;">
                             At YourVoice, We collate all your voices and made a critical analysis using our state of the art bescope Data minning and Statistical tools ....
                         </h4>
@@ -819,7 +874,7 @@
         <script src="{% static 'js/jquery.carouFredSel-6.2.1.js'%}"></script>
         <script src="{% static 'js/Chart.js' %}"></script>
          <script src="{% static 'js/main.js' %}"></script>
-        <script src="{% static 'js/test.js' %}"></script>
+        <script src="{% static 'js/main_1.js' %}"></script>
         
 
     </body>   

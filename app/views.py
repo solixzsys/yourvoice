@@ -244,5 +244,5 @@ def getpolls(request):
     polls= random.sample(list( Poll.objects.all()),2)    
     serialized=serializers.serialize('json',polls)
 
-    # print('quote------ '+serialized)
+    #print('quote------ '+serialized)
     return HttpResponse(serialized,content_type='application/json')

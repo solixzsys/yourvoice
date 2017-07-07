@@ -212,6 +212,8 @@ margin-bottom: 20px;
 }
 .msg1{
     font-size: 26px;
+    padding: 100px 100px;
+    text-align: center;
     
 }
 
@@ -270,6 +272,12 @@ footer{
 
 
 @media screen and (max-width: 700px){
+    .msg1{
+    font-size: 20px;
+    padding: 80px 50px;
+    text-align: center;
+    
+}
 #header {
     
     padding-left: 10px;
@@ -287,6 +295,12 @@ footer{
 
 
 @media screen and (max-width: 1000px){
+    .msg1{
+    font-size: 22px;
+    padding: 90px 60px;
+    text-align: center;
+    
+}
 .logo{
     display: none;
 
@@ -322,6 +336,12 @@ div,img, h3{
 }
 
 @media screen and (max-width: 600px){
+    .msg1{
+    font-size: 18px;
+    padding: 30px 20px;
+    text-align: center;
+    
+}
 .agenda {
     
     width: 100%;

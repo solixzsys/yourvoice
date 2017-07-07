@@ -7,14 +7,13 @@ $(function(){
 
     })
     .done(function(data){
-        console.log('data length..........................'+data.length)
         for(var i=0;i<data.length;i++){
 
 
             var template=$('#dynamictemplate').html();
-             $('#content').prepend(template.replace(/%surveydescription%/,data[i]['fields'].surveytag_description)
+             $('#content div.container').prepend(template.replace(/%surveydescription%/,data[i]['fields'].surveytag_description)
              .replace(/%surveytitle%/,data[i]['fields'].surveytag_title)
-             .replace(/%colid%/g,"col_"+i)
+             .replace(/%rowid%/g,"row_"+i)
              .replace(/%titletext%/g,"titletext_"+i)
              .replace(/%btntag%/,data[i]['fields'].surveytag_tag)
              .replace(/%banner%/,"banner_"+i)
@@ -28,7 +27,7 @@ $(function(){
 
 
         // console.log(data[i]['fields']);
-        makeajax(data[i]['fields'].surveytag_tag,0,"titletext_"+i,"col_"+i);
+        makeajax(data[i]['fields'].surveytag_tag,0,"titletext_"+i,"row_"+i);
 
     }
     retrive_quotes();
@@ -71,7 +70,7 @@ $(function(){
     // )
 
 
-    var makeajax=function(stag,page,sect,cid){
+    var makeajax=function(stag,page,sect,rid){
 
          $.ajax({
         url:'/jsonpoll',
@@ -80,8 +79,8 @@ $(function(){
     })
     .done(
         function(data){
-             console.log('uuu...........................'+ cid)
-             optionajax(data[0]['fields'].poll_code,cid)
+             console.log('uuu...........................'+ data[0]['fields'].poll_question)
+             optionajax(data[0]['fields'].poll_code,rid)
             h=$('#'+sect)
             console.log('tttttttttttttttttnn    '+h)
              h.html(data[0]['fields'].poll_question).hide().show('slow')
@@ -92,7 +91,7 @@ $(function(){
             
             sessionStorage[stag]=0;
             console.log('error..............'+sessionStorage[stag])
-            makeajax(stag,sessionStorage[stag],sect,cid)
+            makeajax(stag,sessionStorage[stag],sect,rid)
         }
     )
 
@@ -100,7 +99,7 @@ $(function(){
 
 
 
-var optionajax=function(code,cid){
+var optionajax=function(code,rid){
 
          $.ajax({
         url:'/jsonpolloption',
@@ -111,17 +110,13 @@ var optionajax=function(code,cid){
         function(data){
             // console.log('from 1..............'+data)
             // console.log('ssss'+data.length)
-            a=$('#'+cid +' ul#optionarea')
-            console.log('xxxxxxxxxxxxxxxx...'+'#'+cid +' ul#optionarea')
+            a=$('#'+rid +' ul#optionarea')
+            console.log('#'+rid +' ul#optionarea')
             // a=$('#optionarea')
             a.html("")
             for(var i=0;i<data.length;i++){
                // a.append('kkk')
-                //  a.append('<li class="optionslist'+i+'   list-group-item radio">\
-                //  <label>\
-                //  <input type="radio" data-colid="'+cid+'" data-value='+data[i]['fields'].polloption_code+' name="optionsRadios" id="optionsRadios'+i+'" value="option'+i+'" checked><span style="" class="optext">'+data[i]["fields"].polloption_text+'</span>\
-                //  </label><b  class="scoreboard badge pull-right">'+ data[i]['fields'].polloption_score+'  </b></li>').hide().show('slow')
-                 a.append('<li class="optionslist'+i+'   list-group-item radio"><label><input type="radio" data-colid="'+cid+'" data-value='+data[i]['fields'].polloption_code+' name="optionsRadios" id="optionsRadios'+i+'" value="option'+i+'" checked><span class="optext">'+data[i]['fields'].polloption_text+'</span></label><b  class="scoreboard badge pull-right">'+ data[i]['fields'].polloption_score+'  </b></li>').hide().show('slow')
+                 a.append('<li class="optionslist'+i+'   list-group-item radio"><label><input type="radio" data-rowid="'+rid+'" data-value='+data[i]['fields'].polloption_code+' name="optionsRadios" id="optionsRadios'+i+'" value="option'+i+' checked><span class="optext"><span>'+data[i]['fields'].polloption_text+'</span></label><b  class="scoreboard badge pull-right">'+ data[i]['fields'].polloption_score+'  </b></li>').hide().show('slow')
             }
             //  a.html(data[0]['fields'].polloption_text)
            attachradio();
@@ -310,11 +305,11 @@ for(var i=0;i< dynamicbtn.length;i++){
 
         if(sessionStorage[n]){
             sessionStorage[n]=Number(sessionStorage[n])+1;
-              makeajax($(this).attr('name'),sessionStorage[n],$(this).attr('data-titletext'),$(this).attr('data-col'))
+              makeajax($(this).attr('name'),sessionStorage[n],$(this).attr('data-titletext'),$(this).attr('data-row'))
 
         }else{
             sessionStorage.setItem(n,1)
-            makeajax($(this).attr('name'),1,$(this).attr('data-titletext'),$(this).attr('data-col'))
+            makeajax($(this).attr('name'),1,$(this).attr('data-titletext'),$(this).attr('data-row'))
         }
 
 
@@ -327,9 +322,9 @@ for(var i=0;i< dynamicbtn.length;i++){
 
 }
 
-var incrementscore=function(tag,cid){
-    console.log('radio incrementscore call with..........................'+cid)
-    var progressbar=$("#"+cid+ ' .progress-bar');
+var incrementscore=function(tag,rowid){
+    console.log('radio incrementscore call..........................')
+    var progressbar=$("#"+rowid+ ' .progress-bar');
      
 
     $.ajax({
@@ -339,10 +334,10 @@ var incrementscore=function(tag,cid){
     })
     .done(function(data){
         var totalscore=0
-        $("#"+cid+ ' .scoreboard').css({'display':'block'})
-         console.log('New score.................. '+data.length)
-        for (var i=0;i<$("#"+cid+ ' .scoreboard').length;i++){
-            $($("#"+cid+ ' .scoreboard')[i]).html(data[i]['fields'].polloption_score)
+        $("#"+rowid+ ' .scoreboard').css({'display':'block'})
+        // console.log('New score.................. '+data.length)
+        for (var i=0;i<$("#"+rowid+ ' .scoreboard').length;i++){
+            $($("#"+rowid+ ' .scoreboard')[i]).html(data[i]['fields'].polloption_score)
             totalscore= totalscore+ data[i]['fields'].polloption_score;
         }
 
@@ -369,7 +364,7 @@ var attachradio=function(){
     $(v).change(function(){
     if($(v).is(":checked")){
     console.log($(v).attr('data-value'))
-    incrementscore(  $(v).attr('data-value'),$(v).attr('data-colid') )    
+    incrementscore(  $(v).attr('data-value'),$(v).attr('data-rowid') )    
 
     }
 

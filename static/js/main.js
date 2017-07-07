@@ -1,6 +1,18 @@
 $(function(){
+    
 
     $(window).scroll(function(){
+        if($(window).width()> 1000){
+            $('#col_1 div.agenda').removeClass('center-block');
+            $('#col_1 div.agenda').addClass('pull-right');
+            $('#col_0 div.agenda').removeClass('center-block');
+        }else{
+             $('#col_1 div.agenda').css({'margin-bottom':'50px'});
+             $('ul.service-list').addClass('center-block');
+             $('.msg1').css({'padding':'50px 10px'});
+
+        }
+
         var msgs=$('div.col-sm-12.msg1 h4 p');
         // console.log('SCROLLING...................................'+msgs.length)
         
@@ -121,7 +133,7 @@ console.log('navbtn click................................')
      if($(window).width()<1000){
     $('#carousel').carouFredSel({ 
 
-        items                : 4,
+        items                : 1,
         responsive: true,
 	    width: '100%', 
         direction            : "left", 
@@ -137,7 +149,7 @@ console.log('navbtn click................................')
 
           $('#carousel').carouFredSel({ 
 
-        items                : 1,
+        items                : 4,
         responsive: true,
 	    width: '100%', 
         direction            : "left", 
