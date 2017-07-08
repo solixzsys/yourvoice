@@ -230,6 +230,7 @@
                         
                         <div class="col-md-4 textboardwrapper">
                             <div class="textboard">
+                                <a href="/mypolls/all" style="color:white;text-decoration: none">
                                 <h4 style="">POLL & SURVEY <i class="fa fa-hand-paper-o fa-lg pull-right"></i></h4>
                                 
                                 <!--<div class="clearfix"></div>-->
@@ -240,16 +241,18 @@
                                 
                                 <!--<h6>Quick previous and next links for simple pagination implementations with light markup and styles. It's great for simple sites like blogs or magazines</h6>-->
                                 <h6>{{obj.0.poll_question |safe}}</h6>
+                                </a>
 
                             </div>
 
                         </div>
-                        <div class="col-md-4">
-                             <div class="textboard purelink" >
+                        <div class="col-md-4 result">
+                             <div class="textboard  purelink" >
                                  <a href="/result" style="color:white;text-decoration: none">
                                 <h4 style="">RESULT & ANALYSIS <i class="fa fa-bar-chart fa-lg pull-right"></i></h4>
                                  <img class="" src="../static/img/Osibanjo.jpg" style=" " alt="">
-                                <h6>Quick previous and next links for simple pagination implementations with light markup and styles. It's great for simple sites like blogs or magazines</h6>
+                                 <h6 style="padding: 5px"></h6>
+                                <p>Quick previous and next links for simple pagination implementations with light markup and styles. It's great for simple sites like blogs or magazines</p>
                                  </a>            
                             </div>
                             
@@ -510,6 +513,7 @@
             
         </div>
         
+        
 
 
 
@@ -530,56 +534,28 @@
                  <div class="row">
                     <div class="col-sm-12 latestpoll" >
                         <div class="agenda center-block">
-                            <h3>LATEST OPPINION POLL RESULT</h3>
+                            <h3>LATEST OPINION POLL RESULT</h3>
 
-                            <ul class="list-group">
+                            <ul id="latestpoll" class="list-group">
+                                <script type="text/template" id="pollresulttemplate"> 
                                     <li class="list-group-item">
-                                        <img class="pull-left" src="../static/img/bg1.jpg">
+                                       
+
                                         <div style="" class="">
                                         <h4>
-                                            Unending Rise in hosing cost
+                                            %title%
 
                                             </h4>
-                                            <h6>For the past decade, several government initiative have failed to curtail the ...</h6>
+                                            <h6>%question%</h6>
                                         </div>
+                                         <canvas  id="%myChart%"  width='400' height='300' >
+
+                                        </canvas>
                                         <div class="clearfix"></div>
                                     </li>
-                                    <li class="list-group-item">
-                                        <img class="pull-left" src="../static/img/bg1.jpg">
-                                        <div style="" class="">
-                                        <h4>
-                                            Unending Rise in hosing cost
+                               </script>
 
-                                            </h4>
-                                            <h6>For the past decade, several government initiative have failed to curtail the ...</h6>
-                                        </div>
-                                        <div class="clearfix"></div>
-
-                                    </li>
-                                    <li class="list-group-item">
-                                        
-                                        <img class="pull-left" src="../static/img/bg1.jpg">
-                                        <div style="" class="">
-                                        <h4>
-                                            Unending Rise in hosing cost
-
-                                            </h4>
-                                            <h6>For the past decade, several government initiative have failed to curtail the ...</h6>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        
-                                        <img class="pull-left" src="../static/img/bg1.jpg">
-                                        <div style="" class="">
-                                        <h4>
-                                            Unending Rise in hosing cost
-
-                                            </h4>
-                                            <h6>For the past decade, several government initiative have failed to curtail the ...</h6>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </li>
+                                   
                                     
                         </ul>
 
@@ -621,43 +597,175 @@
             
         </div>
         
-        <div class="row" >
-            <div class="col-sm-12 img-col" id="carousel" style="float: left;text-align: center">             
-                <ul style="float: left;text-align: center">
+        <div id="imageCarousel" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#imageCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#imageCarousel" data-slide-to="1"></li>
+    <li data-target="#imageCarousel" data-slide-to="2"></li>
+  </ol>
+ <div class="carousel-inner">
+   <div class="item active">
+     <div class="row">
+       <div class="col-md-4">
+         
+         <ul class="l" style="float: left;text-align: center">
                         <li><img src="../static/img/Ambode-7-1.jpg" alt="" class="img-circle center-block"></li>
-                       <li> <span>Mr Abc123</span></li>
+                       <li> <span>Mr AAAAA</span></li>
                 </ul>
-                   
-            <!--</div>-->
-             <!--<div class="col-sm-3 img-col">             -->
-                
-                       <ul style="float: left;text-align: center">
+       </div>
+       <div class="col-md-4">
+         
+         <ul class="m" style="text-align: center">
                         <li><img src="../static/img/Ambode-7-1.jpg" alt="" class="img-circle center-block"></li>
-                       <li> <span>Mr Abc456</span></li>
+                       <li> <span>Mr BBBB</span></li>
                 </ul>
-                   
-            <!--</div>-->
-             <!--<div class="col-sm-3 img-col">             -->
-                
-                        <ul style="float: left;text-align: center">
+       </div>
+       <div class="col-md-4">
+         
+         <ul class="r" style="float: left;text-align: center">
                         <li><img src="../static/img/Ambode-7-1.jpg" alt="" class="img-circle center-block"></li>
-                       <li> <span>Mr Abc789</span></li>
+                       <li> <span>Mr CCCC</span></li>
                 </ul>
-            <!--</div>-->
-            <!--<div class="col-sm-3 img-col">             -->
-                
-                        <ul style="float: left;text-align: center">
+       </div>
+     </div>
+   </div>
+   <div class="item">
+     <div class="row">
+       <div class="col-md-4">
+        
+         <ul class="l" style="float: left;text-align: center">
                         <li><img src="../static/img/Ambode-7-1.jpg" alt="" class="img-circle center-block"></li>
-                       <li> <span>Mr Efg123</span></li>
+                       <li> <span>Mr DDDD</span></li>
                 </ul>
-            <!--</div>-->
-             <!--<div class="col-sm-3 img-col">             -->
-                
-                        <ul style="float: left;text-align: center">
+       </div>
+       <div class="col-md-4">
+        
+         <ul class="m" style="text-align: center">
                         <li><img src="../static/img/Ambode-7-1.jpg" alt="" class="img-circle center-block"></li>
-                       <li> <span>Mr Abc456</span></li>
+                       <li> <span>Mr EEEEE</span></li>
                 </ul>
-            </div>
+       </div>
+       <div class="col-md-4">
+        
+         <ul class="r" style="float: left;text-align: center">
+                        <li><img src="../static/img/Ambode-7-1.jpg" alt="" class="img-circle center-block"></li>
+                       <li> <span>Mr AAAAA</span></li>
+                </ul>
+       </div>
+     </div>
+   </div>
+   <div class="item">
+     <div class="row">
+       <div class="col-md-4">
+        
+         <ul class="l" style="float: left;text-align: center">
+                        <li><img src="../static/img/Ambode-7-1.jpg" alt="" class="img-circle center-block"></li>
+                       <li> <span>Mr CCCC</span></li>
+                </ul>
+       </div>
+       <div class="col-md-4">
+        
+         <ul class="m" style="text-align: center">
+                        <li><img src="../static/img/Ambode-7-1.jpg" alt="" class="img-circle center-block"></li>
+                       <li> <span>Mr BBBB</span></li>
+                </ul>
+       </div>
+       <div class="col-md-4">
+        
+         <ul class="r" style="float: left;text-align: center">
+                        <li><img src="../static/img/Ambode-7-1.jpg" alt="" class="img-circle center-block"></li>
+                       <li> <span>Mr AAAAA</span></li>
+                </ul>
+       </div>
+     </div>
+   </div>
+     <div class="item">
+     <div class="row">
+       <div class="col-md-4">
+        
+         <ul class="l" style="float: left;text-align: center">
+                        <li><img src="../static/img/Ambode-7-1.jpg" alt="" class="img-circle center-block"></li>
+                       <li> <span>Mr BBBB</span></li>
+                </ul>
+       </div>
+       <div class="col-md-4">
+        
+         <ul class="m" style="text-align: center">
+                        <li><img src="../static/img/Ambode-7-1.jpg" alt="" class="img-circle center-block"></li>
+                       <li> <span>Mr CCCC</span></li>
+                </ul>
+       </div>
+       <div class="col-md-4">
+        
+         <ul class="r" style="float: left;text-align: center">
+                        <li><img src="../static/img/Ambode-7-1.jpg" alt="" class="img-circle center-block"></li>
+                       <li> <span>Mr DDDD</span></li>
+                </ul>
+       </div>
+     </div>
+   </div>
+     <div class="item">
+     <div class="row">
+       <div class="col-md-4">
+        
+         <ul class="l" style="float: left;text-align: center">
+                        <li><img src="../static/img/Ambode-7-1.jpg" alt="" class="img-circle center-block"></li>
+                       <li> <span>Mr EEEEE</span></li>
+                </ul>
+       </div>
+       <div class="col-md-4">
+        
+         <ul class="m" style="text-align: center">
+                        <li><img src="../static/img/Ambode-7-1.jpg" alt="" class="img-circle center-block"></li>
+                       <li> <span>Mr AAAAA</span></li>
+                </ul>
+       </div>
+       <div class="col-md-4">
+        
+         <ul class="r" style="float: left;text-align: center">
+                        <li><img src="../static/img/Ambode-7-1.jpg" alt="" class="img-circle center-block"></li>
+                       <li> <span>Mr BBBB</span></li>
+                </ul>
+       </div>
+     </div>
+   </div>
+     <div class="item">
+     <div class="row">
+       <div class="col-md-4">
+        
+         <ul class="l" style="float: left;text-align: center">
+                        <li><img src="../static/img/Ambode-7-1.jpg" alt="" class="img-circle center-block"></li>
+                       <li> <span>Mr CCCC</span></li>
+                </ul>
+       </div>
+       <div class="col-md-4">
+        
+         <ul class="m" style="text-align: center">
+                        <li><img src="../static/img/Ambode-7-1.jpg" alt="" class="img-circle center-block"></li>
+                       <li> <span>Mr DDDD</span></li>
+                </ul>
+       </div>
+       <div class="col-md-4">
+        
+         <ul class="r" style="float: left;text-align: center">
+                        <li><img src="../static/img/Ambode-7-1.jpg" alt="" class="img-circle center-block"></li>
+                       <li> <span>Mr EEEEE</span></li>
+                </ul>
+       </div>
+     </div>
+   </div>
+  </div>
+  <a class="left carousel-control" href="#imageCarousel" role="button" data-slide="prev">
+      
+      <i class="fa fa-backward"></i>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#imageCarousel" role="button" data-slide="next">
+      <i class="fa fa-forward"></i>
+      <span class="sr-only">Next</span>
+    </a>
+ </div>
+      
         </div>
         
         

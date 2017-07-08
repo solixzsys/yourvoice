@@ -33,9 +33,10 @@ urlpatterns = [
     url(r'^dynamictemp$',dynamictemp),
     url(r'^incrementscore$',incrementscore),
     url(r'^getquotes$',getQuotes),
+    url(r'^getsurvey$',getsurvey),
     url(r'^getfeed$',getfeed),
     url(r'^getpolls$',getpolls),
-
+    url(r'^mypolls/all$',mypolls),
     url(r'^about/$', about,name='about'),
     url(r'^team/$', ourteam,name='ourteam'),
     url(r'^services/$', services,name='services'),

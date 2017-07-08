@@ -2,6 +2,7 @@ from django.db import models
 import hashlib
 from datetime import datetime
 from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import  RichTextUploadingField
 # Create your models here.
 from django.db.models.signals import pre_save
 from django.db.models.signals import pre_init
@@ -76,9 +77,11 @@ class StoryFlatPage(CMSFlatPage):
 
     story_is_hero=models.BooleanField(default=False)
     story_hero_image=models.FileField(upload_to='passport/%Y/%m/%d',blank=True)
+    story_content=RichTextUploadingField('Content',blank=True,null=True)
     story_domain=models.CharField(max_length=20,choices=DOMAIN)
     story_status=models.CharField(max_length=20,choices=STATE,default="DRAFT")
     story_date=models.DateField(default= datetime.now())
+    story_creator=models.ForeignKey(User,blank=True,null=True)
 
     def save(self, *args, **kwargs):
         self.url='/'+self.title.replace(' ','-')+'/'
@@ -110,6 +113,7 @@ class SurveyTag(models.Model):
     surveytag_owner=models.ForeignKey(User,default="")
     surveytag_domain=models.CharField(max_length=20,choices=DOMAIN)
     surveytag_status=models.CharField(max_length=20,choices=STATE,default="DRAFT")
+    survey_image=models.FileField(upload_to='passport/%Y/%m/%d',blank=True)
 
     def __str__(self):
         return self.surveytag_title

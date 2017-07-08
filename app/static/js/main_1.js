@@ -121,7 +121,7 @@ var optionajax=function(code,cid){
                 //  <label>\
                 //  <input type="radio" data-colid="'+cid+'" data-value='+data[i]['fields'].polloption_code+' name="optionsRadios" id="optionsRadios'+i+'" value="option'+i+'" checked><span style="" class="optext">'+data[i]["fields"].polloption_text+'</span>\
                 //  </label><b  class="scoreboard badge pull-right">'+ data[i]['fields'].polloption_score+'  </b></li>').hide().show('slow')
-                 a.append('<li class="optionslist'+i+'   list-group-item radio"><label><input type="radio" data-colid="'+cid+'" data-value='+data[i]['fields'].polloption_code+' name="optionsRadios" id="optionsRadios'+i+'" value="option'+i+'" checked><span class="optext">'+data[i]['fields'].polloption_text+'</span></label><b  class="scoreboard badge pull-right">'+ data[i]['fields'].polloption_score+'  </b></li>').hide().show('slow')
+                 a.append('<li class="optionslist'+i+'   list-group-item radio"><label><input type="radio" data-colid="'+cid+'" data-value='+data[i]['fields'].polloption_code+' name="optionsRadios" id="optionsRadios'+i+'" value="option'+i+'" ><span class="optext">'+data[i]['fields'].polloption_text+'</span></label><b  class="scoreboard badge pull-right">'+ data[i]['fields'].polloption_score+'  </b></li>').hide().show('slow')
             }
             //  a.html(data[0]['fields'].polloption_text)
            attachradio();
@@ -185,6 +185,9 @@ var retrive_polls=function(){
 
     })
     .done(function(data){
+
+        
+
          console.log('from getpolls...........'+data)
         var x1=0;
         var x2=0;
@@ -193,7 +196,50 @@ var retrive_polls=function(){
         obj={};
         objs=[];
         opts=[]
+        $('.result h6').html(data[0]['fields'].poll_title)
+        
+
+        console.log('+++++++++++++++++++++++ '+data[0]['fields'].poll_surveytag.surveytag_tag)
+
+          $.ajax({
+        url:'/getsurvey',
+        data:{'num': data[0]['fields'].poll_surveytag}
+
+    })
+    .done(
+        function(data){
+           
+            console.log('survey+++++++++++++++++++++++ '+data[0]['fields'])
+            $('.result p').html(data[0]['fields'].surveytag_description)
+            if(data[0]['fields'].survey_image !=""){
+                $('.result img').attr('src',data[0]['fields'].survey_image)
+            }
+        }
+    )
+    .fail(
+        function(){
+            console.log('error..............')
+            
+        }
+    )
+
+
+
+
+
+
+
+
+        
         $.each(data,function(i,v){
+
+        var polltemplate=$('#pollresulttemplate').html();
+                    $('#latestpoll').prepend(polltemplate.replace(/%title%/,data[i]['fields'].poll_title)
+                    .replace(/%question%/,data[i]['fields'].poll_question)
+                    .replace(/%myChart%/,"myChart_"+i)
+            
+             );
+
             console.log('data,,,,,,,,,,,,,,,,,,,,,'+v['fields'].poll_question)
 
             obj['question'+i]=v['fields'].poll_question;
@@ -242,17 +288,30 @@ var retrive_polls=function(){
 
 var makechart=function(i,x1,x2,x3,x4,ques){
      var ctx = $('#myChart_'+i);
+    //  ctx.height=100;
+    //  ctx.width=100;
+    var graphtype="bar";
+            if(i%2==0){
+                graphtype='line';
+            }
             var myChart = new Chart(ctx, {
-            type: 'line',
+            type: graphtype,
             data: {
                 labels: [x1,x2,x3,x4],
                 datasets: [{
-                // label: ques,
+                 label: "Udec Interractive Chart",
                 data: [12, 19, 3, 17],
                 backgroundColor: "rgba(153,255,51,0.4)"
                 }]
+            },
+            options:{
+                 maintainAspectRatio: false,
+                 responsive: false
             }
-            });
+        });
+        
+        // ctx.attr('height','20px');
+        // ctx.attr('width','20px');
 
 
 }

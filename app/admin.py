@@ -50,7 +50,7 @@ class StoryFlatPageAdmin(admin.ModelAdmin):
 
     fieldsets=(
                     (None,{
-                        'fields':(('story_domain', 'title','story_date'),'content','story_status', 'sites')
+                        'fields':(('story_domain', 'title','story_date'),'story_content','story_status', 'sites')
                     }),
                     ('Options',{
                         'classes': ('collapse',),

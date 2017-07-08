@@ -6,6 +6,10 @@ $(function(){
 
 
         if($(window).width()<1000){
+            // $('.m').css({'display':'none'});
+            // $('.carousel-inner ul.l').css({'float':'none !important'});
+            // $('ul.l').addClass('center-block')
+
     $('#carousel').carouFredSel({ 
 
         items                : 1,
@@ -37,6 +41,8 @@ $(function(){
     }); 
      }
 
+     $('.carousel-inner li span').parent().css({'margin-top':'10px'})
+
 
 
 
@@ -47,6 +53,29 @@ $(function(){
             $('#col_1 div.agenda').removeClass('center-block');
             $('#col_1 div.agenda').addClass('pull-right');
             $('#col_0 div.agenda').removeClass('center-block');
+
+             if($('#heroid').visible(true,true)==false){
+        //$('nav').addClass('hidden').hide().show('normal')
+        // $('nav').removeClass('hidden') 
+         $('nav').slideDown('slow')
+         $('#mainnav').css({'display':'none'})
+        // console.log(' mybox visible.........................');
+// if(parseInt($('#sidebar_id').css('width'))<1){
+//     $('#sidebar_id').css({'width':'250px'});
+    // $('body').css({'margin-left':'250px'});
+ }else{
+//     $('#sidebar_id').css({'width':'0'});
+//     // $('body').css({'margin-left':'0'});
+
+//     }
+        $('nav').slideUp('slow')
+        $('#mainnav').css({'display':'block'})
+        
+       // $('nav').addClass('hidden') 
+        // console.log('mybox not visible.........................');
+    }
+
+
         }else{
              $('#col_1 div.agenda').css({'margin-bottom':'50px'});
              $('ul.service-list').addClass('center-block');
@@ -91,27 +120,7 @@ $(function(){
 
 
 
-    if($('#heroid').visible(true,true)==false){
-        //$('nav').addClass('hidden').hide().show('normal')
-        // $('nav').removeClass('hidden') 
-         $('nav').slideDown('slow')
-         $('#mainnav').css({'display':'none'})
-        // console.log(' mybox visible.........................');
-// if(parseInt($('#sidebar_id').css('width'))<1){
-//     $('#sidebar_id').css({'width':'250px'});
-    // $('body').css({'margin-left':'250px'});
- }else{
-//     $('#sidebar_id').css({'width':'0'});
-//     // $('body').css({'margin-left':'0'});
-
-//     }
-        $('nav').slideUp('slow')
-        $('#mainnav').css({'display':'block'})
-        
-       // $('nav').addClass('hidden') 
-        // console.log('mybox not visible.........................');
-    }
-
+   
 
 
 

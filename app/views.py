@@ -246,3 +246,20 @@ def getpolls(request):
 
     #print('quote------ '+serialized)
     return HttpResponse(serialized,content_type='application/json')
+
+
+
+def getsurvey(request):
+    num=request.GET.get('num')
+    survey=SurveyTag.objects.get(pk=num)
+    
+
+    serialized=serializers.serialize('json',[survey])
+
+    # print('quote------ '+serialized)
+    return HttpResponse(serialized,content_type='application/json')    
+    
+
+def mypolls(request):
+
+    return render(request,'allpolls.html',{})    

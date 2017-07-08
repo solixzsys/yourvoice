@@ -21,7 +21,7 @@ body{
 }
 #headerwrapper{
     height: 100%;
-    background: rgba(25, 25, 25, 0.5);
+    background: rgba(25, 25, 25, 0.8);
     padding-left: 40px;
     padding-top: 20px;
     width: 100%;
@@ -264,6 +264,9 @@ nav{
     opacity: 0.9;
 }
 @media screen and (max-width: 1000px){
+    .r{
+        display: none;
+    }
 
     .row{
         /*background-color: red;*/
@@ -303,7 +306,13 @@ div.quote{
 }
 
 @media screen and (max-width: 760px){
+    
+
 div.mynav{
+        display: none;
+    }
+
+    .carousel-inner ul.l{
         display: none;
     }
 
@@ -425,6 +434,8 @@ section#ourteam{
 #teamwrapper{
     padding: 50px 0;
     background-color: rgba(240, 248, 255, 0.55);
+    /*max-height: 310px;*/
+    overflow-y:hidden;
 }
 .farea{
     padding: 30px 0;
@@ -464,3 +475,37 @@ div.footer-nav a{
     width: 80%;
 }
 
+.carousel-control.left{
+    background-image: none;
+}
+.carousel-control.right{
+    background-image: none;
+}
+
+
+.carousel-inner ul.l{
+    float: right !important;
+}
+.carousel-inner ul.r{
+    float: left !important;
+    
+}
+.carousel-inner ul.m{
+    float: none;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+.carousel-inner{
+    color: #333;
+}
+
+canvas{
+    /*width: 100px;
+    height: 100px;*/
+}
+
+.agenda:hover{
+      border: solid 2px rgba(240, 173, 78, 0.47);
+    /*border-color:  #cb7a08;*/
+}
