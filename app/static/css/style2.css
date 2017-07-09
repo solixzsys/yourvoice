@@ -482,6 +482,19 @@ canvas{
 
 
 
+#feed-analysis{
+    padding: 50px 0;
+}
+.carousel-indicators .active{
+    /*background-color: #cb7a08;*/
+}
+
+
+
+
+.feed-panel{
+    margin: 40px;
+}
 
 
 
