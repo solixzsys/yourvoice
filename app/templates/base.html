@@ -22,6 +22,24 @@
 
         <style>
 
+            #hero-header-container{
+                height: 300px;
+                background: url(/static/img/bg3.jpg) no-repeat;
+                background-size: cover;
+                
+            }
+            .hero-layer{
+                padding-top:200px;
+                /*background-color: #555;*/
+                /*opacity: 1;*/
+                width: 100%;
+                height: 100%;
+                /*opacity: 0.3;*/
+                position: relative;
+            }
+
+
+
     .sidebar2{
     /*height: 100%;*/
     /*width: 0;*/
@@ -33,6 +51,7 @@
     /*overflow-x: hidden;*/
     padding-top:20px;
     /*transition: 0.5s; */
+    display: none;
     
 }
 
@@ -145,6 +164,29 @@ nav{
 
 
         </section>
+
+<!-- HERO HEADER SECTION-->
+
+<!--{% block hero %}-->
+<section id="hero-header">
+    
+    <div id="hero-header-container"  class="container-fluid">
+        <div class="hero-layer" style="text-align: center">
+            <h1 style="" class="">We provide non-partisan analysis of political and economic policies </h1>
+        </div>
+
+       
+    </div>
+    
+
+<!--</section>-->
+
+{% endblock %}
+
+<!-- HERO HEADER SECTION END-->
+
+
+
 <div id="sidebar_id" class="sidebar">
             <a href="javascript:void(0)" class="closebtn"  >&times</a>
              <input type="text" placeholder="Search" class="searchtxt  form-control" style="" />
@@ -160,7 +202,7 @@ nav{
                             <a href="#">Contact Us</a>
                             {% if user.is_authenticated %}
                             <a href="{% url 'logout' %}?next={% url 'home' %}">Login Out</a>
-                            <a id="avatar" style="margin-left: 10px" class=" fa fa-user  "></a>
+                           
                             {% else %}
                             <a href="/login">Login</a>
                             <a href="/signup">Join Us</a>
@@ -210,7 +252,7 @@ nav{
                             <a href="#">Contact Us</a>
                             {% if user.is_authenticated %}
                             <a href="{% url 'logout' %}?next={% url 'home' %}">Login Out</a>
-                            <a id="avatar" style="margin-left: 10px" class=" fa fa-user  "></a>
+                            
                             {% else %}
                             <a href="/login">Login</a>
                             <a href="/signup">Join Us</a>
@@ -264,7 +306,7 @@ nav{
 
 
         <!--FOOTER -->
-           <footer style="background-color: #f0b45f">
+           <footer style="background-color: #02327e">
             
             <div class="container-fluid farea" style="font-family: inherit;line-height: 1.5">
                 
@@ -288,7 +330,7 @@ nav{
                             <a href="#">Contact Us</a>
                             {% if user.is_authenticated %}
                             <a href="{% url 'logout' %}?next={% url 'home' %}">Login Out</a>
-                            <a id="avatar" style="margin-left: 10px" class=" fa fa-user  "></a>
+                           
                             {% else %}
                             <a href="/login">Login</a>
                             <a href="/signup">Join Us</a>

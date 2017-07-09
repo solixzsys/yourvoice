@@ -3,6 +3,10 @@
 body{
     /*font-family: Raleway;*/
     background-color: white;
+    /*font-family: 'Droid Serif', serif;*/
+    line-height: 1.5em;
+    font-size: 100%;
+    
 }
 
 #header{
@@ -21,7 +25,7 @@ body{
 }
 #headerwrapper{
     height: 100%;
-    background: rgba(25, 25, 25, 0.5);
+    background: rgba(25, 25, 25, 0.8);
     padding-left: 40px;
     padding-top: 20px;
     width: 100%;
@@ -259,57 +263,19 @@ nav{
     display: none;
 }
 .navbar-default{
-    background-color: #f0ad4e;
+    background-color: #036cc2;
     box-shadow: 0px -1px 8px 1px #111211;
     opacity: 0.9;
 }
-@media screen and (max-width: 1000px){
-
-    .row{
-        /*background-color: red;*/
-    }
-    footer img{
-        display: none;
-    }
-    div.mynav{
-        /*display: none;*/
-    }
-    nav#navstate{
-        display: block;
-
-    }
-    .textboard img{
-        display: none;
-    }
-.textboard{
-    border-color: #f0ad4e;
-}
-.textboard h3{
-    font-weight: bold;
-    padding: 20px 0;
-}
-
-
-div.quote{
-    font-size:150%;
-    padding: 30px 0;
-    text-align: center;
-    position: relative;
-    margin-right: 25%;
-}
 
 
 
-}
-
-@media screen and (max-width: 760px){
-div.mynav{
-        display: none;
-    }
 
 
 
-}
+
+
+
 
 .scoreboard{
     display: none;
@@ -424,7 +390,9 @@ section#ourteam{
 }
 #teamwrapper{
     padding: 50px 0;
-    background-color: rgba(240, 248, 255, 0.55);
+    background-color: #f3f3f3;
+    /*max-height: 310px;*/
+    overflow-y:hidden;
 }
 .farea{
     padding: 30px 0;
@@ -464,3 +432,135 @@ div.footer-nav a{
     width: 80%;
 }
 
+.carousel-control.left{
+    background-image: none;
+}
+.carousel-control.right{
+    background-image: none;
+}
+
+
+.carousel-inner ul.l{
+    float: right !important;
+}
+.carousel-inner ul.r{
+    float: left !important;
+    
+}
+.carousel-inner ul.m{
+    float: none;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+.carousel-inner{
+    color: #333;
+}
+
+canvas{
+    /*width: 100px;
+    height: 100px;*/
+}
+
+.agenda:hover{
+      border: solid 2px rgba(240, 173, 78, 0.47);
+    /*border-color:  #cb7a08;*/
+}
+
+#footer-info2 ul{
+    text-align: left;
+}
+
+#services-container{
+    padding: 50px 100px;
+    margin-top:100px;
+    background-color: #f3f3f3 
+}
+
+
+
+
+
+
+/*Media Query section*/
+
+@media only screen and (min-width:300px){
+
+}
+
+@media only screen and (min-width:600px){
+
+}
+@media only screen and (min-width:960px){
+
+}
+@media only screen and (min-width:1140px){
+
+}
+@media only screen and (min-width:1360px){
+
+}
+
+
+
+
+
+@media screen and (max-width: 1000px){
+    #services-container{
+    padding: 50px 0;
+    }
+    .r{
+        display: none;
+    }
+
+    .row{
+        /*background-color: red;*/
+    }
+    footer img{
+        display: none;
+    }
+    div.mynav{
+        /*display: none;*/
+    }
+    nav#navstate{
+        display: block;
+
+    }
+    .textboard img{
+        display: none;
+    }
+    .textboard{
+        border-color: #f0ad4e;
+    }
+    .textboard h3{
+        font-weight: bold;
+        padding: 20px 0;
+    }
+
+
+    div.quote{
+        font-size:150%;
+        padding: 30px 0;
+        text-align: center;
+        position: relative;
+        margin-right: 25%;
+    }
+
+
+
+}
+
+@media screen and (max-width: 760px){
+    
+
+    div.mynav{
+            display: none;
+        }
+
+        .carousel-inner ul.l{
+            display: none;
+        }
+
+
+
+}

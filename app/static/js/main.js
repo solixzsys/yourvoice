@@ -9,6 +9,7 @@ $(function(){
             // $('.m').css({'display':'none'});
             // $('.carousel-inner ul.l').css({'float':'none !important'});
             // $('ul.l').addClass('center-block')
+            $('canvas').css({'width':'300px','height':'250px'});
 
     $('#carousel').carouFredSel({ 
 

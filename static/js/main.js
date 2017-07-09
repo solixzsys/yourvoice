@@ -2,10 +2,81 @@ $(function(){
     
 
     $(window).scroll(function(){
+
+
+
+        if($(window).width()<1000){
+            // $('.m').css({'display':'none'});
+            // $('.carousel-inner ul.l').css({'float':'none !important'});
+            // $('ul.l').addClass('center-block')
+            $('canvas').css({'width':'300px','height':'250px'});
+
+    $('#carousel').carouFredSel({ 
+
+        items                : 1,
+        responsive: true,
+	    width: '100%', 
+        direction            : "left", 
+        scroll : { 
+            items            : 2, 
+            // easing           : "elastic", 
+            duration         : 1000, 
+            pauseOnHover     : true 
+        } 
+    }); 
+     }else{
+
+
+          $('#carousel').carouFredSel({ 
+
+        items                : 4,
+        responsive: true,
+	    width: '100%', 
+        direction            : "left", 
+        scroll : { 
+            items            : 2, 
+            // easing           : "elastic", 
+            duration         : 1000, 
+            pauseOnHover     : true 
+        } 
+    }); 
+     }
+
+     $('.carousel-inner li span').parent().css({'margin-top':'10px'})
+
+
+
+
+
+
+
         if($(window).width()> 1000){
             $('#col_1 div.agenda').removeClass('center-block');
             $('#col_1 div.agenda').addClass('pull-right');
             $('#col_0 div.agenda').removeClass('center-block');
+
+             if($('#heroid').visible(true,true)==false){
+        //$('nav').addClass('hidden').hide().show('normal')
+        // $('nav').removeClass('hidden') 
+         $('nav').slideDown('slow')
+         $('#mainnav').css({'display':'none'})
+        // console.log(' mybox visible.........................');
+// if(parseInt($('#sidebar_id').css('width'))<1){
+//     $('#sidebar_id').css({'width':'250px'});
+    // $('body').css({'margin-left':'250px'});
+ }else{
+//     $('#sidebar_id').css({'width':'0'});
+//     // $('body').css({'margin-left':'0'});
+
+//     }
+        $('nav').slideUp('slow')
+        $('#mainnav').css({'display':'block'})
+        
+       // $('nav').addClass('hidden') 
+        // console.log('mybox not visible.........................');
+    }
+
+
         }else{
              $('#col_1 div.agenda').css({'margin-bottom':'50px'});
              $('ul.service-list').addClass('center-block');
@@ -50,27 +121,7 @@ $(function(){
 
 
 
-    if($('#heroid').visible(true,true)==false){
-        //$('nav').addClass('hidden').hide().show('normal')
-        // $('nav').removeClass('hidden') 
-         $('nav').slideDown('slow')
-         $('#mainnav').css({'display':'none'})
-        // console.log(' mybox visible.........................');
-// if(parseInt($('#sidebar_id').css('width'))<1){
-//     $('#sidebar_id').css({'width':'250px'});
-    // $('body').css({'margin-left':'250px'});
- }else{
-//     $('#sidebar_id').css({'width':'0'});
-//     // $('body').css({'margin-left':'0'});
-
-//     }
-        $('nav').slideUp('slow')
-        $('#mainnav').css({'display':'block'})
-        
-       // $('nav').addClass('hidden') 
-        // console.log('mybox not visible.........................');
-    }
-
+   
 
 
 
@@ -130,40 +181,6 @@ console.log('navbtn click................................')
 // Using default configuration 
     // $('#carousel').carouFredSel(); 
      // Using custom configuration 
-     if($(window).width()<1000){
-    $('#carousel').carouFredSel({ 
-
-        items                : 1,
-        responsive: true,
-	    width: '100%', 
-        direction            : "left", 
-        scroll : { 
-            items            : 2, 
-            // easing           : "elastic", 
-            duration         : 1000, 
-            pauseOnHover     : true 
-        } 
-    }); 
-     }else{
-
-
-          $('#carousel').carouFredSel({ 
-
-        items                : 4,
-        responsive: true,
-	    width: '100%', 
-        direction            : "left", 
-        scroll : { 
-            items            : 2, 
-            // easing           : "elastic", 
-            duration         : 1000, 
-            pauseOnHover     : true 
-        } 
-    }); 
-
-
-
-     }
-
+     
 
 })
