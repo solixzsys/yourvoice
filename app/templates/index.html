@@ -355,22 +355,24 @@
                         </ol>
 
                         <!-- Wrapper for slides -->
-                        <div class="carousel-inner" role="listbox">
-                            <div class="item active">
-                                <div  class="feed-panel panel panel-primary">
-                                    <div class="panel-heading">
-                                        <h3 id="feed1-title" class="panel-title">Panel title</h3>
+                        <div id="carousel-inner-section" class="carousel-inner" role="listbox">
+                            <script type="template/text" id="feedtemplate">
+                                <div class="item %active%">
+                                    <div  class="feed-panel panel panel-primary">
+                                        <div class="panel-heading">
+                                            <h3 id="%feed-title%" class="panel-title">%title%</h3>
+                                        </div>
+                                        <div id="%feed-content%" class="panel-body">
+                                            %content%
+                                        </div>
                                     </div>
-                                    <div id="feed1-content" class="panel-body">
-                                        Panel content
+                                
+                                    <div class="carousel-caption">
+                                        
                                     </div>
                                 </div>
-                               
-                                <div class="carousel-caption">
-                                    
-                                </div>
-                            </div>
-                            <div class="item">
+                            </script>
+                            <!--<div class="item">
 
                                  <div  class="feed-panel panel panel-primary">
                                     <div class="panel-heading">
@@ -386,7 +388,7 @@
                                 <div class="carousel-caption">
                                     
                                 </div>
-                            </div>
+                            </div>-->
                             
                         </div>
 

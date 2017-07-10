@@ -143,36 +143,49 @@ var retrive_feed=function(){
         url:'/getfeed',
 
     })
-    .done(function(data){
-
-        
+    .done(function(data){        
           
-        console.log('reading........................')
-       // $('#row_1 #feedspace').show('slow')
-        //      $('.quote i').html("--- "+data[0]['fields'].author).hide('slow').show('slow')
-        //  var k=1
+        console.log('reading........................'+data.length)
+
+        for(var i=0;i<data.length;i++){
+
+
+            var feedtemplate=$('#feedtemplate').html();
+            if(i==0){
+                $('#carousel-inner-section').prepend(feedtemplate.replace(/%feed-title%/,"feed-title_"+i)
+                .replace(/%title%/,data[i]['fields'].title)
+                .replace(/%feed-content%/,"feed-content_"+i)
+                .replace(/%active%/,"active")
+                .replace(/%content%/,data[i]['fields'].description)
+                
+                );
+            }else{
+                 $('#carousel-inner-section').prepend(feedtemplate.replace(/%feed-title%/,"feed-title_"+i)
+                .replace(/%title%/,data[i]['fields'].title)
+                .replace(/%feed-content%/,"feed-content_"+i)
+                //  .replace(/%titletext%/g,"titletext_"+i)
+                .replace(/%content%/,data[i]['fields'].description)
+                 );
+            }
+
+
+
+
+
+
+       
+    }
+
+
+
+
+
+       
          $('#feed1-title').html(data[0]['fields'].title)
         $('#feed1-content').html(data[0]['fields'].description)
          $('#feed2-title').html(data[0]['fields'].title)
         $('#feed2-content').html(data[1]['fields'].description)
-        // setInterval(function(){
-           
-            
-        //      $('#feedspace').css({'top':'-200px','opacity':1})
-            
-        //     if(k>data.length-1){
-        //         k=1;
-        //     }
-        //     // console.log('k============== '+k)
-        //      $('#feed1-title').html(data[0]['fields'].title)
-        // $('#feed1-content').html(data[0]['fields'].description)
-        // //      $('#row_1 #feedspace h3.title').html(data[k]['fields'].title)
-        // // $('#row_1 #feedspace p.desc').html(data[k]['fields'].description)
-        // $('#feedspace').animate({top:"+100px"},3000).animate({top:"-20px"},1000).animate({opacity:1},2000).animate({opacity:0},1000)
-
-        // //  console.log('title--------------------------------  '+data[0]['fields'].title)
-        //     k=k+1
-        // },10000)
+       
 
        
 
