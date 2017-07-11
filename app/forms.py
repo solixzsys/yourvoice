@@ -1,8 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from app.models import Profile
-from django.forms.extras.widgets import SelectDateWidget
-from django.contrib.admin.widgets import AdminDateWidget
+# from django.forms.extras.widgets import SelectDateWidget
+# from django.contrib.admin.widgets import AdminDateWidget
 class UserForm(forms.ModelForm):
     confirm_password=forms.CharField(widget=forms.PasswordInput())
 
