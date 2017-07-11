@@ -4,6 +4,8 @@
 ### VisualStudioCode ###
 .vscode/*
 asst/*
+!media/*
+!static/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json

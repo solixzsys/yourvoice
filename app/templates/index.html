@@ -12,7 +12,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <meta property="og:url"           content="http://fxsoftlogix.com" />
+        <meta property="og:url"           content="http://bigwan.pythonanywhere.com" />
         <meta property="og:type"          content="website" />
         <meta property="og:title"         content="Udec Initiative" />
         <meta property="og:description"   content="Business Research and Opinion Survey Platform" />
@@ -35,7 +35,16 @@
     </head>
     <body>
 
+        <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=103655610273199";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
+<!--
         <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -43,10 +52,10 @@
   js = d.createElement(s); js.id = id;
   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=804104239738038";
   fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+}(document, 'script', 'facebook-jssdk'));</script>-->
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+        <![endif]
 
                                 
 
@@ -189,7 +198,7 @@
                             <p ><a href="">You signed in as <span style="color:#f0ad4e ">{{user.username}}</span></a></p>
                             <hr style="width: 100%"/>
                             <p><a href="">View Profile</a></p>
-                            <p><a href="">Edit Profile</a></p>
+                            <p><a href="/updateprofile">Edit Profile</a></p>
                             <p><a href="">Help</a></p>
                             <p><a href="{% url 'logout' %}?next={% url 'home' %}">SignOut</a></p>
 
@@ -348,11 +357,11 @@
 
                      <div id="feed-carousel" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
-                        <ol class="carousel-indicators">
+                        <!--<ol class="carousel-indicators">
                             <li data-target="#feed-carousel" data-slide-to="0" class="active"></li>
                             <li data-target="#feed-carousel" data-slide-to="1"></li>
                             <li data-target="#feed-carousel" data-slide-to="2"></li>
-                        </ol>
+                        </ol>-->
 
                         <!-- Wrapper for slides -->
                         <div id="carousel-inner-section" class="carousel-inner" role="listbox">
@@ -413,11 +422,11 @@
 
                 <div id="analysis-carousel" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
-                        <ol class="carousel-indicators">
+                        <!--<ol class="carousel-indicators">
                             <li data-target="#analysis-carousel" data-slide-to="0" class="active"></li>
                             <li data-target="#analysis-carousel" data-slide-to="1"></li>
                             <li data-target="#analysis-carousel" data-slide-to="2"></li>
-                        </ol>
+                        </ol>-->
 
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner" role="listbox">
@@ -967,10 +976,15 @@
                                 <!--{% social_widget_render 'facebook/likebox.html' href='https://www.facebook.com/FacebookDevelopers' %}-->
 
                                 <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
-                                <script type="IN/Share" data-url="http://fxsoftlogix.com"></script>
+                                <script type="IN/Share" data-url="http://bigwan.pythonanywhere.com"></script>
                                 {% social_widget_render "twitter/follow_button.html" username="solixz" show_screen_name=True %}
-                                <div class="fb-share-button" data-href="http://fxsoftlogix.com" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Ffxsoftlogix.com%2F&amp;src=sdkpreparse">Share</a></div>
-                                <!--{% social_widget_render "facebook/share_button.html" locale="en_US" app_id=12345678 href="developers.facebook.com" layout="none" %}-->
+                                <!--<div class="fb-share-button" data-href="http://bigwan.pythonanywhere.com" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fbigwan.pythonanywhere.com%2F&amp;src=sdkpreparse">Share</a></div>-->
+                            <!--{% social_widget_render "facebook/share_button.html" locale="en_US" app_id=804104239738038 href="fxsoftlogix.com"  %}-->
+                            <!--{% social_widget_render "facebook/share_button.html" href="developers.facebook.com" %}-->
+
+
+
+                            <div class="fb-share-button" data-href="http://bigwan.pythonanywhere.com" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fbigwan.pythonanywhere.com%2F&amp;src=sdkpreparse">Share</a></div>
                             </div>
 
                                         

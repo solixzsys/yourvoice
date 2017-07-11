@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from app.models import Profile
+from django.forms.extras.widgets import SelectDateWidget
+from django.contrib.admin.widgets import AdminDateWidget
 class UserForm(forms.ModelForm):
     confirm_password=forms.CharField(widget=forms.PasswordInput())
 
@@ -41,9 +43,10 @@ class UserForm(forms.ModelForm):
         fields = ('first_name', 'last_name', 'email','password','confirm_password')
 
 class ProfileForm(forms.ModelForm):
-    
+    # birth_date=forms.DateField(widget=AdminDateWidget())
     def __init__(self,*args,**kwargs):
         super(ProfileForm,self).__init__(*args,**kwargs)
+        # self.fields['birth_date']=forms.DateField(widget=AdminDateWidget())
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update(
                 {

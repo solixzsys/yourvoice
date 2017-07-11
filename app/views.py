@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login
 from app.models import *
 from django.http import JsonResponse,HttpResponse,HttpResponseRedirect
@@ -58,20 +58,29 @@ def signup(request):
 # @transaction.atomic
 def update_profile(request):
     if request.method == 'POST':
-        user_form = UserForm(request.POST, instance=request.user)
+        # user_form = UserForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, instance=request.user.profile)
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
+        # if user_form.is_valid() and profile_form.is_valid():
+        if profile_form.is_valid():
+            # user=user_form.save(False)
+            # user.username=user_form.cleaned_data.get('email')
+            # user.set_password(user_form.cleaned_data.get('password'))
+            # user.save()
             profile_form.save()
-            messages.success(request, _('Your profile was successfully updated!'))
-            return redirect('settings:profile')
-        else:
-            messages.error(request, _('Please correct the error below.'))
+        #     messages.success(request, _('Your profile was successfully updated!'))
+            return redirect('/')
+        # else:
+        #     messages.error(request, _('Please correct the error below.'))
     else:
+        # UserForm().pop('password')
         user_form = UserForm(instance=request.user)
+        # user_form.fields.pop('password')
+        # user_form.fields.pop('confirm_password')
+        # print(user_form.fields)
+        
         profile_form = ProfileForm(instance=request.user.profile)
     return render(request, 'profiles/profile.html', {
-        'user_form': user_form,
+        # 'user_form': user_form,
         'profile_form': profile_form
     })
 
@@ -263,3 +272,19 @@ def getsurvey(request):
 def mypolls(request):
 
     return render(request,'allpolls.html',{})    
+
+def loadstate(request):
+    state=NigeriaState.objects.all()
+
+    serialized=serializers.serialize('json',state)
+
+    
+    return HttpResponse(serialized,content_type='application/json') 
+def getlg(request):
+    state=request.GET.get('state')
+    lg=LG.objects.filter(state=NigeriaState.objects.get(name=state))
+
+    serialized=serializers.serialize('json',lg)
+
+    
+    return HttpResponse(serialized,content_type='application/json')     

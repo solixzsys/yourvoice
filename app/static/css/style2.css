@@ -15,7 +15,7 @@ body{
     position: relative;
     /*height: 730px;*/
     /*padding: 20px 80px 0 80px;*/
-    background: url(../img/city5.png) no-repeat 50% 10%;
+    background: url(../img/city_a.jpg) no-repeat 50% 10%;
     /*background-blend-mode: multiply;*/
     background-size: cover;
      background-color: #333;
@@ -25,7 +25,7 @@ body{
 }
 #headerwrapper{
     height: 100%;
-    background: rgba(25, 25, 25, 0.8);
+    background: rgba(25, 25, 25, 0.6);
     padding-left: 40px;
     padding-top: 20px;
     width: 100%;

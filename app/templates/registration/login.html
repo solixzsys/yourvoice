@@ -16,7 +16,7 @@
             
 <h2 style="padding: 20px 0; ">Login</h2>
 
-<h5 style="padding: 20px 0">Using Socials</h5>
+<h3 style="padding: 20px 0">Using Socials</h5>
 
 
 
@@ -47,6 +47,7 @@
         {% endfor %}
       </p>
     {% endfor %}
+    <button style="margin: 10px 0" class="btn btn-large btn-warning " type="submit"><a style="text-decoration: none" href="/signup"> Register</a></button>
     <button style="margin: 10px 0" class="btn btn-large btn-primary pull-right" type="submit">Login</button>
   </form>
 
@@ -72,6 +73,9 @@ $(function(){
     $('#id_password').addClass('form-control');
     $('#id_password').attr({'placeholder':'Password'});
 })
+
+
+
 
     </script>
 {% endblock %}

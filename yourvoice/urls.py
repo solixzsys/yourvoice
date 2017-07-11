@@ -44,7 +44,8 @@ urlpatterns = [
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^signup/$', signup, name='signup'),
     url(r'^updateprofile/$', update_profile, name='updateprofile'),
-
+    url(r'^loadstate/$', loadstate, name='loadstate'),
+    url(r'^getlg/$', getlg, name='getlg'),
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, name='logout'),
     url(r'^oauth/', include('social_django.urls', namespace='social')), 

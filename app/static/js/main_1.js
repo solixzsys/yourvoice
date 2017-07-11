@@ -285,6 +285,12 @@ var retrive_polls=function(){
                         y2=data[1]['fields'].polloption_score
                         y3=data[2]['fields'].polloption_score
                         y4=data[3]['fields'].polloption_score
+
+                        var ts=y1+y2+y3+y4
+                        y1= Math.floor( (y1/ts)*100)
+                        y2= Math.floor( (y2/ts)*100)
+                        y3= Math.floor( (y3/ts)*100)
+                        y4= Math.floor( (y4/ts)*100)
                         console.log('from getoptions...........'+obj['question'+i])
                         makechart(i,x1,x2,x3,x4,y1,y2,y3,y4,obj['question'+i]);
 
@@ -328,7 +334,9 @@ var makechart=function(i,x1,x2,x3,x4,y1,y2,y3,y4,ques){
                     datasets: [{
                     label: "Udec Interractive Chart",
                     data: [y1,y2,y3,y4],
-                    backgroundColor: "rgba(153,255,51,0.4)"
+                    backgroundColor: "rgba(153,255,51,1)",
+                    borderColor: "rgba(0,0,0,0.1)",
+                     borderWidth: 1
                     }]
                 },
                 options:{
@@ -350,7 +358,9 @@ var makechart=function(i,x1,x2,x3,x4,y1,y2,y3,y4,ques){
                     datasets: [{
                     label: "Udec Interractive Chart",
                     data: [y1,y2,y3,y4],
-                    backgroundColor: "rgba(153,255,51,0.4)"
+                    backgroundColor: "rgba(153,255,51,1)",
+                     borderColor: "rgba(0,0,0,0.1)",
+                      borderWidth: 1
                     }]
                 },
                 options:{
@@ -375,7 +385,7 @@ var makechart=function(i,x1,x2,x3,x4,y1,y2,y3,y4,ques){
                 labels: [x1,x2,x3,x4],
                 datasets: [{
                  label: "Udec Interractive Chart",
-                data: [12, 19, 3, 17],
+                data: [y1,y2,y3,y4],
                 backgroundColor: "rgba(153,255,51,0.4)"
                 }]
             },
@@ -650,6 +660,17 @@ $('#avatar').click(function(e){
 
     }
 });
+
+var loadstate=function(){
+    $.ajax({
+        url:'/loadstate',
+
+    }
+    ).done(function(data){
+        console.log('state...........................'+data)
+
+    })
+}
 
 
 

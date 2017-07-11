@@ -25,19 +25,28 @@ from django.contrib.auth.models import User
 
 class NigeriaState(models.Model):
     name=models.CharField(max_length=30, blank=True)
+
+    def __str__(self):
+        return self.name
 class LG(models.Model):
     name=models.CharField(max_length=30, blank=True)
     state=models.ForeignKey(NigeriaState,blank=True)
+
+    def __str__(self):
+        return self.name
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)    
     firstname=models.CharField(max_length=30,blank=True)
     lastname=models.CharField(max_length=30,blank=True)
     phone_number=models.CharField(max_length=30,blank=True)
     birth_date = models.DateField(null=True, blank=True)
-    location = models.CharField(max_length=30, blank=True)
+    location = models.CharField(max_length=30, blank=True,help_text="Where You Presently Reside")
     state_of_origin=models.ForeignKey(NigeriaState,blank=True,null=True)
     local_government=models.ForeignKey(LG,blank=True,null=True)
     bio = models.TextField(max_length=500, blank=True)
+    
+
 
 
 @receiver(post_save, sender=User)

@@ -24,7 +24,7 @@
 
 
 <div style="margin-top: 50px" class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
+  <div class="panel panel-primary">
     <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -47,4 +47,45 @@
   
   <button class="btn btn-success pull-right "  type="submit">Save </button>
 </form>
+{% endblock %}
+
+
+
+{% block extra_script %}
+
+<script>
+
+$(function(){
+
+$('select#id_state_of_origin').on('change',function(){
+    var choice=$('select#id_state_of_origin option:selected').text();
+    $.ajax({
+      url:'/getlg',
+      data:{'state':choice},
+    })
+    .done(function(data){
+      $('select#id_local_government').html("")
+      console.log('vvvvvvvvvvvvvvvvvvvvvvvvvvvv  '+data[0]['fields'].name);
+      for(var i=0;i<data.length;i++){
+
+        var op='<option value='+(i+1)+'>'+data[i]['fields'].name+'</option>'
+        $('select#id_local_government').append(op);
+
+      }
+
+    })
+    .fail(function(){
+      console.log('eror from .............................getlg');
+    })
+});
+
+
+
+
+
+})
+
+</script>
+
+
 {% endblock %}

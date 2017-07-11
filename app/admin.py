@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app.models import Poll,PollOption,SurveyTag,StoryFlatPage,UserPollOption,Quotes,MyFeed
+from app.models import Poll,PollOption,SurveyTag,StoryFlatPage,UserPollOption,Quotes,MyFeed,LG,NigeriaState
 from django import forms
 
 from ckeditor.fields import RichTextField
@@ -15,6 +15,12 @@ from django.contrib.flatpages.models import FlatPage
 
 admin.site.register(FlatPage) 
 
+admin.site.register(NigeriaState) 
+
+class LGAdmin(admin.ModelAdmin):
+    list_display=('name','state')
+    list_filter=('state',)
+admin.site.register(LG,LGAdmin) 
 
 class MyFeedAdmin(admin.ModelAdmin):
     list_display=('title','description','source','domain','date')
