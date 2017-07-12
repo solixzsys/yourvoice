@@ -58,12 +58,23 @@ def signup(request):
 # @transaction.atomic
 def update_profile(request):
     if request.method == 'POST':
-        # user_form = UserForm(request.POST, instance=request.user)
+        user_form = UserForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, instance=request.user.profile)
         # if user_form.is_valid() and profile_form.is_valid():
         if profile_form.is_valid():
             # user=user_form.save(False)
-            # user.username=user_form.cleaned_data.get('email')
+            email=user_form.data.get('email')
+            # print('uuuuuuuuuuuuuuuuuuuuuuuuu '+username)
+
+            firstname=user_form.data.get('first_name')
+            lastname=user_form.data.get('last_name')
+            u=User.objects.get(email=email)
+            u.username=email
+            if firstname != "":
+                u.first_name=firstname
+            if lastname != "":    
+                u.last_name=lastname
+            u.save()
             # user.set_password(user_form.cleaned_data.get('password'))
             # user.save()
             profile_form.save()
@@ -74,13 +85,13 @@ def update_profile(request):
     else:
         # UserForm().pop('password')
         user_form = UserForm(instance=request.user)
-        # user_form.fields.pop('password')
-        # user_form.fields.pop('confirm_password')
+        user_form.fields.pop('password')
+        user_form.fields.pop('confirm_password')
         # print(user_form.fields)
         
         profile_form = ProfileForm(instance=request.user.profile)
     return render(request, 'profiles/profile.html', {
-        # 'user_form': user_form,
+        'user_form': user_form,
         'profile_form': profile_form
     })
 

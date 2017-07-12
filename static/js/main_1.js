@@ -20,6 +20,7 @@ $(function(){
              .replace(/%banner%/,"banner_"+i)
              .replace(/%next%/,"next_"+i)
              .replace(/%myChart%/,"myChart_"+i)
+             .replace(/%poll-shareid%/,"poll-shareid_"+i)
              );
 
 
@@ -32,7 +33,7 @@ $(function(){
 
     }
     retrive_quotes();
-    // retrive_feed();
+    retrive_feed();
 
      attachbtn();
      retrive_polls();
@@ -143,32 +144,49 @@ var retrive_feed=function(){
         url:'/getfeed',
 
     })
-    .done(function(data){
-
-        
+    .done(function(data){        
           
-        console.log('reading........................')
-       // $('#row_1 #feedspace').show('slow')
-        //      $('.quote i').html("--- "+data[0]['fields'].author).hide('slow').show('slow')
-        //  var k=1
-        //  $('#row_1 #feedspace h3.title').html(data[0]['fields'].title)
-        // $('#row_1 #feedspace p.desc').html(data[0]['fields'].description)
-        setInterval(function(){
-           
-            
-             $('#feedspace').css({'top':'-200px','opacity':1})
-            
-            if(k>data.length-1){
-                k=1;
-            }
-            // console.log('k============== '+k)
-             $('#row_1 #feedspace h3.title').html(data[k]['fields'].title)
-        $('#row_1 #feedspace p.desc').html(data[k]['fields'].description)
-        $('#feedspace').animate({top:"+100px"},3000).animate({top:"-20px"},1000).animate({opacity:1},2000).animate({opacity:0},1000)
+        console.log('reading........................'+data.length)
 
-        //  console.log('title--------------------------------  '+data[0]['fields'].title)
-            k=k+1
-        },10000)
+        for(var i=0;i<data.length;i++){
+
+
+            var feedtemplate=$('#feedtemplate').html();
+            if(i==0){
+                $('#carousel-inner-section').prepend(feedtemplate.replace(/%feed-title%/,"feed-title_"+i)
+                .replace(/%title%/,data[i]['fields'].title)
+                .replace(/%feed-content%/,"feed-content_"+i)
+                .replace(/%active%/,"active")
+                .replace(/%content%/,data[i]['fields'].description)
+                
+                );
+            }else{
+                 $('#carousel-inner-section').prepend(feedtemplate.replace(/%feed-title%/,"feed-title_"+i)
+                .replace(/%title%/,data[i]['fields'].title)
+                .replace(/%feed-content%/,"feed-content_"+i)
+                //  .replace(/%titletext%/g,"titletext_"+i)
+                .replace(/%content%/,data[i]['fields'].description)
+                 );
+            }
+
+
+
+
+
+
+       
+    }
+
+
+
+
+
+       
+         $('#feed1-title').html(data[0]['fields'].title)
+        $('#feed1-content').html(data[0]['fields'].description)
+         $('#feed2-title').html(data[0]['fields'].title)
+        $('#feed2-content').html(data[1]['fields'].description)
+       
 
        
 
@@ -183,12 +201,11 @@ var retrive_polls=function(){
     $.ajax({
         url:'/getpolls',
 
-    })
-    .done(function(data){
+    }).done(function(data){
 
         
 
-         console.log('from getpolls...........'+data)
+        console.log('from getpolls...........'+data)
         var x1=0;
         var x2=0;
         var x3=0;
@@ -201,70 +218,87 @@ var retrive_polls=function(){
 
         console.log('+++++++++++++++++++++++ '+data[0]['fields'].poll_surveytag.surveytag_tag)
 
-          $.ajax({
-        url:'/getsurvey',
-        data:{'num': data[0]['fields'].poll_surveytag}
+        $.ajax({
+            url:'/getsurvey',
+            data:{'num': data[0]['fields'].poll_surveytag}
 
-    })
-    .done(
-        function(data){
-           
-            console.log('survey+++++++++++++++++++++++ '+data[0]['fields'])
-            $('.result p').html(data[0]['fields'].surveytag_description)
-            if(data[0]['fields'].survey_image !=""){
-                $('.result img').attr('src',data[0]['fields'].survey_image)
-            }
-        }
-    )
-    .fail(
-        function(){
-            console.log('error..............')
+        }).done(
+            function(data){
             
-        }
-    )
-
-
-
-
-
+                console.log('survey+++++++++++++++++++++++ '+data[0]['fields'])
+                $('.result p').html(data[0]['fields'].surveytag_description)
+                if(data[0]['fields'].survey_image !=""){
+                    $('.result img').attr('src',data[0]['fields'].survey_image)
+                }
+                }
+                )
+            .fail(
+                function(){
+                    console.log('error..............')
+                    
+                }
+             ) 
 
 
 
         
+        
+        
+        
+        
+        
         $.each(data,function(i,v){
 
-        var polltemplate=$('#pollresulttemplate').html();
-                    $('#latestpoll').prepend(polltemplate.replace(/%title%/,data[i]['fields'].poll_title)
-                    .replace(/%question%/,data[i]['fields'].poll_question)
-                    .replace(/%myChart%/,"myChart_"+i)
+            // FOR SLIDING Chart
             
-             );
 
-            console.log('data,,,,,,,,,,,,,,,,,,,,,'+v['fields'].poll_question)
+                var polltemplate=$('#pollresulttemplate').html();
+                            $('#latestpoll').prepend(polltemplate.replace(/%title%/,data[i]['fields'].poll_title)
+                            .replace(/%question%/,data[i]['fields'].poll_question)
+                            .replace(/%myChart%/,"myChart_"+i)
+                    
+                    );
 
-            obj['question'+i]=v['fields'].poll_question;
-             $('#row_'+i+' #feedspace h3.title').html(v['fields'].poll_question)
-            // $('#row_'+i+'  #feedspace p.desc').html('abc')
-            $.ajax({
-                url:'/jsonpolloption',
-                data:{'code': v['fields'].poll_code}
 
-                
-            })
-            .done(function(data){
-                console.log('first ajax................'+obj['question'+i])
-                obj['options']=data
-                x1 =data[0]['fields'].polloption_text
-                x2=data[1]['fields'].polloption_text
-                 x3=data[2]['fields'].polloption_text
-                x4=data[3]['fields'].polloption_text
-                 console.log('from getoptions...........'+obj['question'+i])
-                 makechart(i,x1,x2,x3,x4,obj['question'+i]);
 
-            })
-            .fail(function(){
-                console.log('error from getoptions.........................')
-            })
+
+
+                    console.log('data,,,,,,,,,,,,,,,,,,,,,'+v['fields'].poll_question)
+
+                    obj['question'+i]=v['fields'].poll_question;
+                    $('#row_'+i+' #feedspace h3.title').html(v['fields'].poll_question)
+                    // $('#row_'+i+'  #feedspace p.desc').html('abc')
+                    $.ajax({
+                        url:'/jsonpolloption',
+                        data:{'code': v['fields'].poll_code}
+
+                        
+                    })
+                    .done(function(data){
+                        console.log('first ajax................'+obj['question'+i])
+                        obj['options']=data
+                        x1 =data[0]['fields'].polloption_text
+                        x2=data[1]['fields'].polloption_text
+                        x3=data[2]['fields'].polloption_text
+                        x4=data[3]['fields'].polloption_text
+
+                        y1 =data[0]['fields'].polloption_score
+                        y2=data[1]['fields'].polloption_score
+                        y3=data[2]['fields'].polloption_score
+                        y4=data[3]['fields'].polloption_score
+
+                        var ts=y1+y2+y3+y4
+                        y1= Math.floor( (y1/ts)*100)
+                        y2= Math.floor( (y2/ts)*100)
+                        y3= Math.floor( (y3/ts)*100)
+                        y4= Math.floor( (y4/ts)*100)
+                        console.log('from getoptions...........'+obj['question'+i])
+                        makechart(i,x1,x2,x3,x4,y1,y2,y3,y4,obj['question'+i]);
+
+                    })
+                    .fail(function(){
+                        console.log('error from getoptions.........................')
+                    })
             objs.push(obj);
 
         })
@@ -278,15 +312,67 @@ var retrive_polls=function(){
 
 
 
-    })
-    .fail(function(){
-        console.log('error from getpolls.........................')
+            })
+            .fail(function(){
+                console.log('error from getpolls.........................')
 
-    })
-}
+            })
+    }
 
 
-var makechart=function(i,x1,x2,x3,x4,ques){
+var makechart=function(i,x1,x2,x3,x4,y1,y2,y3,y4,ques){
+
+    // FOR SLIDING CHART
+    if(i==0){
+        var ctx0=$('#chart'+i)
+        ctx0.css('width','100%');
+        $('#chart0 ~ div.carousel-caption').html(ques)
+         $('#chart0 ~ div.carousel-caption').css({'color':'blue'})
+        var myChart0 = new Chart(ctx0, {
+                type: 'line',
+                data: {
+                    labels: [x1,x2,x3,x4],
+                    datasets: [{
+                    label: "Udec Interractive Chart",
+                    data: [y1,y2,y3,y4],
+                    backgroundColor: "rgba(153,255,51,1)",
+                    borderColor: "rgba(0,0,0,0.1)",
+                     borderWidth: 1
+                    }]
+                },
+                options:{
+                    maintainAspectRatio: false,
+                    responsive: false
+                }
+            });
+    }
+    if(i==1){
+        var ctx1=$('#chart'+i)
+        ctx1.css('width','100%');
+         $('#chart1 ~ div.carousel-caption').html(ques)
+          $('#chart1 ~ div.carousel-caption').css({'color':'blue'})
+
+        var myChart0 = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: [x1,x2,x3,x4],
+                    datasets: [{
+                    label: "Udec Interractive Chart",
+                    data: [y1,y2,y3,y4],
+                    backgroundColor: "rgba(153,255,51,1)",
+                     borderColor: "rgba(0,0,0,0.1)",
+                      borderWidth: 1
+                    }]
+                },
+                options:{
+                    maintainAspectRatio: false,
+                    responsive: false
+                }
+            });
+    }
+
+
+
      var ctx = $('#myChart_'+i);
     //  ctx.height=100;
     //  ctx.width=100;
@@ -300,7 +386,7 @@ var makechart=function(i,x1,x2,x3,x4,ques){
                 labels: [x1,x2,x3,x4],
                 datasets: [{
                  label: "Udec Interractive Chart",
-                data: [12, 19, 3, 17],
+                data: [y1,y2,y3,y4],
                 backgroundColor: "rgba(153,255,51,0.4)"
                 }]
             },
@@ -576,7 +662,41 @@ $('#avatar').click(function(e){
     }
 });
 
+var loadstate=function(){
+    $.ajax({
+        url:'/loadstate',
 
+    }
+    ).done(function(data){
+        console.log('state...........................'+data)
+
+    })
+}
+
+
+
+
+var fb_share_btn=$('.poll-share');
+
+
+$.each(fb_share_btn,function(i,v){
+  $(v).click(function(){
+      console.log('click.........................'+$(v).attr('id'))
+
+     
+   FB.ui({
+     display: 'popup',
+     method: 'share',
+     href: 'https://developers.facebook.com/docs/',
+
+      picture: 'http://fbrell.com/f8.jpg',
+      caption: 'Reference Documentation',
+     description: 'Dialogs provide a simple, consistent interface for applications to interface with users.'
+   }, function(response){});  
+  
+})
+
+})
 
 
 

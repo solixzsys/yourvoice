@@ -1,5 +1,7 @@
 $(function(){
 
+    
+
 
 
     $.ajax({
@@ -20,6 +22,7 @@ $(function(){
              .replace(/%banner%/,"banner_"+i)
              .replace(/%next%/,"next_"+i)
              .replace(/%myChart%/,"myChart_"+i)
+             .replace(/%poll-shareid%/,"poll-shareid_"+i)
              );
 
 
@@ -36,6 +39,8 @@ $(function(){
 
      attachbtn();
      retrive_polls();
+
+     attachsharebtn();
 
 
     })
@@ -673,6 +678,35 @@ var loadstate=function(){
 }
 
 
+
+
+
+
+var attachsharebtn=function(){
+    $('.poll-share').each(function(i,v){ 
+        
+        $(v).click(function(){
+            console.log('click.........................'+$(v).attr('id'))
+
+            var col=$(v).attr('data-col')
+            var desc=$('#'+col+' .panel-title p').html()
+            var mycaption=$('#'+col+' .agenda-title').html()
+
+            // console.log('ooooooooooooooooooooooo'+caption)
+            FB.ui({
+                display: 'popup',
+                method: 'share',
+                href: window.location['href'],
+
+                picture: 'http://fbrell.com/f8.jpg',
+                caption: mycaption,
+                description: desc
+            }, function(response){});  
+        
+        })
+
+    })
+}
 
 
 

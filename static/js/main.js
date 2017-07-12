@@ -1,7 +1,9 @@
 $(function(){
     
-
+var slidding=false;
     $(window).scroll(function(){
+
+
 
 
 
@@ -9,37 +11,37 @@ $(function(){
             // $('.m').css({'display':'none'});
             // $('.carousel-inner ul.l').css({'float':'none !important'});
             // $('ul.l').addClass('center-block')
-            $('canvas').css({'width':'300px','height':'250px'});
+            $('canvas').css({'width':'100%','height':'100%'});
 
-    $('#carousel').carouFredSel({ 
+    // $('#carousel').carouFredSel({ 
 
-        items                : 1,
-        responsive: true,
-	    width: '100%', 
-        direction            : "left", 
-        scroll : { 
-            items            : 2, 
-            // easing           : "elastic", 
-            duration         : 1000, 
-            pauseOnHover     : true 
-        } 
-    }); 
+    //     items                : 1,
+    //     responsive: true,
+	//     width: '100%', 
+    //     direction            : "left", 
+    //     scroll : { 
+    //         items            : 2, 
+    //         // easing           : "elastic", 
+    //         duration         : 1000, 
+    //         pauseOnHover     : true 
+    //     } 
+    // }); 
      }else{
 
 
-          $('#carousel').carouFredSel({ 
+    //       $('#carousel').carouFredSel({ 
 
-        items                : 4,
-        responsive: true,
-	    width: '100%', 
-        direction            : "left", 
-        scroll : { 
-            items            : 2, 
-            // easing           : "elastic", 
-            duration         : 1000, 
-            pauseOnHover     : true 
-        } 
-    }); 
+    //     items                : 4,
+    //     responsive: true,
+	//     width: '100%', 
+    //     direction            : "left", 
+    //     scroll : { 
+    //         items            : 2, 
+    //         // easing           : "elastic", 
+    //         duration         : 1000, 
+    //         pauseOnHover     : true 
+    //     } 
+    // }); 
      }
 
      $('.carousel-inner li span').parent().css({'margin-top':'10px'})
@@ -178,9 +180,12 @@ console.log('navbtn click................................')
     
 
 
-// Using default configuration 
-    // $('#carousel').carouFredSel(); 
-     // Using custom configuration 
-     
+
+
+
+
+
+
+
 
 })

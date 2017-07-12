@@ -1,7 +1,9 @@
 $(function(){
     
-
+var slidding=false;
     $(window).scroll(function(){
+
+
 
 
 
@@ -178,9 +180,12 @@ console.log('navbtn click................................')
     
 
 
-// Using default configuration 
-    // $('#carousel').carouFredSel(); 
-     // Using custom configuration 
-     
+
+
+
+
+
+
+
 
 })

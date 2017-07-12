@@ -235,9 +235,10 @@ margin-bottom: 20px;
 }
 
 h4.agenda-title{
+    text-align: center;
     font-weight: bold;
     color: black;
-    text-align: left;
+    
     /*border-bottom: solid 1px;*/
     padding-bottom: 5px;
     /*background:url(../img/poll.png) no-repeat 0 100%;*/

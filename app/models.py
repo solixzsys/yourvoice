@@ -41,7 +41,7 @@ class Profile(models.Model):
     lastname=models.CharField(max_length=30,blank=True)
     phone_number=models.CharField(max_length=30,blank=True)
     birth_date = models.DateField(null=True, blank=True)
-    location = models.CharField(max_length=30, blank=True,help_text="Where You Presently Reside")
+    location = models.CharField(max_length=30, blank=True)
     state_of_origin=models.ForeignKey(NigeriaState,blank=True,null=True)
     local_government=models.ForeignKey(LG,blank=True,null=True)
     bio = models.TextField(max_length=500, blank=True)
