@@ -239,7 +239,7 @@ def dynamictemp(request):
     #     ques.append(tag)
 
     serialized=serializers.serialize('json',stag)
-    # print(serialized)
+    
     return HttpResponse(serialized,content_type='application/json')
 
 def getQuotes(request):
@@ -299,3 +299,14 @@ def getlg(request):
 
     
     return HttpResponse(serialized,content_type='application/json')     
+
+def adminchart(request,id):
+    id=request.GET.get('pk')
+    tag=SurveyTag.objects.get(pk=int(id))
+    polls = Poll.objects.filter(poll_surveytag=tag)
+    serialized=serializers.serialize('json',polls)
+    # print('pppppppp...............'+serialized)
+
+
+
+    return render(request,'chart.html',{'polls':polls})

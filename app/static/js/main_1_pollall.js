@@ -22,13 +22,9 @@ $(function(){
              .replace(/%banner%/,"banner_"+i)
              .replace(/%next%/,"next_"+i)
              .replace(/%myChart%/,"myChart_"+i)
+             .replace(/%twitter-shareid%/,"twitter_share_"+i)
              .replace(/%poll-shareid%/,"poll-shareid_"+i)
              );
-
-
-
-
-
 
         // console.log(data[i]['fields']);
         makeajax(data[i]['fields'].surveytag_tag,0,"titletext_"+i,"col_"+i);
@@ -41,6 +37,10 @@ $(function(){
      retrive_polls();
 
      attachsharebtn();
+
+     $('.customer.share').on("click", function(e) {
+      $(this).customerPopup(e);
+    });
 
 
     })
@@ -88,8 +88,11 @@ $(function(){
              console.log('uuu...........................'+ cid)
              optionajax(data[0]['fields'].poll_code,cid)
             h=$('#'+sect)
-            console.log('tttttttttttttttttnn    '+h)
+            console.log('tttttttttttttttttnn    '+cid.split('col_')[1])
              h.html(data[0]['fields'].poll_question).hide().show('slow')
+            //  txt=$('#twitter_share_'+cid.split('col_')[1]+' i').attr('href')
+            //  console.log('################################'+txt+'text='+h.text())
+            //  $('#twitter_share_'+cid.split('col_')[1]+' i').attr('href',txt+'text='+h.text())
         }
     )
     .fail(

@@ -178,7 +178,7 @@ class Poll(models.Model):
     # poll_options=models.ManyToManyField(PollOption,default="")
 
     def __str__(self):
-        return self.poll_title
+        return self.poll_question
 
     def save(self, *args, **kwargs):
         # surveytitle=SurveyTag.objects.get(surveytag_title=self.poll_surveytag)

@@ -11,6 +11,7 @@ $(function(){
     .done(function(data){
         console.log('data length..........................'+data.length)
         for(var i=0;i<data.length;i++){
+            if(i<2){
 
 
             var template=$('#dynamictemplate').html();
@@ -22,16 +23,13 @@ $(function(){
              .replace(/%banner%/,"banner_"+i)
              .replace(/%next%/,"next_"+i)
              .replace(/%myChart%/,"myChart_"+i)
+             .replace(/%twitter-shareid%/,"twitter_share_"+i)
              .replace(/%poll-shareid%/,"poll-shareid_"+i)
              );
 
-
-
-
-
-
         // console.log(data[i]['fields']);
         makeajax(data[i]['fields'].surveytag_tag,0,"titletext_"+i,"col_"+i);
+        }
 
     }
     retrive_quotes();
@@ -41,6 +39,10 @@ $(function(){
      retrive_polls();
 
      attachsharebtn();
+
+     $('.customer.share').on("click", function(e) {
+      $(this).customerPopup(e);
+    });
 
 
     })
@@ -88,8 +90,11 @@ $(function(){
              console.log('uuu...........................'+ cid)
              optionajax(data[0]['fields'].poll_code,cid)
             h=$('#'+sect)
-            console.log('tttttttttttttttttnn    '+h)
+            console.log('tttttttttttttttttnn    '+cid.split('col_')[1])
              h.html(data[0]['fields'].poll_question).hide().show('slow')
+            //  txt=$('#twitter_share_'+cid.split('col_')[1]+' i').attr('href')
+            //  console.log('################################'+txt+'text='+h.text())
+            //  $('#twitter_share_'+cid.split('col_')[1]+' i').attr('href',txt+'text='+h.text())
         }
     )
     .fail(
@@ -291,7 +296,7 @@ var retrive_polls=function(){
                         y3=data[2]['fields'].polloption_score
                         y4=data[3]['fields'].polloption_score
 
-                        var ts=y1+y2+y3+y4
+                        var ts=parseInt(y1)+parseInt(y2)+parseInt(y3)+parseInt(y4)
                         y1= Math.floor( (y1/ts)*100)
                         y2= Math.floor( (y2/ts)*100)
                         y3= Math.floor( (y3/ts)*100)
@@ -339,7 +344,12 @@ var makechart=function(i,x1,x2,x3,x4,y1,y2,y3,y4,ques){
                     datasets: [{
                     label: "Udec Interractive Chart",
                     data: [y1,y2,y3,y4],
-                    backgroundColor: "rgba(153,255,51,1)",
+                    backgroundColor:[ "rgba(92,184,92,1)",
+                                 "rgba(240,173,78,1)",
+                                 "rgba(91,192,222,1)",
+                                 "rgba(217,83,79,1)"
+
+                                 ],
                     borderColor: "rgba(0,0,0,0.1)",
                      borderWidth: 1
                     }]
@@ -363,7 +373,12 @@ var makechart=function(i,x1,x2,x3,x4,y1,y2,y3,y4,ques){
                     datasets: [{
                     label: "Udec Interractive Chart",
                     data: [y1,y2,y3,y4],
-                    backgroundColor: "rgba(153,255,51,1)",
+                     backgroundColor:[ "rgba(92,184,92,1)",
+                                 "rgba(240,173,78,1)",
+                                 "rgba(91,192,222,1)",
+                                 "rgba(217,83,79,1)"
+
+                                 ],
                      borderColor: "rgba(0,0,0,0.1)",
                       borderWidth: 1
                     }]
@@ -391,7 +406,12 @@ var makechart=function(i,x1,x2,x3,x4,y1,y2,y3,y4,ques){
                 datasets: [{
                  label: "Udec Interractive Chart",
                 data: [y1,y2,y3,y4],
-                backgroundColor: "rgba(153,255,51,0.4)"
+                 backgroundColor:[ "rgba(92,184,92,1)",
+                                 "rgba(240,173,78,1)",
+                                 "rgba(91,192,222,1)",
+                                 "rgba(217,83,79,1)"
+
+                                 ],
                 }]
             },
             options:{
@@ -689,10 +709,10 @@ var attachsharebtn=function(){
             console.log('click.........................'+$(v).attr('id'))
 
             var col=$(v).attr('data-col')
-            var desc=$('#'+col+' .panel-title p').html()
-            var mycaption=$('#'+col+' .agenda-title').html()
-
-            // console.log('ooooooooooooooooooooooo'+caption)
+            var desc=$('#'+col+' .panel-title p').text()
+            var mycaption=$('#'+col+' .agenda-title').text().trim()
+            console.log('caption  ooooooooooooooooooooooo'+mycaption)
+             console.log(' desc  ooooooooooooooooooooooo'+desc)
             FB.ui({
                 display: 'popup',
                 method: 'share',

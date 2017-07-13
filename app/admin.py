@@ -1,8 +1,10 @@
 from django.contrib import admin
 from app.models import Poll,PollOption,SurveyTag,StoryFlatPage,UserPollOption,Quotes,MyFeed,LG,NigeriaState
 from django import forms
-
+from django.http import JsonResponse,HttpResponse,HttpResponseRedirect
+from django.shortcuts import render,redirect
 from ckeditor.fields import RichTextField
+from django.core import serializers
 # Register your models here.
 import random
 import string
@@ -85,6 +87,16 @@ admin.site.register(StoryFlatPage,StoryFlatPageAdmin)
 
 class SurveyTagAdmin(admin.ModelAdmin):
     list_display=('surveytag_title','surveytag_tag','surveytag_owner','surveytag_domain','surveytag_status')
+    actions=['show_chart']
+    def show_chart(self,request,queryset):
+        
+        id=queryset[0].pk
+       
+        return HttpResponseRedirect('/adminchart/?pk='+str(id))
+
+
+
+    show_chart.short_description="Chart Summary"
 
 
 admin.site.register(SurveyTag,SurveyTagAdmin)
