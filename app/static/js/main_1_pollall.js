@@ -703,7 +703,9 @@ var attachsharebtn=function(){
 
                 picture: 'http://fbrell.com/f8.jpg',
                 caption: mycaption,
-                description: desc
+                description: desc,
+                quote:desc
+
             }, function(response){});  
         
         })

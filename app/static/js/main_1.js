@@ -92,9 +92,13 @@ $(function(){
             h=$('#'+sect)
             console.log('tttttttttttttttttnn    '+cid.split('col_')[1])
              h.html(data[0]['fields'].poll_question).hide().show('slow')
-            //  txt=$('#twitter_share_'+cid.split('col_')[1]+' i').attr('href')
+              txt=$('#twitter_share_'+cid.split('col_')[1]+' i').attr('href')
             //  console.log('################################'+txt+'text='+h.text())
-            //  $('#twitter_share_'+cid.split('col_')[1]+' i').attr('href',txt+'text='+h.text())
+             // $('#twitter_share_'+cid.split('col_')[1]+' i').attr('href',txt+'text='+h.text())
+
+             newval = txt.replace(new RegExp('%mytext%'),h.text())
+             $('#twitter_share_'+cid.split('col_')[1]+' i').attr('href',newval);
+
         }
     )
     .fail(
@@ -720,7 +724,8 @@ var attachsharebtn=function(){
 
                 picture: 'http://fbrell.com/f8.jpg',
                 caption: mycaption,
-                description: desc
+                description: desc,
+                quote:desc
             }, function(response){});  
         
         })
