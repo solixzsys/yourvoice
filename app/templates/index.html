@@ -4,6 +4,7 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
+        {% load staticfiles %}
         <meta charset="utf-8">
         <meta http-equiv="Content-Type" content="text/html">
         <meta name="author" content="">
@@ -11,12 +12,21 @@
         <title>Mock Up - Let YourVoice be heard</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="http://bigwan.pythonanywhere.com/static/img/udec_logo.png" rel="shortcut icon" type="image/x-icon">
 
         <meta property="og:url"           content="http://bigwan.pythonanywhere.com" />
         <meta property="og:type"          content="article" />
         <meta property="og:title"         content="Udec Initiative" />
         <meta property="og:description"   content="Business Research and Opinion Survey Platform" />
         <meta property="og:image"         content=""/>
+
+        <meta name="twitter:card" content="summary" >
+        <meta name="twitter:site" content="@solixz" >
+        <meta name="twitter:title" content="Unbiased Non-Partisan Analysis of Public Opinion" >
+        <meta name="twitter:description" content="Udec is The Number One Platform that Provide Researh and Analysis of Public Opinion" >
+        <meta name="twitter:creator" content="@solixz" >
+        <meta name="twitter:image" content="http://bigwan.pythonanywhere.com/static/img/chart.png" >
+        <meta name="twitter:domain" content="http://bigwan.pythonanywhere.com" >
         
         <!-- Font Awesomes link-->
        
@@ -128,7 +138,7 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a class="navbar-brand" href="/"><img  width="100" height="30" src="../static/img/yourvoice.png" /></a>
+                <a class="navbar-brand" href="/"><img  width="100"  src="../static/img/UDEC LOGO.png" /></a>
                 </div>
 
                     <!--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">-->
@@ -188,7 +198,8 @@
                 <div class="row">
                     <div class="col-sm-5">
                         <div class="logo ">
-                        <img  class="" src="../static/img/yourvoice2.svg" width="80%" />
+                        <img  class="" src="../static/img/UDEC LOGO.png" width="200" />
+                        <div style="font-style:italic;">.....give your opinion the attention it deserve</div>
                         
                         </div>
                         
@@ -277,7 +288,9 @@
                                
                                 
                                 <!--<h6>Quick previous and next links for simple pagination implementations with light markup and styles. It's great for simple sites like blogs or magazines</h6>-->
+                               <div class="textboard_mini">
                                 <h6>{{obj.0.poll_question |safe}}</h6>
+                               </div>
                                 </a>
 
                             </div>
@@ -288,8 +301,10 @@
                                  <a href="/result" style="color:white;text-decoration: none">
                                 <h4 style="">RESULT & ANALYSIS <i class="fa fa-bar-chart fa-lg pull-right"></i></h4>
                                  <img class="" src="../static/img/Osibanjo.jpg" style=" " alt="">
+                                 <div class="textboard_mini">
                                  <h6 style="padding: 5px"></h6>
-                                <p>Quick previous and next links for simple pagination implementations with light markup and styles. It's great for simple sites like blogs or magazines</p>
+                                <p></p>
+                                 </div>
                                  </a>            
                             </div>
                             
@@ -299,7 +314,11 @@
                                 <h4 style="">SOLUTION & SERVICES <i class="fa fa-camera-retro  pull-right"></i></h4>
                                 <img class="" src="../static/img/Ambode-7-1.jpg" style="" alt="">
 
-                                <h6>Quick previous and next links for simple pagination implementations with light markup and styles. It's great for simple sites like blogs or magazines</h4>
+                                <div class="textboard_mini">
+
+
+                                <h6>Quick previous and next links for simple pagination implementations with light markup and styles. It's great for simple sites like blogs or magazines</h6>
+                                </div>
 
                             </div>
                             
@@ -359,21 +378,7 @@
         <!-- CONTENT SECTION -->
 
 
-<div class="container-fluid" style=" margin: 100px 0;   background-color: #eee;" >
-    
 
-
-    <div class="row" style="padding: 3em 0">
-        <div class="col-sm-12">
-            <div style="margin: 0 -5px">
-                <span style=""><h3 style="text-align: center; padding:0.5em; color: #cb7a08"><i class="fa fa-anchor"></i>Take Part in U decide Poll <span style="color:#333;font-size: 16px;font-weight: bold;font-style: italic">we provide a platform for you to weight your opinion...</span> </h3></span>
-            </div>
-        
-        </div>
-        
-        
-    </div>
-    </div>
 
 
 <section id="feed-analysis">
@@ -395,7 +400,7 @@
                         <div id="carousel-inner-section" class="carousel-inner" role="listbox">
                             <script type="template/text" id="feedtemplate">
                                 <div class="item %active%">
-                                    <div  class="feed-panel panel panel-primary">
+                                    <div  class="feed-panel panel panel-danger">
                                         <div class="panel-heading">
                                             <h3 id="%feed-title%" class="panel-title">%title%</h3>
                                             
@@ -439,6 +444,64 @@
                             <i style="color:blue" class="fa fa-forward"></i>
                             <span class="sr-only">Next</span>
                         </a>
+                </div>
+
+                   <div id="feed-carousel1" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                        <!--<ol class="carousel-indicators">
+                            <li data-target="#feed-carousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#feed-carousel" data-slide-to="1"></li>
+                            <li data-target="#feed-carousel" data-slide-to="2"></li>
+                        </ol>-->
+
+                        <!-- Wrapper for slides -->
+                        <div id="carousel-inner-section1" class="carousel-inner" role="listbox">
+                            <script type="template/text" id="feedtemplate1">
+                                <div class="item %active%">
+                                    <div  class="feed-panel panel panel-primary">
+                                        <div class="panel-heading">
+                                            <h3 id="%feed-title%" class="panel-title">%title%</h3>
+                                            
+                                        </div>
+                                        <div id="%feed-content%" class="panel-body">
+                                            %content%
+                                        </div>
+                                    </div>
+                                
+                                    <div class="carousel-caption">
+                                        
+                                    </div>
+                                </div>
+                            </script>
+                            <!--<div class="item">
+
+                                 <div  class="feed-panel panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h3 id="feed2-title" class="panel-title">Panel title</h3>
+                                    </div>
+                                    <div id="feed2-content" class="panel-body">
+                                        Panel content
+                                    </div>
+                                </div>
+                               
+
+
+                                <div class="carousel-caption">
+                                    
+                                </div>
+                            </div>-->
+                            
+                        </div>
+
+                        <!-- Controls -->
+                        <!--<a class="left carousel-control" href="#feed-carousel" role="button" data-slide="prev">
+                            <i style="color:blue" class="fa fa-backward"></i>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#feed-carousel" role="button" data-slide="next">
+                            <i style="color:blue" class="fa fa-forward"></i>
+                            <span class="sr-only">Next</span>
+                        </a>-->
                 </div>
 
 
@@ -513,6 +576,23 @@
     </div>
     
 </section>
+
+<div class="container-fluid" style=" margin: 100px 0;   background-color: #eee;" >
+    
+
+
+    <div class="row" style="padding: 3em 0">
+        <div class="col-sm-12">
+            <div style="margin: 0 -5px">
+                <span style=""><h3 style="text-align: center; padding:0.5em; color: #cb7a08"><i class="fa fa-anchor"></i>Take Part in U decide Poll <span style="color:#333;font-size: 16px;font-weight: bold;font-style: italic">we provide a platform for you to weight your opinion...</span> </h3></span>
+            </div>
+        
+        </div>
+        
+        
+    </div>
+    </div>
+
 
 <section id="content" style="padding-top: 1em">
     
@@ -639,7 +719,8 @@
                 </div>
                 <div class="col-sm-4 "  style="text-align: center">
                     <ul class="service-list">
-                        <li><i class="fa fa-bicycle fa-3x"></i></li>
+                        <!--<li><i class="fa fa-bicycle fa-3x"></i></li>-->
+                        <li><img src="/static/img/MARKET RESEARCH.png" width="80" /></li>
                         <li><h3>Market Research</h3></li>
                         <li><h6>I have made two files for this purpose. The class 
                             file contains class and function to fetch the required data. And the usage file 
@@ -652,7 +733,8 @@
                 </div>
                 <div class="col-sm-4"  style="text-align: center">
                     <ul class="service-list" style="width:80%">
-                        <li><i class="fa fa-hourglass-end fa-3x"></i></li>
+                        <!--<li><i class="fa fa-hourglass-end fa-3x"></i></li>-->
+                        <li><img src="/static/img/ELECTION PREDICTION1.png" width="80" /></li>
                         <li><h3>Election Prediction</h3></li>
                         <li><h6>I have made two files for this purpose. The class 
                             file contains class and function to fetch the required data. And the usage file 
@@ -665,7 +747,8 @@
                 </div>
                 <div class="col-sm-4"  style="text-align: center">
                     <ul class="service-list">
-                        <li><i class="fa fa-product-hunt fa-3x"></i></li>
+                        <!--<li><i class="fa fa-product-hunt fa-3x"></i></li>-->
+                        <li><img src="/static/img/PRODUCT ANALYSIS1.png" width="80" /></li>
                         <li><h3>Product Analysis</h3></li>
                         <li><h6>I have made two files for this purpose. The class 
                             file contains class and function to fetch the required data. And the usage file 
@@ -950,7 +1033,7 @@
 
 
                     <!--Footer Section-->
-        <footer style="background-color: #02327e">
+        <footer style="background-color: #38386c">
             
             <div class="container-fluid farea" style="font-family: inherit;">
                 

@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^$', index,name='home'),
     url(r'^index3/$', index2,name='home2'),
     url(r'^result$', result),
+    url(r'^result_detail', result_detail),
     url(r'^test$', test),
     url(r'^adminchart/(?P<id>)$', adminchart),
     url(r'^jsonpoll$', jsonpoll),

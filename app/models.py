@@ -93,7 +93,7 @@ class StoryFlatPage(CMSFlatPage):
     story_creator=models.ForeignKey(User,blank=True,null=True)
 
     def save(self, *args, **kwargs):
-        self.url='/'+self.title.replace(' ','-')+'/'
+        self.url='/'+ str(self.story_date)+'/'+self.title.replace(' ','-')+'/'
         return super(StoryFlatPage,self).save(*args, **kwargs)
 
 

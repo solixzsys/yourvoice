@@ -33,7 +33,7 @@ body{
 {%block middlecol%}
 <div class="row">
     <div class="col-xs-12 heroresult" style="margin-bottom: 20px;text-align: center">
-        <a style="text-decoration: none" href="{{hero.url}}">
+        <a style="text-decoration: none" href="result_detail{{hero.url}}detail_result?story={{hero.pk}}">
         <div> 
             <div class="hero_heading" style="text-align: left;font-weight: bold">  {{ hero.title|safe}}</div>
             <img src="/media/{{hero.story_hero_image}}" style="max-width: 300px;height: 200px"   />
@@ -50,7 +50,7 @@ body{
             
                 
                 <div class="panel panel-default">
-                    <a href="{{page.url}}">
+                    <a href="result_detail/{{page.url}}detail_result?story={{page.pk}}">
 
                         <div class="panel-footer">
                                <h3 class="panel-title" style="font-weight: bold">{{page.title|safe}}</h3>

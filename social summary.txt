@@ -1,0 +1,59 @@
+https://www.facebook.com/sharer.php?text=You+can+now+share+quoted+text+directly+to+Facebook&u=https%3A%2F%2Fwww.theverge.com%2F2016%2F4%2F12%2F11411330%2Ffacebook-quote-sharing-button-f8-conference-2016%3Futm_campaign%3Dtheverge%26utm_content%3Dentry%26utm_medium%3Dsocial%26utm_source%3Dfacebook
+
+
+
+
+https://www.facebook.com/sharer.php?u=https%3A%2F%2Fyougov.co.uk%2Fopi%2Fsurvey%2Ffbbc0ee0-661d-11e7-8cde-a6b53c1dce63%2Fquestion%2F8e2411b0-661e-11e7-8cde-a6b53c1dce63
+
+
+
+https://www.facebook.com/sharer/sharer.php?app_id=103655610273199&kid_directed_site=0&sdk=joey&u=http%3A%2F%2Fbigwan.pythonanywhere.com%2F&display=popup&ref=plugin&src=share_button
+
+
+https://www.facebook.com/login.php?login_attempt=1&next=https%3A%2F%2Fwww.facebook.com%2Fv2.9%2Fdialog%2Fshare_open_graph%3Fredirect_uri%3Dhttps%253A%252F%252Fstaticxx.facebook.com%252Fconnect%252Fxd_arbiter%252Fr%252FXBwzv5Yrm_1.js%253Fversion%253D42%2523cb%253Df2e2d5866984e3e%2526domain%253Dbigwan.pythonanywhere.com%2526origin%253Dhttps%25253A%25252F%25252Fbigwan.pythonanywhere.com%25252Ff358d7ae3a72fc%2526relation%253Dopener%2526frame%253Df305aa6bcdec09%2526result%253D%252522xxRESULTTOKENxx%252522%26display%3Dpopup%26action_type%3Dog.likes%26action_properties%3D%257B%2522object%2522%253A%2522http%253A%252F%252Fbigwan.pythonanywhere.com%2522%257D%26client_id%3D1585449031507058%26ret%3Dlogin%26sdk%3Djoey&popup=1&lwv=120&lwc=1348028
+
+
+
+https://www.facebook.com/v2.9/dialog/share?app_id=184484190795&caption=Reference%20Documentation&description=Dialogs%20provide%20a%20simple%2C%20consistent%20interface%20for%20applications%20to%20interface%20with%20users.&display=popup&e2e=%7B%7D&href=https%3A%2F%2Fbigwan.pythonanywhere.com%2Fabout&locale=en_US&mobile_iframe=false&next=http%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter%2Fr%2FXBwzv5Yrm_1.js%3Fversion%3D42%23cb%3Dffb85728d6130c%26domain%3Dbigwan.pythonanywhere.com%26origin%3Dhttp%253A%252F%252Fbigwan.pythonanywhere.com%252Ff12adc3558a8b1c%26relation%3Dopener%26frame%3Df3e9d09d0cf3bce%26result%3D%2522xxRESULTTOKENxx%2522&picture=http%3A%2F%2Ffbrell.com%2Ff8.jpg&sdk=joey&version=v2.9
+
+
+
+
+
+https://www.facebook.com/v2.9/dialog/share?app_id=1585449031507058&caption=Injecting%20Entertainment%20industry%20with%20technology&description=What%20did%20u%20think%20about%20the%20quality%20of%20graphics%20in%20nigeria%20moving%20production&display=popup&e2e=%7B%7D&href=http%3A%2F%2Fbigwan.pythonanywhere.com%2F&locale=en_US&mobile_iframe=false&next=http%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter%2Fr%2FXBwzv5Yrm_1.js%3Fversion%3D42%23cb%3Df10973dcd2e6838%26domain%3Dbigwan.pythonanywhere.com%26origin%3Dhttp%253A%252F%252Fbigwan.pythonanywhere.com%252Ff29689192ea51%26relation%3Dopener%26frame%3Df30a68a7e75c884%26result%3D%2522xxRESULTTOKENxx%2522&picture=http%3A%2F%2Ffbrell.com%2Ff8.jpg&sdk=joey&version=v2.9
+
+
+
+
+var fb_share_btn=$('.poll-share');
+
+
+$.each(fb_share_btn,function(i,v){
+  $(v).click(function(){
+      console.log('click.........................'+$(v).attr('id'))
+
+     
+   FB.ui({
+     display: 'popup',
+     method: 'share',
+     href: 'https://developers.facebook.com/docs/',
+
+      picture: 'http://fbrell.com/f8.jpg',
+      caption: 'Reference Documentation',
+     description: 'Dialogs provide a simple, consistent interface for applications to interface with users.'
+   }, function(response){});  
+  
+})
+
+})
+
+
+*******************************************TWITTER CARD***********************************************
+<meta name="twitter:card" content="summary_large_image" >
+<meta name="twitter:site" content="@site_username" >
+<meta name="twitter:title" content="To 10 story Ever" >
+<meta name="twitter:description" content="Up than 200 character" >
+<meta name="twitter:creator" content="@creator_username" >
+<meta name="twitter:image" content="http://myimage.com" >
+<meta name="twitter:domain" content="yourdomain.com" >
+

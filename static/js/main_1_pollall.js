@@ -11,7 +11,6 @@ $(function(){
     .done(function(data){
         console.log('data length..........................'+data.length)
         for(var i=0;i<data.length;i++){
-            if(i<2){
 
 
             var template=$('#dynamictemplate').html();
@@ -29,7 +28,6 @@ $(function(){
 
         // console.log(data[i]['fields']);
         makeajax(data[i]['fields'].surveytag_tag,0,"titletext_"+i,"col_"+i);
-        }
 
     }
     retrive_quotes();
@@ -92,7 +90,8 @@ $(function(){
             h=$('#'+sect)
             console.log('tttttttttttttttttnn    '+cid.split('col_')[1])
              h.html(data[0]['fields'].poll_question).hide().show('slow')
-              txt=$('#twitter_share_'+cid.split('col_')[1]+' i').attr('href')
+            
+               txt=$('#twitter_share_'+cid.split('col_')[1]+' i').attr('href')
             //  console.log('################################'+txt+'text='+h.text())
              // $('#twitter_share_'+cid.split('col_')[1]+' i').attr('href',txt+'text='+h.text())
 
@@ -165,34 +164,20 @@ var retrive_feed=function(){
 
 
             var feedtemplate=$('#feedtemplate').html();
-             var feedtemplate1=$('#feedtemplate1').html();
             if(i==0){
                 $('#carousel-inner-section').prepend(feedtemplate.replace(/%feed-title%/,"feed-title_"+i)
                 .replace(/%title%/,data[i]['fields'].title)
                 .replace(/%feed-content%/,"feed-content_"+i)
                 .replace(/%active%/,"active")
-                .replace(/%content%/,data[i]['fields'].description));
-
-                 $('#carousel-inner-section1').prepend(feedtemplate1.replace(/%feed-title%/,"feed-title_"+i)
-                .replace(/%title%/,data[i+2]['fields'].title)
-                .replace(/%feed-content%/,"feed-content_1"+i)
-                .replace(/%active%/,"active")
-                .replace(/%content%/,data[i+2]['fields'].description)
+                .replace(/%content%/,data[i]['fields'].description)
                 
                 );
             }else{
-                 $('#carousel-inner-section').prepend(feedtemplate.replace(/%feed-title%/,"feed-title1_"+i)
+                 $('#carousel-inner-section').prepend(feedtemplate.replace(/%feed-title%/,"feed-title_"+i)
                 .replace(/%title%/,data[i]['fields'].title)
                 .replace(/%feed-content%/,"feed-content_"+i)
                 //  .replace(/%titletext%/g,"titletext_"+i)
                 .replace(/%content%/,data[i]['fields'].description)
-                 );
-
-                  $('#carousel-inner-section1').prepend(feedtemplate1.replace(/%feed-title%/,"feed-title1_"+i)
-                .replace(/%title%/,data[i+2]['fields'].title)
-                .replace(/%feed-content%/,"feed-content_1"+i)
-                //  .replace(/%titletext%/g,"titletext_"+i)
-                .replace(/%content%/,data[i+2]['fields'].description)
                  );
             }
 
@@ -314,7 +299,7 @@ var retrive_polls=function(){
                         y3=data[2]['fields'].polloption_score
                         y4=data[3]['fields'].polloption_score
 
-                        var ts=parseInt(y1)+parseInt(y2)+parseInt(y3)+parseInt(y4)
+                        var ts=y1+y2+y3+y4
                         y1= Math.floor( (y1/ts)*100)
                         y2= Math.floor( (y2/ts)*100)
                         y3= Math.floor( (y3/ts)*100)
@@ -362,12 +347,7 @@ var makechart=function(i,x1,x2,x3,x4,y1,y2,y3,y4,ques){
                     datasets: [{
                     label: "Udec Interractive Chart",
                     data: [y1,y2,y3,y4],
-                    backgroundColor:[ "rgba(92,184,92,1)",
-                                 "rgba(240,173,78,1)",
-                                 "rgba(91,192,222,1)",
-                                 "rgba(217,83,79,1)"
-
-                                 ],
+                    backgroundColor: "rgba(153,255,51,1)",
                     borderColor: "rgba(0,0,0,0.1)",
                      borderWidth: 1
                     }]
@@ -391,12 +371,7 @@ var makechart=function(i,x1,x2,x3,x4,y1,y2,y3,y4,ques){
                     datasets: [{
                     label: "Udec Interractive Chart",
                     data: [y1,y2,y3,y4],
-                     backgroundColor:[ "rgba(92,184,92,1)",
-                                 "rgba(240,173,78,1)",
-                                 "rgba(91,192,222,1)",
-                                 "rgba(217,83,79,1)"
-
-                                 ],
+                    backgroundColor: "rgba(153,255,51,1)",
                      borderColor: "rgba(0,0,0,0.1)",
                       borderWidth: 1
                     }]
@@ -424,12 +399,7 @@ var makechart=function(i,x1,x2,x3,x4,y1,y2,y3,y4,ques){
                 datasets: [{
                  label: "Udec Interractive Chart",
                 data: [y1,y2,y3,y4],
-                 backgroundColor:[ "rgba(92,184,92,1)",
-                                 "rgba(240,173,78,1)",
-                                 "rgba(91,192,222,1)",
-                                 "rgba(217,83,79,1)"
-
-                                 ],
+                backgroundColor: "rgba(153,255,51,0.4)"
                 }]
             },
             options:{
@@ -740,6 +710,7 @@ var attachsharebtn=function(){
                 caption: mycaption,
                 description: desc,
                 quote:desc
+
             }, function(response){});  
         
         })

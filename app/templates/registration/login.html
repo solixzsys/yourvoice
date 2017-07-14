@@ -32,7 +32,7 @@
 
 
 
-<div style="padding: 40px 0; text-align: center" class="center-block">OR </div>
+<div style="padding: 20px 0; text-align: center" class="center-block">OR </div>
   <form method="post" style="">
     {% csrf_token %}
     {% for field in form %}
@@ -47,7 +47,7 @@
         {% endfor %}
       </p>
     {% endfor %}
-    <button style="margin: 10px 0" class="btn btn-large btn-warning " type="submit"><a style="text-decoration: none" href="/signup"> Register</a></button>
+    <button style="margin: 10px 0" class="btn btn-large btn-warning " type="submit"><a style="text-decoration: none;color: white" href="/signup"> Register</a></button>
     <button style="margin: 10px 0" class="btn btn-large btn-primary pull-right" type="submit">Login</button>
   </form>
 
@@ -69,9 +69,11 @@
 $(function(){
     $('#id_username').addClass('form-control');
     $('#id_username').attr({'placeholder':'Enter Email'});
+    $('#id_username').parent('p').prepend('<strong style="font-weight:bold">Email:</strong>')
 
     $('#id_password').addClass('form-control');
     $('#id_password').attr({'placeholder':'Password'});
+    $('#id_password').parent('p').prepend('<strong style="font-weight:bold">Password:</strong>')
 })
 
 

@@ -102,6 +102,12 @@ def result(request):
     hero=StoryFlatPage.objects.filter(story_is_hero=True)[0]
     return render(request,'result.html',{'pages':pages,'hero':hero})
 
+def result_detail(request):
+    story_id=request.GET.get('story')
+    page=StoryFlatPage.objects.get(pk=story_id)
+    return render(request,'result_detail.html',{'page':page})
+
+
 def about(request):
     
     return render(request,'about.html',{})

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+ {% load staticfiles %}
+
+ {% block hero %}
+{% endblock %}
+
+
+{% block middlecol %}
+
+<div class="col-xs-12" style="padding: 50px 0">
+    <div><h2 style="padding: 10px 0;text-align: center"> {{page.title}}</h2></div>
+    <div style="padding: 30px 0">
+        <img  src="{% static 'img/placeholder1.png' %}"  />
+            <h3> {{page.description | safe}}  </h3>
+    </div>
+
+    <div>{{page.story_content | safe}}</div>
+
+
+
+
+</div>
+
+
+{% endblock %}

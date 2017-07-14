@@ -484,6 +484,7 @@ canvas{
 
 #feed-analysis{
     padding: 50px 0;
+    margin-top: 100px;
 }
 .carousel-indicators .active{
     /*background-color: #cb7a08;*/
@@ -571,6 +572,9 @@ canvas{
     .textboard h3{
         font-weight: bold;
         padding: 20px 0;
+    }
+    .textboard h6{
+        color: #aa0000;
     }
 
 

@@ -4,13 +4,13 @@
 {% block leftcol %}
 {% endblock %}
 {% block middlecol %}
-<p style="padding: 30px;">Please endaviour to fill the form below to register your account</p>
+<p style="padding: 30px;"><i style="color: red" class="fa fa-edit"></i> Please endaviour to fill the form below to register your account</p>
 <form class="form-horizontal" method="post" >
   {% csrf_token %}
   
   {% for field in user_form %}
       <p style="margin-bottom: 10px">
-        <!--{{ field.label_tag }}<br>-->
+        <strong style="font-weight: bold" > {{field.label_tag }}</strong><br>
         {{ field }}
         <!--{% if field.help_text %}
           <small style="color: grey">{{ field.help_text }}</small>
@@ -56,6 +56,8 @@
 <script>
 
 $(function(){
+
+   $('#id_location').attr({'placeholder':'Your Place of Residence'});
 
 $('select#id_state_of_origin').on('change',function(){
     var choice=$('select#id_state_of_origin option:selected').text();
