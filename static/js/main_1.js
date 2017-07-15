@@ -39,6 +39,7 @@ $(function(){
      retrive_polls();
 
      attachsharebtn();
+     
 
      $('.customer.share').on("click", function(e) {
       $(this).customerPopup(e);
@@ -165,20 +166,34 @@ var retrive_feed=function(){
 
 
             var feedtemplate=$('#feedtemplate').html();
+             var feedtemplate1=$('#feedtemplate1').html();
             if(i==0){
                 $('#carousel-inner-section').prepend(feedtemplate.replace(/%feed-title%/,"feed-title_"+i)
                 .replace(/%title%/,data[i]['fields'].title)
                 .replace(/%feed-content%/,"feed-content_"+i)
                 .replace(/%active%/,"active")
-                .replace(/%content%/,data[i]['fields'].description)
+                .replace(/%content%/,data[i]['fields'].description));
+
+                 $('#carousel-inner-section1').prepend(feedtemplate1.replace(/%feed-title%/,"feed-title_"+i)
+                .replace(/%title%/,data[i+2]['fields'].title)
+                .replace(/%feed-content%/,"feed-content_1"+i)
+                .replace(/%active%/,"active")
+                .replace(/%content%/,data[i+2]['fields'].description)
                 
                 );
             }else{
-                 $('#carousel-inner-section').prepend(feedtemplate.replace(/%feed-title%/,"feed-title_"+i)
+                 $('#carousel-inner-section').prepend(feedtemplate.replace(/%feed-title%/,"feed-title1_"+i)
                 .replace(/%title%/,data[i]['fields'].title)
                 .replace(/%feed-content%/,"feed-content_"+i)
                 //  .replace(/%titletext%/g,"titletext_"+i)
                 .replace(/%content%/,data[i]['fields'].description)
+                 );
+
+                  $('#carousel-inner-section1').prepend(feedtemplate1.replace(/%feed-title%/,"feed-title1_"+i)
+                .replace(/%title%/,data[i+2]['fields'].title)
+                .replace(/%feed-content%/,"feed-content_1"+i)
+                //  .replace(/%titletext%/g,"titletext_"+i)
+                .replace(/%content%/,data[i+2]['fields'].description)
                  );
             }
 
@@ -484,6 +499,10 @@ for(var i=0;i< dynamicbtn.length;i++){
         if(sessionStorage[n]){
             sessionStorage[n]=Number(sessionStorage[n])+1;
               makeajax($(this).attr('name'),sessionStorage[n],$(this).attr('data-titletext'),$(this).attr('data-col'))
+              console.log('---------------------------'+sessionStorage[n])
+
+              
+              
 
         }else{
             sessionStorage.setItem(n,1)

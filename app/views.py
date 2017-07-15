@@ -288,7 +288,7 @@ def getsurvey(request):
 
 def mypolls(request):
 
-    return render(request,'allpolls.html',{})    
+    return render(request,'allpolls.html',{'user':request.user})    
 
 def loadstate(request):
     state=NigeriaState.objects.all()

@@ -39,6 +39,7 @@ $(function(){
      retrive_polls();
 
      attachsharebtn();
+     
 
      $('.customer.share').on("click", function(e) {
       $(this).customerPopup(e);
@@ -498,6 +499,10 @@ for(var i=0;i< dynamicbtn.length;i++){
         if(sessionStorage[n]){
             sessionStorage[n]=Number(sessionStorage[n])+1;
               makeajax($(this).attr('name'),sessionStorage[n],$(this).attr('data-titletext'),$(this).attr('data-col'))
+              console.log('---------------------------'+sessionStorage[n])
+
+              
+              
 
         }else{
             sessionStorage.setItem(n,1)

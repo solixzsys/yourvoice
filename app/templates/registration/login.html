@@ -48,7 +48,7 @@
       </p>
     {% endfor %}
     <button style="margin: 10px 0" class="btn btn-large btn-warning " type="submit"><a style="text-decoration: none;color: white" href="/signup"> Register</a></button>
-    <button style="margin: 10px 0" class="btn btn-large btn-primary pull-right" type="submit">Login</button>
+    <button id="btn_login" style="margin: 10px 0" class="btn btn-large btn-primary pull-right" type="submit">Login</button>
   </form>
 
 
@@ -74,6 +74,12 @@ $(function(){
     $('#id_password').addClass('form-control');
     $('#id_password').attr({'placeholder':'Password'});
     $('#id_password').parent('p').prepend('<strong style="font-weight:bold">Password:</strong>')
+
+    $('#btn_login').on('click',function(){
+      // alert('sssssssssssssssss')
+      sessionStorage.setItem('login',1);
+
+    })
 })
 
 
