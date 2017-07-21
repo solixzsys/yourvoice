@@ -1,22 +1,12 @@
 
 
-body{
-    /*font-family: Raleway;*/
-    background-color: white;
-    /*font-family: 'Droid Serif', serif;*/
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    line-height: 1.5em;
-    font-size: 100%;
-    
-}
-
 #header{
    
     
     position: relative;
     /*height: 730px;*/
     /*padding: 20px 80px 0 80px;*/
-    background: url(../img/city_a.jpg) no-repeat 50% 10%;
+    background: url(../img/979.jpg) no-repeat 35% 10%;
     /*background-blend-mode: multiply;*/
     background-size: cover;
      background-color: #333;
@@ -26,7 +16,7 @@ body{
 }
 #headerwrapper{
     height: 100%;
-    background: rgba(25, 25, 25, 0.6);
+    /*background: rgba(25, 25, 25, 0.6);*/
     padding-left: 40px;
     padding-top: 20px;
     width: 100%;
@@ -74,7 +64,12 @@ body{
         opacity: 1;
     }
 }
-
+h4.hero_text{
+    background-color: rgba(26,25,50,0.34);
+    padding: 50px 0px;
+    /* margin: 0 150px; */
+    margin-left: 200px;
+}
 
 .hero_text{
     position: inherit;
@@ -264,7 +259,7 @@ nav{
     display: none;
 }
 .navbar-default{
-    background-color: #036cc2;
+    background-color: #464485;
     box-shadow: 0px -1px 8px 1px #111211;
     opacity: 0.9;
 }
@@ -334,6 +329,7 @@ nav{
 #mainnav{
     position: absolute;
     right: 30px;
+    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
 }
 
 #row_1 #feedspace h3.title{
@@ -381,10 +377,10 @@ section#ourteam{
 
 .sectiontitle{
    
-    font-family: Raleway, Verdana, Geneva, Tahoma, sans-serif;
-    /*font-size: 30px;*/
+    /*font-family: Raleway, Verdana, Geneva, Tahoma, sans-serif;*/
+    font-size: 1.5em;
     text-align: center;
-    font-weight: bold;
+    /*font-weight: bold;*/
     color: #444;
 }
 .section-title-col{
@@ -428,7 +424,7 @@ div.footer-nav a{
 }
 
 .footer-subhead{
-    font-family: 'Alfa Slab One',Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+    /*font-family: 'Alfa Slab One',Cambria, Cochin, Georgia, Times, Times New Roman, serif;*/
     font-weight: bold;
     padding: 20px 0;
     
@@ -487,6 +483,7 @@ canvas{
 #feed-analysis{
     padding: 50px 0;
     margin-top: 100px;
+    background-color:  rgba(231,231,231,0.36);
 }
 .carousel-indicators .active{
     /*background-color: #cb7a08;*/
@@ -514,18 +511,53 @@ div.textboard_mini{
         /*color: #aa0000;*/
     }
 
+div.sectiontitle{
+    padding: 10px 0;
+    
+}
+#footer-info2{
+    color: #ffffff;
+}
 
 
+#takepart-container{
+    background: url(../img/city_a.jpg);
+}
 
 
+#takepart-container h6{
+ margin-top: 20px;
+}
+#takepart-container h6 span{
+    color:#fff;
+    font-weight: bold;
+    font-style: italic;
+   
+    background-color:  rgba(27,27,27,0.43);
+    opacity: 0.8;
+    padding: 10px;
+    border-radius: 5px;
 
+}
 
+#contact-container li{
+    color: #333333;
+}
 
+#contact-container li:first-child{
+    color: #4b4988;
+}
+#contact-container li:hover{
+    color: #e43636;
 
+}
+div.latestpoll{
+    background: url(../img/06.jpg);
+    background-size: contain;
+    padding: 100px 0;
+    box-shadow: 1px 2px 11px grey;
 
-
-
-
+}
 
 
 
@@ -533,6 +565,7 @@ div.textboard_mini{
 /*Media Query section*/
 
 @media only screen and (min-width:300px){
+   
 
 }
 
@@ -540,6 +573,9 @@ div.textboard_mini{
 
 }
 @media only screen and (min-width:960px){
+    ul.phone{
+        width: 80%;
+    }
 
 }
 @media only screen and (min-width:1140px){
@@ -554,6 +590,21 @@ div.textboard_mini{
 
 
 @media screen and (max-width: 1000px){
+    div.textboard_mini{
+        margin-top: 20px;
+    }
+    h2{
+        font-size: 1.1em;
+    }
+    h3{
+        font-size: 1.2em;
+    }
+    .sectiontitle{
+   
+    /*font-family: Raleway, Verdana, Geneva, Tahoma, sans-serif;*/
+    font-size: 1.0em;
+    
+    }
     #services-container{
     padding: 50px 0;
     }
@@ -600,7 +651,22 @@ div.textboard_mini{
 }
 
 @media screen and (max-width: 760px){
-    
+    ul.phone{
+        width: 100%;
+    }
+     h4.hero_text{
+        margin-left: 0;
+    }
+    #header{
+        position: relative;
+    /* height: 730px; */
+    /* padding: 20px 80px 0 80px; */
+    background: url(../img/979.jpg) no-repeat 20% 20%;
+    /* background-blend-mode: multiply; */
+    background-size: cover;
+    background-color: #333;
+    padding: 0px 0px 0 0px;
+    }
 
     div.mynav{
             display: none;
