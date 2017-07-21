@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load social_widgets %}
 {% block extra_style %}
 <style>
 .hero_heading a{
@@ -24,6 +25,10 @@ body{
 .othercol a, .othercol a:hover{
     text-decoration: none;
     color: #555;
+}
+div.panel-body{
+        height: 300px;
+    overflow-y: scroll;
 }
 </style>
 
@@ -99,7 +104,14 @@ body{
             <h3 class="panel-title"><span style="color: red;font-size: 26px;font-weight: bold "> Today's News</span></h3>
       </div>
       <div class="panel-body">
-            Panel content
+            <ul>
+                {% for feed in feeds %}
+                <li style="color: #00aaff;font-weight: bold" class="primary">{{feed.title}}</li>
+                <li class="default">{{feed.description}}</li>
+
+
+                {% endfor %}
+            </ul>
       </div>
       <div class="panel-footer">
             
@@ -110,7 +122,8 @@ body{
             <h3 class="panel-title"><span style="color: red;font-size: 26px;font-weight: bold "> Twitter Feed</span></h3>
       </div>
       <div class="panel-body">
-            Panel content
+            <a class="twitter-timeline"  href="https://twitter.com/hashtag/unity3d" data-widget-id="882244242508328960">#unity3d Tweets</a>
+                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
       </div>
       <div class="panel-footer">
             
@@ -121,7 +134,7 @@ body{
             <h3 class="panel-title"><span style="color: red;font-size: 26px;font-weight: bold "> Facebook Feed</span></h3>
       </div>
       <div class="panel-body">
-            Panel content
+           {% social_widget_render "facebook/activity_feed.html" locale="en_US" app_id=12345678 site="bigwan.pythonanywhere.com" action="likes, recommends" colorscheme="light" header=True height=300 linktarget="_blank" max_age=0 recommendations=False width=300 %}
       </div>
       <div class="panel-footer">
             

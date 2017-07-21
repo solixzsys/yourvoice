@@ -100,11 +100,14 @@ def update_profile(request):
 def result(request):
     pages=StoryFlatPage.objects.all()
     hero=StoryFlatPage.objects.filter(story_is_hero=True)[0]
-    return render(request,'result.html',{'pages':pages,'hero':hero})
+    feed=MyFeed.objects.all()
+    return render(request,'result.html',{'pages':pages,'hero':hero,'feeds':feed})
 
 def result_detail(request):
     story_id=request.GET.get('story')
     page=StoryFlatPage.objects.get(pk=story_id)
+    
+
     return render(request,'result_detail.html',{'page':page})
 
 
