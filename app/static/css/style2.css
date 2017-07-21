@@ -27,6 +27,11 @@
      width: 100%;
      background-color: grey;
 }
+img.ico-img{
+        width: 36px;
+        float: right;
+    }
+
 
 .textboard{
     -webkit-animation-name:textboardin; 
@@ -625,9 +630,10 @@ div.latestpoll{
         display: block;
 
     }
-    .textboard img{
+    .feature-img{
         display: none;
     }
+    
     .textboard{
         border-color: #f0ad4e;
     }
