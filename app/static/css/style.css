@@ -3,7 +3,7 @@ body{
     /*font-family: Raleway,Helvetica, sans-serif;*/
      font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
     line-height: 1.5em;
-    background-color: #ffffff;
+    background-color: rgb(250, 250, 250);
     font-size: 1.0em;
 }
 
@@ -251,7 +251,7 @@ ul#optionarea{
     color: #333333;
 }
 .agenda{
-    width: 80%;
+    /*width: 80%;*/
     background-color: #ee464b;
     opacity: 0.9;
     color: #ffffff;

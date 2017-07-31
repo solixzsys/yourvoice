@@ -22,6 +22,17 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+class ScrapyFeed(models.Model):
+    name=models.CharField(max_length=30, blank=True)
+    title=models.TextField()
+    link=models.TextField()
+    image=models.TextField()
+    publish_on=models.TextField()
+    scrap_on=models.CharField(max_length=30, blank=True)
+    story=models.TextField()
+
+
+
 
 class NigeriaState(models.Model):
     name=models.CharField(max_length=30, blank=True)

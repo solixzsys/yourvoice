@@ -488,7 +488,7 @@ canvas{
 #feed-analysis{
     padding: 50px 0;
     margin-top: 100px;
-    background-color:  rgba(231,231,231,0.36);
+    /*background-color:  rgba(231,231,231,0.36);*/
 }
 .carousel-indicators .active{
     /*background-color: #cb7a08;*/
@@ -557,7 +557,7 @@ div.sectiontitle{
 
 }
 div.latestpoll{
-    background: url(../img/06.jpg);
+    /*background: url(../img/06.jpg);*/
     background-size: contain;
     padding: 100px 0;
     box-shadow: 1px 2px 11px grey;
@@ -569,34 +569,187 @@ span.optext{
 }
 
 
+/*.row > .col-md-3:nth-child(6n+1) {
+    clear: left;
+}*/
+/*.row {
+  display: flex;
+  flex-wrap: wrap;
+}*/
+/*div.news-banner{
+    padding: 5px;
+    background-color: rgb(200, 200, 200);
+    border-radius:5px; 
+}*/
+div.news-banner.trending-news-banner{
+    color: #ee004e;
+    /*font-size: 24px;*/
+    font-weight: bold;
+     text-decoration: underline;
+     margin-left: -15px;
+}
+iframe#ticker{
+    position: fixed;
+    bottom: 0;
+    /*width: 100%;*/
+}
+/*News Entry Section*/
 
+div.news-entry{
+    margin:5px -15px 5px -15px;
+    background-color: rgb(255, 255, 255);
+    border: solid 1px #e2e2e2;
+    box-shadow: 1px 1px 1px #e2e2e2;
+}
+div.news-listing{
+    padding: 5px;
+    background-color: rgb(255, 255, 255);
+    margin: 5px;
+    border: solid 1px #e2e2e2;
+    box-shadow: 1px 1px 1px grey;
 
-/*Media Query section*/
+}
+div.news-listing:hover{
+    border: none;
+    box-shadow: none;
+
+}
+
+/*.panel-heading{
+    padding: 0 15px;
+}*/
+.news-listing a{
+    text-decoration: none;
+    color: #333333;
+}
+
+.news-listing a:hover{
+    
+    color: red;
+}
+
+div.news-entry img{
+        float: none;
+        height: 100px;
+        
+
+    }
+
+    .news-wrap{
+            box-shadow: 1px 1px 1px grey;
+            background-color: #ffffff;
+            padding: 5px;
+    }
+    .news-text{
+        text-align: left;
+    }
+
+/*Media Query section Mobile First*/
 
 @media only screen and (min-width:300px){
+    .news-wrap{
+        width: 100%;
+        height: 100px;
+        margin: 5px;
+        display: inline-flex;
+    }
+    .news-wrap img{
+        width: 90px;
+        margin-right: 5px;
+    }
+    .news-wrap .news-text{
+        font-size: 14px;
+    }
+
    
 
 }
 
-@media only screen and (min-width:600px){
+@media only screen and (min-width:640px){
+    div.news-entry img{
+        float: none;
+        height: 100px;
+        
+
+    }
+    div.news-entry {
+        width: 23.2%;
+        overflow: hidden;
+        float: left;
+        /*display: inline-flex;*/
+        margin: 5px;
+        height: 160px;
+        padding: 5px;
+
+    }
+    div .trending-banner{
+        width: calc(24.6%*4);
+    }
+
+
 
 }
+/* Small Devices, Tablets */
+    @media only screen and (min-width : 768px) {
+         .news-wrap{
+        width: 31.5%;
+        /*height: 100px;*/
+        margin: 5px;
+        display: inline-table;
+        
+    }
+    .news-wrap img{
+        width: 100%;
+        margin-right: 5px;
+    }
+    .news-wrap .news-text{
+        font-size: 16px;
+    }
+
+}
+
 @media only screen and (min-width:960px){
     ul.phone{
         width: 80%;
     }
 
 }
+
+@media only screen and (min-width : 992px) {
+       .news-wrap{
+        width: 31.3%;
+        /*height: 100px;*/
+        margin: 5px;
+        display: inline-table;
+        
+    }
+    .news-wrap img{
+        width: 100%;
+        margin-right: 5px;
+    }
+    .news-wrap .news-text{
+        font-size: 16px;
+    }
+
+}
+
 @media only screen and (min-width:1140px){
 
 }
+
+@media only screen and (min-width : 1200px) {
+
+}
+
 @media only screen and (min-width:1360px){
 
 }
 
 
 
-
+@media screen and (max-width: 1200px){
+   
+}
 
 @media screen and (max-width: 1000px){
     div.textboard_mini{
@@ -655,12 +808,24 @@ span.optext{
         position: relative;
         margin-right: 25%;
     }
-
+div.news-entry {
+        width: 31.1%;
+     }
+   
 
 
 }
 
+@media screen and (max-width: 993px){
+     div.news-entry {
+        width: 23.2%;
+     }
+   
+
+}
+
 @media screen and (max-width: 760px){
+    
     ul.phone{
         width: 100%;
     }
@@ -688,4 +853,22 @@ span.optext{
 
 
 
+}
+@media screen and (max-width: 640px){
+
+}
+@media screen and (max-width: 575px){
+    div.news-entry img{
+        /*float: left;*/
+        max-height: 50px;
+        width: 90px;
+
+    }
+   div.news-entry{
+       width:100%;
+       display: inline-flex;
+   }
+   div.news-entry .news-title{
+        clear: left;
+   }
 }

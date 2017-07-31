@@ -24,7 +24,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     
     url(r'^$', index,name='home'),
-    url(r'^index3/$', index2,name='home2'),
+    url(r'^index_/$', index_,name='index_'),
     url(r'^result$', result),
     url(r'^result_detail', result_detail),
     url(r'^test$', test),

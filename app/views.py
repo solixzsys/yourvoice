@@ -130,12 +130,12 @@ def index(request):
     # for obj in poll_object:
     #     polls_dict[obj.poll_question]=PollOption.objects.filter(polloption_questioncode=obj.poll_code)
    
+    scrapyfeed=ScrapyFeed.objects.all()
 
 
+    return render(request,'index.html',{'obj':poll_object,'user':user,'scrapyfeed':scrapyfeed})
 
-    return render(request,'index.html',{'obj':poll_object,'user':user})
-
-def index2(request):
+def index_(request):
     
 
     polls_dict={}
@@ -146,7 +146,7 @@ def index2(request):
 
 
 
-    return render(request,'index3.html',{'objccc':poll_object})    
+    return render(request,'index_.html',{'objccc':poll_object})    
 
 def test(request):
     polls_dict={}

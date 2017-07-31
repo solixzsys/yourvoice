@@ -24,16 +24,16 @@ class FeedObject:
         self.domain=""
         self.date=""
         self.sources=[
-            {
-            'url':'http://rss.cnn.com/rss/money_news_international.rss',
-            'name':'cnn',
-            'domain':'business',
-            },
             # {
-            # 'url':'http://rss.cnn.com/rss/edition_entertainment.rss',
+            # 'url':'http://rss.cnn.com/rss/money_news_international.rss',
             # 'name':'cnn',
-            # 'domain':'society',
+            # 'domain':'business',
             # },
+            {
+            'url':'http://punchng.com/feed/',
+            'name':'punch',
+            'domain':'society',
+            },
         ]
 
 
@@ -44,12 +44,12 @@ class FeedObject:
         for source in self.sources:
             myfeed=feedparser.parse(source['url'])
             for f in myfeed.entries:
-                item.title=f.title
-                item.description=f.summary
-                item.date=f.published
-                item.source=source['name']
-                item.domain=source['domain']
-                    
+                # item.title=f.title
+                # item.description=f.summary
+                # item.date=f.published
+                # item.source=source['name']
+                # item.domain=source['domain']
+                # print()    
                 MyFeed.objects.create(title=f.title,description=f.summary.split('<img')[0],source=source['name'],domain=source['domain'])          
                 print('created............... '+item.title)  
 

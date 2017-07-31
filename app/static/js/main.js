@@ -5,7 +5,7 @@ var slidding=false;
 
 
 
-
+// $('iframe.ticker').css('top',(window.innerHeight-200)+'px');
 
         if($(window).width()<1000){
             // $('.m').css({'display':'none'});

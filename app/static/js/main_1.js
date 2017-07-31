@@ -15,7 +15,7 @@ $(function(){
 
 
             var template=$('#dynamictemplate').html();
-             $('#content').prepend(template.replace(/%surveydescription%/,data[i]['fields'].surveytag_description)
+             $('#poll-spot').prepend(template.replace(/%surveydescription%/,data[i]['fields'].surveytag_description)
              .replace(/%surveytitle%/,data[i]['fields'].surveytag_title)
              .replace(/%colid%/g,"col_"+i)
              .replace(/%titletext%/g,"titletext_"+i)

@@ -280,62 +280,7 @@
                 
                 <div class="container-fluid navbox" style="padding: 50px 0;">
 
-                    <div id="heroid" class="row">
-
-
-
-
-
-
-                        
-                        <div class="col-md-4 textboardwrapper">
-                            <div class="textboard">
-                                <a href="/mypolls/all" style="color:white;text-decoration: none">
-                                <h2 style="">POLL & SURVEY <img class="ico-img" src="../static/img/POLL-SURVEY-ICON.png"  /> </h2>
-                                
-                                <!--<div class="clearfix"></div>-->
-                                    
-                                        <img class="feature-img" src="../static/img/POLL-SURVEY-IMAGE.jpg" style="" alt="">
-                                  
-                               
-                                
-                                <!--<h6>Quick previous and next links for simple pagination implementations with light markup and styles. It's great for simple sites like blogs or magazines</h6>-->
-                               <div class="textboard_mini">
-                                <h6>{{obj.0.poll_question |safe}}</h6>
-                               </div>
-                                </a>
-
-                            </div>
-
-                        </div>
-                        <div class="col-md-4 result">
-                             <div class="textboard  purelink" >
-                                 <a href="/result" style="color:white;text-decoration: none">
-                                <h2 style="">RESULT & ANALYSIS <img class="ico-img" src="../static/img/RESULTS-ANALYSIS-ICON.png"  /></h2>
-                                 <img  class="feature-img" src="../static/img/Osibanjo.jpg" style=" " alt="">
-                                 <div class="textboard_mini">
-                                 <h6 style="padding: 5px"></h6>
-                                <p></p>
-                                 </div>
-                                 </a>            
-                            </div>
-                            
-                        </div>
-                        <div class="col-md-4">
-                             <div class="textboard">
-                                <h2 style="">SOLUTION & SERVICES <img class="ico-img" src="../static/img/SOLUTION-SERVICES-ICON.png"  /></h2>
-                                <img  class="feature-img" src="../static/img/Ambode-7-1.jpg" style="" alt="">
-
-                                <div class="textboard_mini">
-
-
-                                <h6>Quick previous and next links for simple pagination implementations with light markup and styles. It's great for simple sites like blogs or magazines</h6>
-                                </div>
-
-                            </div>
-                            
-                        </div>
-                    </div>
+                    
 
                     
                 </div>
@@ -398,133 +343,38 @@
     <div id="feed-analysis-container" class="container">
         
         <div  id="feed-analysis-row" class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-12 col-md-8 news trending-news">
+                
+                   
+                   
+                        {% for feed in scrapyfeed %}
+                        {% if forloop.counter < 19 %}
 
-                     <div id="feed-carousel" class="carousel slide" data-ride="carousel">
-                    <!-- Indicators -->
-                        <!--<ol class="carousel-indicators">
-                            <li data-target="#feed-carousel" data-slide-to="0" class="active"></li>
-                            <li data-target="#feed-carousel" data-slide-to="1"></li>
-                            <li data-target="#feed-carousel" data-slide-to="2"></li>
-                        </ol>-->
-
-                        <!-- Wrapper for slides -->
-                        <div id="carousel-inner-section" class="carousel-inner" role="listbox">
-                            <script type="template/text" id="feedtemplate">
-                                <div class="item %active%">
-                                    <div  class="feed-panel panel panel-danger">
-                                        <div class="panel-heading">
-                                            <h3 id="%feed-title%" class="panel-title">%title%</h3>
-                                            
-                                        </div>
-                                        <div id="%feed-content%" class="panel-body">
-                                            %content%
-                                        </div>
-                                    </div>
-                                
-                                    <div class="carousel-caption">
-                                        
-                                    </div>
-                                </div>
-                            </script>
-                            <!--<div class="item">
-
-                                 <div  class="feed-panel panel panel-primary">
-                                    <div class="panel-heading">
-                                        <h3 id="feed2-title" class="panel-title">Panel title</h3>
-                                    </div>
-                                    <div id="feed2-content" class="panel-body">
-                                        Panel content
-                                    </div>
-                                </div>
-                               
-
-
-                                <div class="carousel-caption">
-                                    
-                                </div>
-                            </div>-->
                             
-                        </div>
-
-                        <!-- Controls -->
-                        <a class="left carousel-control" href="#feed-carousel" role="button" data-slide="prev">
-                            <i style="color:blue" class="fa fa-backward"></i>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#feed-carousel" role="button" data-slide="next">
-                            <i style="color:blue" class="fa fa-forward"></i>
-                            <span class="sr-only">Next</span>
-                        </a>
-                </div>
-
-                   <div id="feed-carousel1" class="carousel slide" data-ride="carousel">
-                    <!-- Indicators -->
-                        <!--<ol class="carousel-indicators">
-                            <li data-target="#feed-carousel" data-slide-to="0" class="active"></li>
-                            <li data-target="#feed-carousel" data-slide-to="1"></li>
-                            <li data-target="#feed-carousel" data-slide-to="2"></li>
-                        </ol>-->
-
-                        <!-- Wrapper for slides -->
-                        <div id="carousel-inner-section1" class="carousel-inner" role="listbox">
-                            <script type="template/text" id="feedtemplate1">
-                                <div class="item %active%">
-                                    <div  class="feed-panel panel panel-primary">
-                                        <div class="panel-heading">
-                                            <h3 id="%feed-title%" class="panel-title">%title%</h3>
-                                            
-                                        </div>
-                                        <div id="%feed-content%" class="panel-body">
-                                            %content%
-                                        </div>
+                                <div class="news-wrap">
+                                    <img src="{{feed.image}}"/>
+                                    <!--<img src="/static/img/xyz.jpg"/>-->
+                                    <div class="news-text" >
+                                        {{feed.title}}
                                     </div>
+
+                                </div>
                                 
-                                    <div class="carousel-caption">
-                                        
-                                    </div>
-                                </div>
-                            </script>
-                            <!--<div class="item">
 
-                                 <div  class="feed-panel panel panel-primary">
-                                    <div class="panel-heading">
-                                        <h3 id="feed2-title" class="panel-title">Panel title</h3>
-                                    </div>
-                                    <div id="feed2-content" class="panel-body">
-                                        Panel content
-                                    </div>
-                                </div>
-                               
-
-
-                                <div class="carousel-caption">
-                                    
-                                </div>
-                            </div>-->
                             
-                        </div>
-
-                        <!-- Controls -->
-                        <!--<a class="left carousel-control" href="#feed-carousel" role="button" data-slide="prev">
-                            <i style="color:blue" class="fa fa-backward"></i>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#feed-carousel" role="button" data-slide="next">
-                            <i style="color:blue" class="fa fa-forward"></i>
-                            <span class="sr-only">Next</span>
-                        </a>-->
-                </div>
-
-
-
-            </div>
-            <div class="col-sm-6">
+                          {% endif %}  
+                        {% endfor %}
+                     
+                     </div>
+                     
+                  
+             
+            <div class="col-sm-12 col-md-4 analysis-chart">
 
 
 
 
-                <div id="analysis-carousel" class="carousel slide" data-ride="carousel">
+                <div style="position: relative" id="analysis-carousel" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
                         <!--<ol class="carousel-indicators">
                             <li data-target="#analysis-carousel" data-slide-to="0" class="active"></li>
@@ -554,30 +404,15 @@
                         </div>
 
                         <!-- Controls -->
-                        <a class="left carousel-control" href="#analysis-carousel" role="button" data-slide="prev">
+                        <!--<a class="left carousel-control" href="#analysis-carousel" role="button" data-slide="prev">
                             <i style="color:blue" class="fa fa-backward"></i>
                             <span class="sr-only">Previous</span>
                         </a>
                         <a class="right carousel-control" href="#analysis-carousel" role="button" data-slide="next">
                             <i style="color:blue" class="fa fa-forward"></i>
                             <span class="sr-only">Next</span>
-                        </a>
+                        </a>-->
                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -589,7 +424,182 @@
     
 </section>
 
-<div id="takepart-container" class="container-fluid" style=" margin: 100px 0;   background-color: #eee;" >
+<section id="news-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                <div class="row">
+                    
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                             
+                            
+                            <div class="panel panel-info">
+                                  <div class="panel-heading">
+                                        <h3 style="font-weight: bold;color: red;" class="panel-title">Business</h3>
+                                  </div>
+                                  <div class="panel-body">
+                                        
+                                        {% for feed in scrapyfeed %}
+                                        {% if forloop.counter > 10 and forloop.counter < 21 %}
+                                            <div class="news-listing news-left">
+                                                {{feed.title}}
+                                            </div>
+                                        {% endif %}
+                                        {% endfor %}
+                                        
+                                  </div>
+                            </div>
+                            
+
+
+                                    
+
+
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            
+
+
+                            
+                            <div class="panel panel-info">
+                                  <div class="panel-heading">
+                                        <h3 style="font-weight: bold;color: red;" class="panel-title">Politics</h3>
+                                  </div>
+                                  <div class="panel-body">
+                                        {% for feed in scrapyfeed %}
+                                        {% if forloop.counter > 20 and forloop.counter < 31 %}
+                                            <div class="news-listing news-right ">
+                                            {{feed.title}}
+
+                                            </div>
+                                        {% endif %}
+                                        {% endfor %}
+                                  </div>
+                            </div>
+                            
+
+
+
+
+                            
+                        </div>
+                        
+                </div>
+                
+            </div>
+            <div id="poll-spot" class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                <div id="row_0" class="row">
+
+                        <script type="text/template" id="dynamictemplate"> 
+
+                    
+
+                                    <!--<div id="%banner%"  class="row">
+                                        
+                                        <div class=" col-sm-12 msg1 " >
+                                            <h4>
+                                            
+                                                %surveydescription%
+                                                <hr style="border-bottom: solid 1px grey;opacity: 0.3;width: 30%;margin-top:100px">
+                                            </h4>
+                                        </div>
+
+                                        
+                                    </div>-->
+                        
+                                    
+                                    
+                                        
+                                        <div id="%colid%" class="col-xs-12" style="margin-bottom:50px">
+                                        
+                                            <div class="agenda center-block">
+                                                <h2 class="agenda-title">
+                                                
+                                                    %surveytitle%
+
+                                                </h2>
+                                                <div class="panel panel-primary">
+                                                            <div class="panel-heading">
+                                                                <h4 class="panel-title" id="%titletext%"></h4>
+                                                            </div>
+                                                            <div class="panel-body">
+
+                                                                <ul id='optionarea' class="list-group">
+                                                                    
+
+
+
+                                                                </ul>
+
+                                                                <!--<div
+                                                                                class="fb-like"
+                                                                                data-share="true"
+                                                                                data-width="450"
+                                                                                data-show-faces="true">
+                                                                </div>-->
+
+
+
+                                                        <button id="%twitter-shareid%" class="btn btn-primary">
+                                                                
+                                                            <i class="twitter customer share" href="https://twitter.com/share?url=https://bigwan.pythonanywhere.com&amp;text=%mytext% &amp;hashtags=solixz" title="Twitter share" target="_blank">Twitter</i>
+                                                            
+                                                            
+                                                        </button>
+                                                                
+
+
+                                                                <button  id="%poll-shareid%" data-col="%colid%" class="poll-share btn btn-primary "> <i class="fa  fa-facebook-square ">share</i></button>
+                                                            <button  id="%next%" data-titletext="%titletext%" data-col="%colid%" data-row="%rowid%" name="%btntag%" style="" type="button"  class="btnpoll btn btn-info pull-right ">Next</button>
+                                                            </div>
+
+
+                                                                    <div class="panel-footer">
+                                                                        
+                                                                            <div class="progress">
+                                                                                <div class="progress-bar progress-bar-success" style="width: 35%">
+                                                                                    <span class="sr-only">35% Complete (success)</span>
+                                                                                </div>
+                                                                                <div class="progress-bar progress-bar-warning" style="width: 20%">
+                                                                                    <span class="sr-only">20% Complete (warning)</span>
+                                                                                </div>
+                                                                                <div class="progress-bar progress-bar-info" style="width: 10%">
+                                                                                    <span class="sr-only">10% Complete (danger)</span>
+                                                                                </div>
+                                                                                <div class="progress-bar progress-bar-danger" style="width: 10%">
+                                                                                    <span class="sr-only">10% Complete (danger)</span>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            
+
+                                                                    </div>
+                                                                    
+                                                    
+                                                                    
+                                                </div> 
+                                                
+                                            
+
+
+                                            </div>
+                                        </div>
+                                        
+
+                                    
+                        </script>   
+                </div> 
+
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<div id="takepart-container" class="container-fluid" style="  margin: 100px 0;   background-color: #eee;" >
     
 
 
@@ -615,104 +625,7 @@
     
     <div id="row_0" class="row">
 
-    <script type="text/template" id="dynamictemplate"> 
-
    
-
-                <!--<div id="%banner%"  class="row">
-                    
-                    <div class=" col-sm-12 msg1 " >
-                        <h4>
-                           
-                            %surveydescription%
-                            <hr style="border-bottom: solid 1px grey;opacity: 0.3;width: 30%;margin-top:100px">
-                        </h4>
-                    </div>
-
-                    
-                </div>-->
-     
-                
-                   
-                    
-                    <div id="%colid%" class="col-sm-6" style="margin-top:50px">
-                       
-                        <div class="agenda center-block">
-                            <h2 class="agenda-title">
-                               
-                                %surveytitle%
-
-                            </h2>
-                            <div class="panel panel-primary">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title" id="%titletext%"></h4>
-                                        </div>
-                                        <div class="panel-body">
-
-                                            <ul id='optionarea' class="list-group">
-                                                
-
-
-
-                                            </ul>
-
-                                            <!--<div
-                                                            class="fb-like"
-                                                            data-share="true"
-                                                            data-width="450"
-                                                            data-show-faces="true">
-                                            </div>-->
-
-
-
-                                      <button id="%twitter-shareid%" class="btn btn-primary">
-                                            
-                                           <i class="twitter customer share" href="https://twitter.com/share?url=https://bigwan.pythonanywhere.com&amp;text=%mytext% &amp;hashtags=solixz" title="Twitter share" target="_blank">Twitter</i>
-                                          
-                                          
-                                     </button>
-                                            
-
-
-                                            <button  id="%poll-shareid%" data-col="%colid%" class="poll-share btn btn-primary "> <i class="fa  fa-facebook-square ">share</i></button>
-                                        <button  id="%next%" data-titletext="%titletext%" data-col="%colid%" data-row="%rowid%" name="%btntag%" style="" type="button"  class="btnpoll btn btn-info pull-right ">Next</button>
-                                        </div>
-
-
-                                                <div class="panel-footer">
-                                                    
-                                                        <div class="progress">
-                                                            <div class="progress-bar progress-bar-success" style="width: 35%">
-                                                                <span class="sr-only">35% Complete (success)</span>
-                                                            </div>
-                                                            <div class="progress-bar progress-bar-warning" style="width: 20%">
-                                                                <span class="sr-only">20% Complete (warning)</span>
-                                                            </div>
-                                                            <div class="progress-bar progress-bar-info" style="width: 10%">
-                                                                <span class="sr-only">10% Complete (danger)</span>
-                                                            </div>
-                                                            <div class="progress-bar progress-bar-danger" style="width: 10%">
-                                                                <span class="sr-only">10% Complete (danger)</span>
-                                                            </div>
-                                                        </div>
-
-                                                        
-
-                                                </div>
-                                                
-                                   
-                                                
-                            </div> 
-                            
-                           
-
-
-                        </div>
-                    </div>
-                     
-
-                
-    </script>   
     </div>   
    
      </div>
@@ -786,7 +699,7 @@
 
 
          <!-- 3 iteration row begin --> 
-                <div class="row">
+                <div style="display: none" class="row">
                     <div class="col-sm-12 msg1 " style="padding: 100px 100px">
                         <h2 style=" text-align: center; ">
                             At YourVoice, We collate all your voices and made a critical analysis using our state of the art bescope Data minning and Statistical tools ....
@@ -794,7 +707,7 @@
                     </div>
                 </div>
 
-                 <div class="row">
+                 <div style="display: none" class="row">
                     <div class="col-sm-12 latestpoll" >
                         <div class="agenda center-block">
                             <h3>LATEST OPINION POLL RESULT</h3>
@@ -1210,7 +1123,7 @@
                                 <ul>
                                     <li class="footer-subhead"><h4>Locate Us:</h4></li>
                                 <li id="map">
-                                    <iframe style="border-radius: 5px;position: relative" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.5346251869987!2d3.387373814604186!3d6.453732425761343!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8b11de11c53b%3A0x8d3e2dca80ed48ca!2sWestern+House%2C+Broad+St%2C+Lagos+Island%2C+Lagos!5e0!3m2!1sen!2sng!4v1499248624923" width="300" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+                                    <xxiframe style="border-radius: 5px;position: relative" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.5346251869987!2d3.387373814604186!3d6.453732425761343!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8b11de11c53b%3A0x8d3e2dca80ed48ca!2sWestern+House%2C+Broad+St%2C+Lagos+Island%2C+Lagos!5e0!3m2!1sen!2sng!4v1499248624923" width="300" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
                                 </li>
                                 </ul>
 
@@ -1228,9 +1141,9 @@
 
 
 
-
-            
-
+                <!-- EXCHANGERATES.ORG.UK LIVE CURRENCY RATES TICKER START -->
+<iframe id="ticker" src="http://www.exchangerates.org.uk/widget/ER-LRTICKER.php?w=1800&s=1&mc=NGN&mbg=F0F0F0&bs=yes&bc=000044&f=verdana&fs=10px&fc=000044&lc=000044&lhc=FE9A00&vc=FE9A00&vcu=008000&vcd=FF0000&" width="1800" height="30" frameborder="0" scrolling="no" marginwidth="0" marginheight="0"></iframe>
+<!-- EXCHANGERATES.ORG.UK LIVE CURRENCY RATES TICKER END -->
 
 
         </footer>
@@ -1291,6 +1204,8 @@
                 $('#avatarbox').css('display','none')
 
             })
+
+            
 
 
         </script>
