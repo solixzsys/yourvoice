@@ -1,6 +1,6 @@
 $(function(){
 
-    
+    sessionStorage.clear();
 
 
 
@@ -29,6 +29,7 @@ $(function(){
 
         // console.log(data[i]['fields']);
         makeajax(data[i]['fields'].surveytag_tag,0,"titletext_"+i,"col_"+i);
+        getpollcount(data[i]['fields'].surveytag_tag,"col_"+i);
         }
 
     }
@@ -78,6 +79,18 @@ $(function(){
     //     }
     // )
 
+var getpollcount=function(stag,cid){
+    $.ajax({
+        url:'/pollcount',
+        data:{'tag': stag}
+    })
+    .done(function(data){
+        console.log(cid+'..................poll count: '+data.pcount)
+        $('#'+cid).attr({'data-pollcount':data.pcount})
+
+    })
+
+}
 
     var makeajax=function(stag,page,sect,cid){
 
@@ -88,17 +101,48 @@ $(function(){
     })
     .done(
         function(data){
-             console.log('uuu...........................'+ cid)
+            // console.log('1************************* inside makeajax')
+            //  console.log('uuu...........................'+ cid)
              optionajax(data[0]['fields'].poll_code,cid)
             h=$('#'+sect)
-            console.log('tttttttttttttttttnn    '+cid.split('col_')[1])
+            // console.log('tttttttttttttttttnn    '+cid.split('col_')[1])
              h.html(data[0]['fields'].poll_question).hide().show('slow')
-              txt=$('#twitter_share_'+cid.split('col_')[1]+' i').attr('href')
+            //   txt=$('#twitter_share_'+cid.split('col_')[1]+' i').attr('href')
+            txt=$('#'+cid+' .twitter').attr('href')
+
+              $('#'+cid+' .panel-title').attr({'data-pollid':page})
             //  console.log('################################'+txt+'text='+h.text())
              // $('#twitter_share_'+cid.split('col_')[1]+' i').attr('href',txt+'text='+h.text())
-
+            // console.log('2************************* inside makeajax--txt'+txt)
              newval = txt.replace(new RegExp('%mytext%'),h.text())
+            //  console.log('3************************* inside makeajax')
              $('#twitter_share_'+cid.split('col_')[1]+' i').attr('href',newval);
+
+               var pc=parseInt($('#'+cid).attr('data-pollcount'))
+            var pid=parseInt($('#'+cid).find('h4.panel-title').attr('data-pollid'))
+            
+             console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~'+(pc-pid))
+              if((pc-pid)==1){
+              
+                  $('#'+cid+' button.btnpoll').addClass('disabled')
+                  var pollfinish=0
+                  var pollbtn=$('.btnpoll')
+                  console.log(pollbtn)
+                  $.each(pollbtn,function(i,e){
+                      if(!($(e).hasClass('disabled'))){
+                            pollfinish=1;
+                      }
+                  })
+                  if(pollfinish==0){
+                      setTimeout(function() {
+                           $('#modal2').modal();
+                      $('#modal2').modal('open');
+                          
+                      }, 3000);
+                     
+                  }
+
+              } 
 
         }
     )
@@ -491,20 +535,31 @@ var retrive_quotes=function(){
 
 var attachbtn=function(){
 var dynamicbtn=$('.btnpoll');
+var swt=0
 for(var i=0;i< dynamicbtn.length;i++){
     var btn=$(dynamicbtn[i])
     btn.click(function(){
         var n=$(this).attr('name');
-
+        // n = survey tag
+        
         if(sessionStorage[n]){
+            console.log('############################## first click')
             sessionStorage[n]=Number(sessionStorage[n])+1;
-              makeajax($(this).attr('name'),sessionStorage[n],$(this).attr('data-titletext'),$(this).attr('data-col'))
-              console.log('---------------------------'+sessionStorage[n])
+            // var pc=parseInt($(this).parent().parent().parent().parent().attr('data-pollcount'))
+            // var pid=parseInt($(this).parent().parent().find('h4.panel-title').attr('data-pollid'))
+            //   if(!((pc-pid)==1)){
+                console.log('############################## session n is'+sessionStorage[n])
+                makeajax($(this).attr('name'),sessionStorage[n],$(this).attr('data-titletext'),$(this).attr('data-col'))
+                console.log('££££---------------------------'+sessionStorage[n])
+            //   }else{
+            //       $(this).addClass('disabled')
 
+            //   } 
               
               
 
         }else{
+            console.log('############################## setting session to 1')
             sessionStorage.setItem(n,1)
             makeajax($(this).attr('name'),1,$(this).attr('data-titletext'),$(this).attr('data-col'))
         }
@@ -532,17 +587,17 @@ var incrementscore=function(tag,cid){
     .done(function(data){
         var totalscore=0
         $("#"+cid+ ' .scoreboard').css({'display':'block'})
-         console.log('New score.................. '+data.length)
+        //  console.log('New score.................. '+data.length)
         for (var i=0;i<$("#"+cid+ ' .scoreboard').length;i++){
             $($("#"+cid+ ' .scoreboard')[i]).html(data[i]['fields'].polloption_score)
             totalscore= totalscore+ data[i]['fields'].polloption_score;
         }
 
         
-        console.log(progressbar.length +' ------------ bars')
+        // console.log(progressbar.length +' ------------ bars')
         for(var j=0;j<progressbar.length;j++){
             var p= Math.floor( (data[j]['fields'].polloption_score/totalscore)*100)
-            console.log(j+' ------------ '+p)
+            // console.log(j+' ------------ '+p)
             $((progressbar)[j]).css({'width':p+'%'})
             $((progressbar)[j]).html(p+'%')
 
@@ -554,13 +609,13 @@ var incrementscore=function(tag,cid){
 
 var attachradio=function(){
 
-    console.log('radio attached..........................')
+    // console.log('radio attached..........................')
 
     $('input[type=radio]').each(function(i,v){
 
     $(v).change(function(){
     if($(v).is(":checked")){
-    console.log($(v).attr('data-value'))
+    // console.log($(v).attr('data-value'))
     incrementscore(  $(v).attr('data-value'),$(v).attr('data-colid') )    
 
     }

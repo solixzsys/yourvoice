@@ -1,0 +1,111 @@
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   app/__pycache__/admin.cpython-35.pyc
+	modified:   app/__pycache__/forms.cpython-35.pyc
+	modified:   app/__pycache__/models.cpython-35.pyc
+	modified:   app/__pycache__/views.cpython-35.pyc
+	modified:   app/admin.py
+	modified:   app/forms.py
+	modified:   app/migrations/0001_initial.py
+	deleted:    app/migrations/0002_storyflatpage.py
+	deleted:    app/migrations/0003_storyflatpage_story_date.py
+	deleted:    app/migrations/0004_auto_20170626_2228.py
+	deleted:    app/migrations/0005_auto_20170626_2231.py
+	deleted:    app/migrations/0006_auto_20170628_1137.py
+	deleted:    app/migrations/0007_auto_20170628_1246.py
+	deleted:    app/migrations/0008_auto_20170628_1250.py
+	deleted:    app/migrations/0009_auto_20170701_2037.py
+	deleted:    app/migrations/0010_auto_20170701_2110.py
+	deleted:    app/migrations/0011_auto_20170702_0015.py
+	deleted:    app/migrations/0012_auto_20170702_0020.py
+	deleted:    app/migrations/0013_auto_20170702_0807.py
+	deleted:    app/migrations/0014_auto_20170703_0022.py
+	deleted:    app/migrations/0015_auto_20170703_1321.py
+	deleted:    app/migrations/0016_auto_20170708_0837.py
+	deleted:    app/migrations/0017_auto_20170708_0859.py
+	deleted:    app/migrations/0018_auto_20170708_0924.py
+	deleted:    app/migrations/0019_auto_20170708_1351.py
+	deleted:    app/migrations/0020_auto_20170711_0657.py
+	deleted:    app/migrations/0021_auto_20170712_0933.py
+	deleted:    app/migrations/0022_auto_20170727_1631.py
+	modified:   app/migrations/__pycache__/0001_initial.cpython-35.pyc
+	deleted:    app/migrations/__pycache__/0002_storyflatpage.cpython-35.pyc
+	deleted:    app/migrations/__pycache__/0003_storyflatpage_story_date.cpython-35.pyc
+	deleted:    app/migrations/__pycache__/0004_auto_20170626_2228.cpython-35.pyc
+	deleted:    app/migrations/__pycache__/0005_auto_20170626_2231.cpython-35.pyc
+	deleted:    app/migrations/__pycache__/0006_auto_20170628_1137.cpython-35.pyc
+	deleted:    app/migrations/__pycache__/0007_auto_20170628_1246.cpython-35.pyc
+	deleted:    app/migrations/__pycache__/0008_auto_20170628_1250.cpython-35.pyc
+	deleted:    app/migrations/__pycache__/0009_auto_20170701_2037.cpython-35.pyc
+	deleted:    app/migrations/__pycache__/0010_auto_20170701_2110.cpython-35.pyc
+	deleted:    app/migrations/__pycache__/0011_auto_20170702_0015.cpython-35.pyc
+	deleted:    app/migrations/__pycache__/0012_auto_20170702_0020.cpython-35.pyc
+	deleted:    app/migrations/__pycache__/0013_auto_20170702_0807.cpython-35.pyc
+	deleted:    app/migrations/__pycache__/0014_auto_20170703_0022.cpython-35.pyc
+	deleted:    app/migrations/__pycache__/0015_auto_20170703_1321.cpython-35.pyc
+	deleted:    app/migrations/__pycache__/0016_auto_20170708_0837.cpython-35.pyc
+	deleted:    app/migrations/__pycache__/0017_auto_20170708_0859.cpython-35.pyc
+	deleted:    app/migrations/__pycache__/0018_auto_20170708_0924.cpython-35.pyc
+	deleted:    app/migrations/__pycache__/0019_auto_20170708_1351.cpython-35.pyc
+	deleted:    app/migrations/__pycache__/0020_auto_20170711_0657.cpython-35.pyc
+	deleted:    app/migrations/__pycache__/0021_auto_20170712_0933.cpython-35.pyc
+	deleted:    app/migrations/__pycache__/0022_auto_20170727_1631.cpython-35.pyc
+	modified:   app/migrations/__pycache__/__init__.cpython-35.pyc
+	modified:   app/models.py
+	modified:   app/static/css/style.css
+	modified:   app/static/css/style2.css
+	modified:   app/static/css/style_.css
+	modified:   app/static/js/main_1.js
+	modified:   app/static/js/main_1_pollall.js
+	modified:   app/static/js/main_pollall.js
+	modified:   app/templates/allpolls.html
+	modified:   app/templates/index.html
+	modified:   app/templates/index_.html
+	modified:   app/templates/registration/login.html
+	modified:   app/templates/registration/signup.html
+	modified:   app/views.py
+	modified:   yourvoice/__pycache__/urls.cpython-35.pyc
+	modified:   yourvoice/urls.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	Nigerian-economy.jpg
+	Unity-590x400.jpg
+	app/migrations/0002_auto_20170806_1553.py
+	app/migrations/0003_auto_20170806_1554.py
+	app/migrations/__pycache__/0002_auto_20170806_1532.cpython-35.pyc
+	app/migrations/__pycache__/0002_auto_20170806_1539.cpython-35.pyc
+	app/migrations/__pycache__/0002_auto_20170806_1553.cpython-35.pyc
+	app/migrations/__pycache__/0003_auto_20170806_1533.cpython-35.pyc
+	app/migrations/__pycache__/0003_auto_20170806_1540.cpython-35.pyc
+	app/migrations/__pycache__/0003_auto_20170806_1554.cpython-35.pyc
+	app/migrations/__pycache__/0004_auto_20170806_1534.cpython-35.pyc
+	app/migrations/__pycache__/0004_auto_20170806_1540.cpython-35.pyc
+	app/migrations/__pycache__/0005_auto_20170806_1542.cpython-35.pyc
+	app/migrations/__pycache__/0006_auto_20170806_1546.cpython-35.pyc
+	app/migrations/__pycache__/0007_auto_20170806_1550.cpython-35.pyc
+	app/static/css/materialize-social.css
+	app/static/css/node_modules/
+	app/static/img/Lagos14.jpg
+	app/static/img/Lagos8.jpg
+	app/static/img/lagos-new.jpg
+	app/static/img/queuing1.jpg
+	app/static/js/jquery.form.js
+	app/static/js/main_.js
+	app/templates/opinion/
+	app/templates/registration/success.html
+	app/templates/registration/unsuccessful.html
+	app/templates/result_.html
+	changes.txt
+	market.jpg
+	media/passport/2017/08/
+	sf.csv
+	unity1.jpg
+	xyz.sql
+
+no changes added to commit (use "git add" and/or "git commit -a")

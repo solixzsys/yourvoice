@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.forms import AuthenticationForm
 from app.models import *
 from django.http import JsonResponse,HttpResponse,HttpResponseRedirect
 from django.core import serializers
@@ -12,8 +13,48 @@ from ipware.ip import get_real_ip
 import random
 # Create your views here.
 
+def mylogin(request):
+    print('inside view ........................')
+    if request.method == 'POST':
+        print('in post ........................')
+        user_form = LoginForm(request.POST)
+        if user_form.is_valid():
+            print('valid form ........................')
+               
+            # user=user_form.save(False)
+            # user.username=user_form.cleaned_data.get('username')
+            # user.set_password(user_form.cleaned_data.get('password'))
+            # user.save()
+            user=authenticate(username=user_form.cleaned_data.get('username'),password= user_form.cleaned_data.get('password'))
+            if user is not None:
+                print('authenticate.........................')
+                login(request,user)
+    
+                return render(request,'registration/success.html',{})
+
+            else:
+                print('not authenticating.........................')
+                return render(request,'registration/login.html',{'form':LoginForm(request.POST),'new_form':'0'})
+                
+                
+    else:
+        print('problem........................')
+        user_form = LoginForm()
+        # print(str(user_form))
+    return render(request, 'registration/login.html', {
+        'form': user_form,
+        'new_form':'1'
+        
+    })     
 
 
+
+def mylogout(request):
+    if request.user.is_authenticated():
+        logout(request)
+    return HttpResponseRedirect('/index_')    
+
+        
 def signup(request):
     if request.method == 'POST':
         
@@ -103,6 +144,13 @@ def result(request):
     feed=MyFeed.objects.all()
     return render(request,'result.html',{'pages':pages,'hero':hero,'feeds':feed})
 
+def result_(request):
+    pages=StoryFlatPage.objects.all()
+    hero=StoryFlatPage.objects.filter(story_is_hero=True)[0]
+    feed=MyFeed.objects.all()
+    return render(request,'result_.html',{'pages':pages,'hero':hero,'feeds':feed})    
+
+
 def result_detail(request):
     story_id=request.GET.get('story')
     page=StoryFlatPage.objects.get(pk=story_id)
@@ -140,13 +188,16 @@ def index_(request):
 
     polls_dict={}
     poll_object = Poll.objects.filter(poll_state='PUBLISH')
-    for obj in poll_object:
-        polls_dict[obj.poll_question]=PollOption.objects.filter(polloption_questioncode=obj.poll_code)
+    pages=StoryFlatPage.objects.all()
+    user=request.user
+    print('uuuuuuuuuuuuuuuuuuu+'+user.username)
+    # for obj in poll_object:
+    #     polls_dict[obj.poll_question]=PollOption.objects.filter(polloption_questioncode=obj.poll_code)
    
+    scrapyfeed=ScrapyFeed.objects.all()
 
 
-
-    return render(request,'index_.html',{'objccc':poll_object})    
+    return render(request,'index_.html',{'obj':poll_object,'user':user,'scrapyfeed':scrapyfeed,'pages':pages})    
 
 def test(request):
     polls_dict={}
@@ -291,7 +342,7 @@ def getsurvey(request):
 
 def mypolls(request):
 
-    return render(request,'allpolls.html',{'user':request.user})    
+    return render(request,'opinion/polls.html',{'user':request.user})    
 
 def loadstate(request):
     state=NigeriaState.objects.all()
@@ -308,6 +359,13 @@ def getlg(request):
 
     
     return HttpResponse(serialized,content_type='application/json')     
+
+def pollcount(request):
+    stag=request.GET.get('tag')
+    pcount=Poll.objects.filter(poll_surveytag=SurveyTag.objects.get(surveytag_tag=stag)).count()
+    print('Tag: '+stag+'.....poll: '+str(pcount))  
+   
+    return HttpResponse(json.dumps({'pcount':pcount}),content_type='application/json')
 
 def adminchart(request,id):
     id=request.GET.get('pk')

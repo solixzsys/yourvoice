@@ -1,6 +1,6 @@
 $(function(){
 
-    
+    sessionStorage.clear();
 
 
 
@@ -28,8 +28,13 @@ $(function(){
 
         // console.log(data[i]['fields']);
         makeajax(data[i]['fields'].surveytag_tag,0,"titletext_"+i,"col_"+i);
+        getpollcount(data[i]['fields'].surveytag_tag,"col_"+i);
 
     }
+
+
+ 
+
     retrive_quotes();
     retrive_feed();
 
@@ -37,6 +42,9 @@ $(function(){
      retrive_polls();
 
      attachsharebtn();
+
+// arrange_poll();
+
 
      $('.customer.share').on("click", function(e) {
       $(this).customerPopup(e);
@@ -76,6 +84,21 @@ $(function(){
     // )
 
 
+
+
+var getpollcount=function(stag,cid){
+    $.ajax({
+        url:'/pollcount',
+        data:{'tag': stag}
+    })
+    .done(function(data){
+        console.log(cid+'..................poll count: '+data.pcount)
+        $('#'+cid).attr({'data-pollcount':data.pcount})
+
+    })
+
+}
+
     var makeajax=function(stag,page,sect,cid){
 
          $.ajax({
@@ -85,11 +108,14 @@ $(function(){
     })
     .done(
         function(data){
-             console.log('uuu...........................'+ cid)
+             console.log('poll no:................'+page)
+            //  console.log('uuu...........................'+ cid)
              optionajax(data[0]['fields'].poll_code,cid)
             h=$('#'+sect)
-            console.log('tttttttttttttttttnn    '+cid.split('col_')[1])
+            // console.log('tttttttttttttttttnn    '+cid.split('col_')[1])
              h.html(data[0]['fields'].poll_question).hide().show('slow')
+             $('#'+cid+' .panel-title').attr({'data-pollid':page})
+
             
                txt=$('#twitter_share_'+cid.split('col_')[1]+' i').attr('href')
             //  console.log('################################'+txt+'text='+h.text())
@@ -97,6 +123,24 @@ $(function(){
 
              newval = txt.replace(new RegExp('%mytext%'),h.text())
              $('#twitter_share_'+cid.split('col_')[1]+' i').attr('href',newval);
+
+            // var pc=parseInt($('#'+cid).attr('data-pollcount'))
+            // var pid=parseInt($('#'+cid).find('h4.panel-title').attr('data-pollid'))
+            
+            //  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~'+pc+'---'+pid)
+            //    if((pc-pid)==0){
+
+            //         $('#'+cid).animate({'margin-top':0},3000);
+            //         console.log(cid+' going................')
+                    
+            //         newid=parseInt( cid.split('_')[1])+1
+            //         console.log('new poll................col_'+ newid)
+            //         $('#col_'+newid).animate({'opacity':1},2000);
+              
+            //     //   $('#'+cid+' button.btnpoll').addClass('disabled')
+
+            //   } 
+
 
         }
     )
@@ -134,7 +178,7 @@ var optionajax=function(code,cid){
                 //  <label>\
                 //  <input type="radio" data-colid="'+cid+'" data-value='+data[i]['fields'].polloption_code+' name="optionsRadios" id="optionsRadios'+i+'" value="option'+i+'" checked><span style="" class="optext">'+data[i]["fields"].polloption_text+'</span>\
                 //  </label><b  class="scoreboard badge pull-right">'+ data[i]['fields'].polloption_score+'  </b></li>').hide().show('slow')
-                 a.append('<li class="optionslist'+i+'   list-group-item radio"><label><input type="radio" data-colid="'+cid+'" data-value='+data[i]['fields'].polloption_code+' name="optionsRadios" id="optionsRadios'+i+'" value="option'+i+'" ><span class="optext">'+data[i]['fields'].polloption_text+'</span></label><b  class="scoreboard badge pull-right">'+ data[i]['fields'].polloption_score+'  </b></li>').hide().show('slow')
+                 a.append('<li class="optionslist'+i+'   list-group-item radio"><label><input type="radio" data-colid="'+cid+'" data-value='+data[i]['fields'].polloption_code+' name="optionsRadios" id="optionsRadios'+i+'" value="option'+i+'" ><span class="optext">'+data[i]['fields'].polloption_text+'</span></label><b  class="scoreboard badge pull-right">'+ data[i]['fields'].polloption_score+'  </b></li>')//.hide().show('slow')
             }
             //  a.html(data[0]['fields'].polloption_text)
            attachradio();
@@ -467,8 +511,21 @@ for(var i=0;i< dynamicbtn.length;i++){
 
         if(sessionStorage[n]){
             sessionStorage[n]=Number(sessionStorage[n])+1;
+            var id=$(this).parent().parent().parent().parent().attr('id');
+            console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@ id'+id)
+            var pc=parseInt($(this).parent().parent().parent().parent().attr('data-pollcount'))
+            var pid=parseInt($(this).parent().parent().find('h4.panel-title').attr('data-pollid'))
+              if(!((pc-pid)==1)){
               makeajax($(this).attr('name'),sessionStorage[n],$(this).attr('data-titletext'),$(this).attr('data-col'))
+                }else{
+                    $('#'+id).animate({'margin-top':0},3000);
+                    console.log(id+' going................')
+                    // swt=0;
+                    newid=parseInt( id.split('_')[1])+1
+                    console.log('new poll................col_'+ newid)
+                    $('#col_'+newid).animate({'opacity':1},2000);
 
+              } 
         }else{
             sessionStorage.setItem(n,1)
             makeajax($(this).attr('name'),1,$(this).attr('data-titletext'),$(this).attr('data-col'))
@@ -717,12 +774,6 @@ var attachsharebtn=function(){
 
     })
 }
-
-
-
-
-
-
 
 
 

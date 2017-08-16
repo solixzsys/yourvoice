@@ -2,32 +2,32 @@
 body{
     /*font-family: Raleway,Helvetica, sans-serif;*/
      font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
-    line-height: 1.5em;
+    /*line-height: 1.5em;
     background-color: rgb(250, 250, 250);
-    font-size: 1.0em;
+    font-size: 1.0em;*/
 }
 
 h1{
-    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
-    font-size: 2.0em;
+    /*font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+    font-size: 2.0em;*/
    
 }
 h2{
     
-    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+    /*font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
     font-size: 1.1em;
-    font-weight: bold;
+    font-weight: bold;*/
 }
 h3{
-    
+/*    
     font-family: 'Raleway', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 2.0em;
     padding: 10px 0;
-    /*font-family: 'Alfa Slab One',Cambria, Cochin, Georgia, Times, Times New Roman, serif;*/
+    font-family: 'Alfa Slab One',Cambria, Cochin, Georgia, Times, Times New Roman, serif;*/
 }
 h4{
-     font-family: 'Raleway', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 1.5em;
+     /*font-family: 'Raleway', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.5em;*/
 }
 h5{
    
@@ -138,7 +138,7 @@ margin-bottom: 20px;
     
 }
 .textboard h6{
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 .textboard h6:hover{
     color: #e43636;
@@ -252,7 +252,7 @@ ul#optionarea{
 }
 .agenda{
     /*width: 80%;*/
-    background-color: #ee464b;
+    background-color: #266aa4;
     opacity: 0.9;
     color: #ffffff;
     border: solid 2px rgba(145, 164, 180, 0.48);
@@ -266,13 +266,13 @@ ul#optionarea{
 .agenda-title{
     padding: 10px 0;
     margin-left: 15px;
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 
 h4.agenda-title{
-    text-align: center;
-    font-weight: bold;
-    color: black;
+    /*text-align: center;*/
+    /*font-weight: bold;*/
+    color: #ffffff;
     
     /*border-bottom: solid 1px;*/
     padding-bottom: 5px;
@@ -292,7 +292,7 @@ footer{
 .farea{
     padding: 100px;
     text-align: center;
-    font-size: 18px;
+    /*font-size: 18px;*/
 }
 .farea ul li{
     list-style: none;
@@ -310,7 +310,7 @@ footer{
 
 @media screen and (max-width: 700px){
     .msg1{
-    font-size: 20px;
+    /*font-size: 20px;*/
     padding: 80px 50px;
     text-align: center;
     
@@ -333,7 +333,7 @@ footer{
 
 @media screen and (max-width: 1000px){
     .msg1{
-    font-size: 22px;
+    /*font-size: 22px;*/
     padding: 90px 60px;
     text-align: center;
     
@@ -374,7 +374,7 @@ div,img, h3{
 
 @media screen and (max-width: 600px){
     .msg1{
-    font-size: 18px;
+    /*font-size: 18px;*/
     padding: 30px 20px;
     text-align: center;
     
@@ -451,11 +451,11 @@ li.optionslist3{
 }
 
 .service-list li h2{
-    font-weight: bold;
+    /*font-weight: bold;*/
     color: #e43636;
 }
 .contact-list{
-    font-weight: bold;
+    /*font-weight: bold;*/
     padding: 100px 0;
 }
 
@@ -463,7 +463,7 @@ li.optionslist3{
    color: #9fa1a3;
 }
 .contact-list li:first-child:hover{
-    font-size: 30px;
+    /*font-size: 30px;*/
     color: #e43636;
 }
 

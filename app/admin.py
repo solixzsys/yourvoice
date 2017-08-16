@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app.models import Poll,PollOption,SurveyTag,StoryFlatPage,UserPollOption,Quotes,MyFeed,LG,NigeriaState
+from app.models import Poll,PollOption,SurveyTag,StoryFlatPage,UserPollOption,Quotes,MyFeed,LG,NigeriaState,ScrapyFeed
 from django import forms
 from django.http import JsonResponse,HttpResponse,HttpResponseRedirect
 from django.shortcuts import render,redirect
@@ -18,6 +18,7 @@ from django.contrib.flatpages.models import FlatPage
 admin.site.register(FlatPage) 
 
 admin.site.register(NigeriaState) 
+admin.site.register(ScrapyFeed) 
 
 class LGAdmin(admin.ModelAdmin):
     list_display=('name','state')

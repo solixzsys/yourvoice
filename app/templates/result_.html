@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load staticfiles %}
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Parallax Template - Materialize</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="/static/css/bootstrap.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  
+  
+   <link href="{% static 'css/style.css'%}" rel="stylesheet">
+    <link href="{% static 'css/style2.css'%}" rel="stylesheet">
+    <link href="/static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/static/css/font-awesome.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/static/css/materialize-social.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="/static/css/style_.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <style>
+      .card-panel{
+          padding-top:5px;
+          font-weight: bolder;
+      }
+      .in-the-news h6{
+            margin-top:20px;
+            color: #ef2d27;
+            font-weight: bolder;
+      }
+      .in-the-news div{
+            border-bottom: dashed 1px grey;
+            padding-bottom: 10px;
+
+      }
+      #content-container{
+          padding-top: 50px;
+      }
+      .news-thumb-col h6{
+          font-weight: bold;
+      }
+      .news-thumb-col img{
+          max-width: 100%;
+      }
+      .leftnav .collection-item{
+          background-color: #f5f5f5;
+      }
+      .leftnav .collection-item a{
+          color: #444444;
+          text-decoration: none;
+      }
+      .leftnav .collection-item:hover{
+          background-color: #ef2d27;
+          /*color: #f5f5f5;*/
+          font-size: 150%;
+          /*font-weight: bold;*/
+      }
+       .leftnav .collection-item a:hover{
+          color: #ffffff;
+          
+      }
+
+  </style>
+</head>
+<body>
+
+   <!--<div class="navbar-fixed">-->
+  <nav class="white" role="navigation">
+    <div class="nav-wrapper">
+      <a id="logo-container" href="/index_" class="brand-logo"><img src="/static/img/udec_logo.png" width="150"></a>
+       
+      <ul class="right hide-on-med-and-down">
+        <li><a href="/opinion/all">Poll & Survey</a></li>
+        <li><a href="#">Services & Solution</a></li>
+        <li><a href="/result_">Result & Analysis</a></li>
+        <li><a href="#">Politics</a></li>
+        <li><a href="#">Economy</a></li>
+         {% if user.is_authenticated %}
+            <li><a href="/logout">Login Out</a></li>
+        {% else %}
+            <li><a class="modal-trigger" href="#modal1">Login</a></li>
+            
+        {% endif %}
+        
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+         <li><a href="/opinion/all">Poll & Survey</a></li>
+        <li><a href="#">Services & Solution</a></li>
+        <li><a href="/result_">Result & Analysis</a></li>
+        <li><a href="#">Politics</a></li>
+        <li><a href="#">Economy</a></li>
+        {% if user.is_authenticated %}
+            <li><a href="/logout">Login Out</a></li>
+        {% else %}
+            <li><a class="modal-trigger" href="#modal1">Login</a></li>
+            
+        {% endif %}
+
+
+
+        
+       
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+
+  <!--Modal login-->
+
+
+<!--<a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>-->
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    
+  </div>
+          
+
+
+
+<!--end to modal-->
+
+
+
+
+
+
+
+  <!--</div>-->
+  
+ 
+<!-- BEGIN CONTENT CONTAINER-->
+
+    <div id="content-container" class="container">
+        <div class="row">
+            <div class="col l3">
+                <section class="leftbar">
+                    <div class="leftnav">
+                          <input type="search" name="" id="input1/(\w+)/\u\1/g" class="form-control" value="" required="required" placeholder="Search ..." title="">
+                        <ul class="collection with-header ">
+                            <li class="collection-header red darken-1"><h5>Results</h5></li>
+                            <li class="collection-item "><a href="#!">  <div>Politics<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></a></li>
+                            <li class="collection-item"><a href="#!"> <div>Economy<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></a></li>
+                            <li class="collection-item"><a href="#!"> <div>Society<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></a></li>
+                            <li class="collection-item"><a href="#!" ><div>Live Result<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></a></li>
+                            <li class="collection-item"><a href="#!" ><div>Corporate<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></a></li>
+                            <li class="collection-item"><a href="#!" ><div>Consumer<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></a></li>
+                            <li class="collection-item"><a href="#!" ><div>Archive<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></a></li>
+                        </ul>
+
+                    </div>
+                    <div class="hot-topic">
+                        <div><h5> LATEST TOPICS </h5> </div>
+                         <ul class="collection">
+                                
+                                <li class="collection-item avatar">
+                                <img src="images/yuna.jpg" alt="" class="circle">
+                                <span class="title">Title</span>
+                               
+                                
+                                </li>
+                                <li class="collection-item avatar">
+                                <i class="material-icons circle">folder</i>
+                                <span class="title">Title</span>
+                                
+                                
+                                </li>
+                                <li class="collection-item avatar">
+                                <i class="material-icons circle green">insert_chart</i>
+                                <span class="title">Title</span>
+                                
+                               
+                                </li>
+                                <li class="collection-item avatar">
+                                <i class="material-icons circle red">play_arrow</i>
+                                <span class="title">Title</span>
+                                
+                               
+                                </li>
+                        </ul>
+            
+                    </div>
+                     <div class="frelancers">
+                        <div><h5> FRELANCERS </h5> </div>
+                         <ul class="collection">
+                                
+                                <li class="collection-item avatar">
+                                <img src="images/yuna.jpg" alt="" class="circle">
+                                <span class="title">Title</span>
+                                <p>First Line <br>
+                                    Second Line
+                                </p>
+                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                                </li>
+                                <li class="collection-item avatar">
+                                <i class="material-icons circle">folder</i>
+                                <span class="title">Title</span>
+                                <p>First Line <br>
+                                    Second Line
+                                </p>
+                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                                </li>
+                                <li class="collection-item avatar">
+                                <i class="material-icons circle green">insert_chart</i>
+                                <span class="title">Title</span>
+                                <p>First Line <br>
+                                    Second Line
+                                </p>
+                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                                </li>
+                                <li class="collection-item avatar">
+                                <i class="material-icons circle red">play_arrow</i>
+                                <span class="title">Title</span>
+                                <p>First Line <br>
+                                    Second Line
+                                </p>
+                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                                </li>
+                        </ul>
+            
+                    </div>
+
+                </section>
+
+            </div>
+            <div  class="col l6 middle-col">
+                <div class="row">
+                    <div class="col s12" style="padding-bottom: 20px;border-bottom: solid 1px grey">
+                        <div class="news-title"><h4> {{ hero.title|safe}}</h4></div>
+                        <img class="responsive-img" src="/media/{{hero.story_hero_image}}">
+                        <div class="img-overlay">{{ hero.story_content|safe|truncatewords:"60"}}</div>
+
+                    </div>
+                </div>
+                 <div class="row">
+                      {%for page in pages%}
+                    <div class="col l6 news-thumb-col">
+                        <div ><h6>{{page.title|safe}} </h6></div>
+                        <img src="/media/{{page.story_hero_image}}" class="responsive-img">
+                        <p>{{ page.story_content|safe|truncatewords:"20"}}</p>
+                        
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+            <div class="col l3">
+                <div><h5>STAT OF THE DAY </h5></div>
+                <div class="card-panel grey lighten-4" style="">
+                    <span><h1 class="red-text">66%</h1> of south eastherner says no to succession !!! </span>
+                    <div class="red-text"><h6>READ MORE >>></h6></div>
+                </div>
+                <div class="card-panel">
+                    <div>
+                        <h6>Udec Election Center</h6>
+                        <p>The 2019 NG General Election Model</p>
+                        <i class="flow-text btn red " >Go to Election Center</i>
+                    </div>
+                </div>
+                <div class="card-panel">
+                    <div>
+                        <h6>Udec Profile</h6>
+                        <p style="padding-top:100px ">Search for any Brand, Celebrity or things and find out about their customers</p>
+                         
+                         <input type="search" name="" id="input1/(\w+)/\u\1/g" class="form-control" value="" required="required" placeholder="Search ..." title="">
+                         
+                    </div>
+                </div>
+                <div class="in-the-news">
+                    <div><h6>UDEC IN THE NEWS</h6></div>
+                        <ul>
+                            <h6>NIGERIA GARDIAN</h6>
+                            <div>H will turn out of 2019 Election be</div>
+                            <h6>NIGERIA GARDIAN</h6>
+                            <div>H will turn out of 2019 Election be</div>
+                            <h6>NIGERIA GARDIAN</h6>
+                            <div>H will turn out of 2019 Election be</div>
+                            <h6>NIGERIA GARDIAN</h6>
+                            <div>H will turn out of 2019 Election be</div>
+                        
+                        </ul>
+                </div>
+                
+
+            </div>
+        </div>
+    </div>
+
+<!-- END CONTENT CONTAINER-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+  <footer class="page-footer teal">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Company Bio</h5>
+          <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+
+
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Settings</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Link 1</a></li>
+            <li><a class="white-text" href="#!">Link 2</a></li>
+            <li><a class="white-text" href="#!">Link 3</a></li>
+            <li><a class="white-text" href="#!">Link 4</a></li>
+          </ul>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Connect</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Link 1</a></li>
+            <li><a class="white-text" href="#!">Link 2</a></li>
+            <li><a class="white-text" href="#!">Link 3</a></li>
+            <li><a class="white-text" href="#!">Link 4</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="/static/js/jquery.js"></script>
+  <script src="/static/js/jquery.form.js"></script>
+  <script src="{% static 'js/bootstrap.js' %}"></script>  
+  <script src="/static/js/materialize.js"></script>
+  <script src="/static/js/init.js"></script>
+  <script src="/static/js/main_.js"></script>
+  <script src="{% static 'js/main_1.js' %}"></script>
+
+<script >
+
+  // revealing cards
+$('.card').hover(function(){
+
+    $(this).find('> div.card-image > img.activator').click()
+    console.log('11111111111111')
+
+},function(){
+    $(this).find('> div.card-reveal > span.card-title').click();
+    console.log('222222222222')
+ }
+);
+
+  </script>
+
+  </body>
+</html>

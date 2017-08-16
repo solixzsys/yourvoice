@@ -3,6 +3,12 @@ from django.contrib.auth.models import User
 from app.models import Profile
 # from django.forms.extras.widgets import SelectDateWidget
 # from django.contrib.admin.widgets import AdminDateWidget
+
+
+class LoginForm(forms.Form):
+    username=forms.CharField(max_length=200)
+    password=forms.CharField(widget=forms.PasswordInput())
+
 class UserForm(forms.ModelForm):
     confirm_password=forms.CharField(widget=forms.PasswordInput())
 
